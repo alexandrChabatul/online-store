@@ -11,8 +11,13 @@ const baseConfig = {
         rules: [
             { test: /\.ts$/i, use: 'ts-loader' },
             {
-                test: /\.css$/i,
-                use: ['style-loader', 'css-loader'],
+                test: /\.s[ac]ss$/i,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'sass-loader',
+                    'sass-resources-loader',
+                ],
             },
             {
                 test: /\.(ico|jpg|svg)$/,
@@ -34,6 +39,8 @@ const baseConfig = {
         }),
         new CleanWebpackPlugin(),
         new EslingPlugin({ extensions: 'ts' }),
+        new MiniCssExtractPlugin({
+        }),
     ],
 };
 
