@@ -1,8 +1,8 @@
-import RouterService from '../../services/RouterService';
+import Router from '../../services/Router';
 
 class ErrorPage {
-    router: RouterService;
-    constructor(router: RouterService) {
+    router: Router;
+    constructor(router: Router) {
         this.router = router;
     }
 

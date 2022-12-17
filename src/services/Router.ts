@@ -1,8 +1,7 @@
 import Route from 'route-parser';
-import App from '../app/App.';
 import AppController from '../constroller/AppController';
 
-class RouterService {
+class Router {
     private routes: { [key: string]: Route };
     private controller: AppController;
 
@@ -16,9 +15,9 @@ class RouterService {
     }
 
     render(path: string) {
-        console.log(this.routes);
         if (this.routes.Main.match(path)) {
-            this.controller.renderMain();
+            const params = this.routes.Main.match(path) || {};
+            this.controller.renderMain(params);
         } else if (this.routes.Cart.match(path)) {
             this.controller.renderCart();
         } else if (this.routes.Product.match(path)) {
@@ -37,19 +36,23 @@ class RouterService {
     }
 
     initRouter() {
-        window.addEventListener('popstate', (e) => {
-            this.render(new URL(window.location.href).pathname);
+        window.addEventListener('popstate', () => {
+            const url = new URL(window.location.href);
+            this.render(url.pathname + url.search);
         });
-        document.querySelectorAll('[href^="/"]').forEach((el) => {
-            el.addEventListener('click', (env) => {
-                env.preventDefault();
-                const eventTarget = <HTMLLinkElement>env.target;
-                const { pathname: path } = new URL(eventTarget.href);
-                this.goTo(path);
-            });
+        document.addEventListener('click', (e) => {
+            const target = <HTMLElement>e.target;
+            if (target && target.hasAttribute('href') && target.classList.contains('router-link')) {
+                const linkTarget = <HTMLLinkElement>target;
+                e.preventDefault();
+                const { pathname: path, search: params } = new URL(linkTarget.href);
+                const gotoPath = path + params;
+                this.goTo(gotoPath);
+            }
         });
-        this.render(new URL(window.location.href).pathname);
+        const url = new URL(window.location.href);
+        this.render(url.pathname + url.search);
     }
 }
 
-export default RouterService;
+export default Router;

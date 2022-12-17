@@ -1,30 +1,36 @@
-import RouterService from '../services/RouterService';
+import Router from '../services/Router';
 import ErrorPage from '../view/pages/404';
 import Cart from '../view/pages/Cart';
 import Main from '../view/pages/Main';
 import Product from '../view/pages/Product';
+import appConstants from '../common/constants';
 
 class AppController {
-    router: RouterService;
+    router: Router;
     main: Main;
     cart: Cart;
     product: Product;
     error: ErrorPage;
 
-    constructor(router: RouterService) {
+    constructor(router: Router) {
         this.router = router;
-        router.addRoute('Main', '/');
-        router.addRoute('Cart', '/cart');
-        router.addRoute('Product', '/product/:id');
+        router.addRoute('Main', appConstants.routes.main);
+        router.addRoute('Cart', appConstants.routes.cart);
+        router.addRoute('Product', appConstants.routes.product);
         this.main = new Main(this.router);
         this.cart = new Cart(this.router);
         this.product = new Product(this.router);
         this.error = new ErrorPage(this.router);
     }
 
-    renderMain() {
+    renderMain(params?: { [key: string]: string }) {
+        // get data(data)
+        // new FilterService
+        //filter(data)
+        //view(filteredData)
+
         console.log(this);
-        this.main.render();
+        this.main.render(params);
     }
 
     renderCart() {
