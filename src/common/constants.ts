@@ -1,9 +1,24 @@
 const appConstants = {
     routes: {
-        main:
-            '/(?)(category=*category)(&)(brand=*brand)(&)(price=*price)(&)(stock=*stock)(&)(sort=*sort)(&)(search=*search)',
-        product: '/product/:id',
-        cart: '/cart',
+        main: {
+            path: '^/$',
+            params: {
+                category: 'category',
+                brand: 'brand',
+                price: 'price',
+                stock: 'stock',
+                sort: 'category',
+                search: 'category',
+            },
+        },
+        product: {
+            path: '^/product/(?<id>\\w+)$',
+            params: {},
+        },
+        cart: {
+            path: '^/cart$',
+            params: {},
+        },
     },
 };
 
