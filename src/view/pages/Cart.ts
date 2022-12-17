@@ -8,7 +8,7 @@ class Cart {
 
     render() {
         const app = <HTMLDivElement>document.getElementById('app');
-        app.textContent = 'This id cart!';
+        app.textContent = 'This is cart!';
     }
 }
 
