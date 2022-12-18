@@ -37,7 +37,7 @@ class Router {
 
     render(path: string) {
         const route = this.getParamsWithCallback(path);
-        route ? route.callback.call(this.controller, route.params) : this.controller.renderError();
+        route ? route.callback.call(null, route.params) : this.controller.renderError();
     }
 
     goTo(path: string) {

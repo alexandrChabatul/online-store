@@ -27,8 +27,6 @@ class AppController {
         // new FilterService
         //filter(data)
         //view(filteredData)
-
-        console.log(this);
         this.main.render(params);
     }
 
@@ -45,9 +43,15 @@ class AppController {
     }
 
     private initRouterPath() {
-        this.router.addRoute(appConstants.routes.main, this.renderMain);
-        this.router.addRoute(appConstants.routes.cart, this.renderCart);
-        this.router.addRoute(appConstants.routes.product, this.renderProduct);
+        this.router.addRoute(appConstants.routes.main, (params?: params) => {
+            this.renderMain(params);
+        });
+        this.router.addRoute(appConstants.routes.cart, () => {
+            this.renderCart();
+        });
+        this.router.addRoute(appConstants.routes.product, (params?: params) => {
+            this.renderProduct(params);
+        });
     }
 }
 
