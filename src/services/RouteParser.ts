@@ -9,11 +9,10 @@ class PouterParser {
      * Returns parametrs object(maybe empty) or false if path is not exist to template.
      * @param {string} path - path to check
      * @param {Route} template - object of Route type (contains path RegExp and available params)
-     * @param {boolean} checkParams - true if we need check params of path with template
      * @return {params | false}
      * **/
 
-    match(path: string, template: Route, checkParams = false): params | false {
+    match(path: string, template: Route): params | false {
         const pathParts = path.split('?');
         const linkPath = pathParts[0];
         const regex = new RegExp(template.path);
@@ -21,12 +20,11 @@ class PouterParser {
             return false;
         }
         const groups = linkPath.match(regex)?.groups;
-        // const regex1 = new RegExp('\/product\/(?<id>\\w+)');
         if (pathParts.length === 1) {
             return groups || {};
         }
         const params = this.getParams(pathParts[1]);
-        if (checkParams) {
+        if (Object.keys(template.params).length > 0) {
             if (!this.checkParams(params, template.params)) {
                 return false;
             }

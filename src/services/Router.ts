@@ -1,35 +1,43 @@
-import { Route } from '../common/types';
+import { paramsWithCallback, renderCallback, Route } from '../common/types';
 import AppController from '../constroller/AppController';
 import RouterParser from './RouteParser';
 
 class Router {
-    private routes: { [key: string]: Route };
+    // private routes: { [key: string]: Route };
+    private routes: {
+        route: Route;
+        cb: renderCallback;
+    }[];
     private controller: AppController;
     private parser: RouterParser = new RouterParser();
 
     constructor() {
-        this.routes = {};
+        this.routes = [];
         this.controller = new AppController(this);
     }
 
-    addRoute(name: string, path: Route) {
-        this.routes[name] = path;
+    addRoute(path: Route, cb: renderCallback) {
+        this.routes.push({
+            route: path,
+            cb: cb,
+        });
+    }
+
+    getParamsWithCallback(path: string): paramsWithCallback | null {
+        const target = this.routes.find((el) => this.parser.match(path, el.route));
+        if (target) {
+            const params = this.parser.match(path, target.route) || {};
+            return {
+                params: params,
+                callback: target.cb,
+            };
+        }
+        return null;
     }
 
     render(path: string) {
-        if (this.parser.match(path, this.routes.Main, true)) {
-            const params = this.parser.match(path, this.routes.Main) || {};
-            this.controller.renderMain(params);
-        } else if (this.parser.match(path, this.routes.Cart)) {
-            this.controller.renderCart();
-        } else if (this.parser.match(path, this.routes.Product)) {
-            const params = this.parser.match(path, this.routes.Product);
-            if (params) {
-                this.controller.renderProduct(params);
-            }
-        } else {
-            this.controller.renderError();
-        }
+        const route = this.getParamsWithCallback(path);
+        route ? route.callback.call(this.controller, route.params) : this.controller.renderError();
     }
 
     goTo(path: string) {
