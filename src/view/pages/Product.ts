@@ -1,3 +1,4 @@
+import { customParams, params } from '../../common/types';
 import Router from '../../services/Router';
 
 class Product {
@@ -6,7 +7,7 @@ class Product {
         this.router = router;
     }
 
-    render(params: { [key: string]: string }) {
+    render(params: params) {
         console.log('render product');
         const app = <HTMLDivElement>document.getElementById('app');
         app.textContent = `This id product! Product id - ${params.id}`;

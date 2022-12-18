@@ -4,6 +4,7 @@ import Cart from '../view/pages/Cart';
 import Main from '../view/pages/Main';
 import Product from '../view/pages/Product';
 import appConstants from '../common/constants';
+import { customParams } from '../common/types';
 
 class AppController {
     router: Router;
@@ -14,9 +15,16 @@ class AppController {
 
     constructor(router: Router) {
         this.router = router;
-        router.addRoute('Main', appConstants.routes.main);
-        router.addRoute('Cart', appConstants.routes.cart);
-        router.addRoute('Product', appConstants.routes.product);
+        router.addRoute('', appConstants.routes.main, (params: customParams) => {
+            this.renderMain(params.params);
+        });
+        router.addRoute('cart', appConstants.routes.cart, (params: customParams) => {
+            this.renderCart();
+        });
+        router.addRoute('product', appConstants.routes.product, (params: customParams) => {
+            this.renderProduct(params.productId);
+        });
+
         this.main = new Main(this.router);
         this.cart = new Cart(this.router);
         this.product = new Product(this.router);
@@ -24,13 +32,18 @@ class AppController {
     }
 
     renderMain(params?: { [key: string]: string }) {
-        // get data(data)
-        // new FilterService
-        //filter(data)
-        //view(filteredData)
+        console.log('render main', params);
+        if (params?.valid === 'false') {
+            this.renderError();
+        } else {
+            // get data(data)
+            // new FilterService
+            //filter(data)
+            //view(filteredData)
 
-        console.log(this);
-        this.main.render(params);
+            console.log(this);
+            this.main.render(params);
+        }
     }
 
     renderCart() {
