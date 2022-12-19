@@ -13,13 +13,9 @@ const appConstants = {
         },
         product: {
             path: '^/product/(?<id>\\w+)$',
-            params: {
-                id: 'id',
-            },
         },
         cart: {
             path: '^/cart$',
-            params: {},
         },
     },
 };

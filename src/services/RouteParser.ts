@@ -23,13 +23,13 @@ class PouterParser {
         if (pathParts.length === 1) {
             return groups || {};
         }
-        const params = Object.assign(this.getParams(pathParts[1]), groups);
-        if (Object.keys(template.params).length > 0) {
+        const params = this.getParams(pathParts[1]);
+        if (template.params) {
             if (!this.checkParams(params, template.params)) {
                 return false;
             }
         }
-        return params;
+        return Object.assign(params, groups);
     }
 
     private getParams(str: string): params {
