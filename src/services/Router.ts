@@ -1,43 +1,48 @@
-import { Route } from '../common/types';
+import { IParamsWithCallback, renderCallback, Route, IRouteWithCallback } from '../common/types';
 import AppController from '../constroller/AppController';
 import RouterParser from './RouteParser';
 
 class Router {
-    private routes: { [key: string]: Route };
+    // private routes: { [key: string]: Route };
+    private routes: IRouteWithCallback[];
     private controller: AppController;
     private parser: RouterParser = new RouterParser();
 
     constructor() {
-        this.routes = {};
+        this.routes = [];
         this.controller = new AppController(this);
     }
 
-    addRoute(name: string, path: Route) {
-        this.routes[name] = path;
+    addRoute(path: Route, cb: renderCallback): void {
+        this.routes.push({
+            route: path,
+            cb: cb,
+        });
     }
 
-    render(path: string) {
-        if (this.parser.match(path, this.routes.Main, true)) {
-            const params = this.parser.match(path, this.routes.Main) || {};
-            this.controller.renderMain(params);
-        } else if (this.parser.match(path, this.routes.Cart)) {
-            this.controller.renderCart();
-        } else if (this.parser.match(path, this.routes.Product)) {
-            const params = this.parser.match(path, this.routes.Product);
-            if (params) {
-                this.controller.renderProduct(params);
-            }
-        } else {
-            this.controller.renderError();
+    getParamsWithCallback(path: string): IParamsWithCallback | null {
+        const target = this.routes.find((el) => this.parser.match(path, el.route));
+        if (target) {
+            const params = this.parser.match(path, target.route) || {};
+            return {
+                params: params,
+                callback: target.cb,
+            };
         }
+        return null;
     }
 
-    goTo(path: string) {
+    render(path: string): void {
+        const route = this.getParamsWithCallback(path);
+        route ? route.callback.call(null, route.params) : this.controller.renderError();
+    }
+
+    goTo(path: string): void {
         window.history.pushState({ path }, path, path);
         this.render(path);
     }
 
-    initRouter() {
+    initRouter(): void {
         window.addEventListener('popstate', () => {
             const url = new URL(window.location.href);
             this.render(url.pathname + url.search);
