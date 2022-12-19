@@ -30,7 +30,7 @@ class AppController {
         this.main.render(params);
     }
 
-    renderCart() {
+    renderCart(params: params) {
         this.cart.render();
     }
 
@@ -43,13 +43,13 @@ class AppController {
     }
 
     private initRouterPath() {
-        this.router.addRoute(appConstants.routes.main, (params?: params) => {
+        this.router.addRoute(appConstants.routes.main, (params: params) => {
             this.renderMain(params);
         });
-        this.router.addRoute(appConstants.routes.cart, () => {
-            this.renderCart();
+        this.router.addRoute(appConstants.routes.cart, (params: params) => {
+            this.renderCart(params);
         });
-        this.router.addRoute(appConstants.routes.product, (params?: params) => {
+        this.router.addRoute(appConstants.routes.product, (params: params) => {
             this.renderProduct(params);
         });
     }

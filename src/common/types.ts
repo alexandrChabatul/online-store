@@ -7,7 +7,7 @@ interface IRoute {
 
 export type Route = Readonly<IRoute>;
 
-export type renderCallback = (params?: params) => void;
+export type renderCallback = (params: params) => void;
 
 export interface IParamsWithCallback {
     params: params;

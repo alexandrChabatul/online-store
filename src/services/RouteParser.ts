@@ -19,17 +19,15 @@ class PouterParser {
         if (!regex.test(linkPath)) {
             return false;
         }
+        if (!template.params) {
+            return {};
+        }
         const groups = linkPath.match(regex)?.groups;
         if (pathParts.length === 1) {
             return groups || {};
         }
-        const params = this.getParams(pathParts[1]);
-        if (template.params) {
-            if (!this.checkParams(params, template.params)) {
-                return false;
-            }
-        }
-        return Object.assign(params, groups);
+        const params = Object.assign(this.getParams(pathParts[1]), groups);
+        return this.filterParams(params, template.params);
     }
 
     private getParams(str: string): params {
@@ -38,15 +36,13 @@ class PouterParser {
         return Object.fromEntries(entrySet);
     }
 
-    private checkParams(params: params, paramsScheme: params): boolean {
-        for (const key in params) {
-            if (Object.prototype.hasOwnProperty.call(params, key)) {
-                if (!paramsScheme[key]) {
-                    return false;
-                }
+    private filterParams(params: params, paramsScheme: params): params {
+        return Object.keys(params).reduce((acc: params, el: string): params => {
+            if (paramsScheme[el]) {
+                acc[el] = params[el];
             }
-        }
-        return true;
+            return acc;
+        }, {});
     }
 }
 
