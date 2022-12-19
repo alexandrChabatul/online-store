@@ -38,7 +38,7 @@ class PouterParser {
         return Object.fromEntries(entrySet);
     }
 
-    private checkParams(params: { [key: string]: string }, paramsScheme: { [key: string]: string }) {
+    private checkParams(params: params, paramsScheme: params): boolean {
         for (const key in params) {
             if (Object.prototype.hasOwnProperty.call(params, key)) {
                 if (!paramsScheme[key]) {

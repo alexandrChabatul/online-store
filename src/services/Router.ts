@@ -1,13 +1,10 @@
-import { paramsWithCallback, renderCallback, Route } from '../common/types';
+import { IParamsWithCallback, renderCallback, Route, IRouteWithCallback } from '../common/types';
 import AppController from '../constroller/AppController';
 import RouterParser from './RouteParser';
 
 class Router {
     // private routes: { [key: string]: Route };
-    private routes: {
-        route: Route;
-        cb: renderCallback;
-    }[];
+    private routes: IRouteWithCallback[];
     private controller: AppController;
     private parser: RouterParser = new RouterParser();
 
@@ -16,14 +13,14 @@ class Router {
         this.controller = new AppController(this);
     }
 
-    addRoute(path: Route, cb: renderCallback) {
+    addRoute(path: Route, cb: renderCallback): void {
         this.routes.push({
             route: path,
             cb: cb,
         });
     }
 
-    getParamsWithCallback(path: string): paramsWithCallback | null {
+    getParamsWithCallback(path: string): IParamsWithCallback | null {
         const target = this.routes.find((el) => this.parser.match(path, el.route));
         if (target) {
             const params = this.parser.match(path, target.route) || {};
@@ -35,17 +32,17 @@ class Router {
         return null;
     }
 
-    render(path: string) {
+    render(path: string): void {
         const route = this.getParamsWithCallback(path);
         route ? route.callback.call(null, route.params) : this.controller.renderError();
     }
 
-    goTo(path: string) {
+    goTo(path: string): void {
         window.history.pushState({ path }, path, path);
         this.render(path);
     }
 
-    initRouter() {
+    initRouter(): void {
         window.addEventListener('popstate', () => {
             const url = new URL(window.location.href);
             this.render(url.pathname + url.search);
