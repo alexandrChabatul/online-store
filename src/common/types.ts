@@ -12,11 +12,9 @@ export type renderCallback = (params: params) => void;
 export interface IParamsWithCallback {
     params: params;
     callback: renderCallback;
-};
+}
 
 export interface IRouteWithCallback {
     route: Route;
     cb: renderCallback;
-};
-
-
+}
