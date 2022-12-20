@@ -1,9 +1,6 @@
-import Router from '../../services/Router';
-
 class Cart {
-    router: Router;
-    constructor(router: Router) {
-        this.router = router;
+    constructor() {
+        //do nothing
     }
 
     render() {
