@@ -5,6 +5,13 @@ export class NewElement {
         return element;
     }
 
+    static createBaseElementWithText(elementType: string, className: string, text: string): HTMLElement {
+        const element = document.createElement(elementType);
+        element.classList.add(className);
+        element.textContent = text;
+        return element;
+    }
+
     static createButton(className: string, text: string): HTMLButtonElement {
         const element = document.createElement('button');
         element.classList.add(className);
