@@ -15,12 +15,17 @@ const baseConfig = {
             {
                 test: /\.s[ac]ss$/i,
                 use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    'sass-loader',
-                    'sass-resources-loader',
+                  MiniCssExtractPlugin.loader,
+                  "css-loader",
+                  "sass-loader",
+                  {
+                    loader: "sass-resources-loader",
+                    options: {
+                      resources: [path.join(__dirname, "src", "common", "vars.scss")],
+                    },
+                  },
                 ],
-            },
+              },
             {
                 test: /\.(ico|jpg|svg)$/,
                 type: 'asset/resource',

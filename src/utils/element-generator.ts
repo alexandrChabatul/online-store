@@ -1,5 +1,4 @@
 export class NewElement {
-
     static createBaseElement(elementType: string, className: string): HTMLElement {
         const element = document.createElement(elementType);
         element.classList.add(className);
