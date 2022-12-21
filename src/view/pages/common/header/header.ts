@@ -12,13 +12,11 @@ export class Header {
 
     public createHeader(): HTMLElement {
         const header = NewElement.createBaseElement('div', 'header');
-        const logoBlock = NewElement.createAnchor('router-link', '', '/');
+        const logoBlock = NewElement.createAnchor('router-link logo-block', '', '/');
         const logo = NewElement.createBaseElementWithText('span', 'logo', 'Online Store');
         const logoIcon = NewElement.createBaseElement('span', 'logo-icon');
-        const cartIcon = NewElement.createAnchor('router-link', '', '/cart');
-        cartIcon.classList.add('cart-icon');
+        const cartIcon = NewElement.createAnchor('router-link cart-icon', '', '/cart');
         const cartTotal = NewElement.createBaseElementWithText('div', 'cart-total', 'Cart total: ');
-        logoBlock.classList.add('logo-block');
         header.append(logoBlock);
         logoBlock.append(logoIcon);
         logoBlock.append(logo);
