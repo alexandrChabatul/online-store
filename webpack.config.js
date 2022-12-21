@@ -25,9 +25,9 @@ const baseConfig = {
                     },
                   },
                 ],
-              },
+            },
             {
-                test: /\.(ico|jpg|svg)$/,
+                test: /\.(ico|jpg|svg|png)$/,
                 type: 'asset/resource',
             },
         ],

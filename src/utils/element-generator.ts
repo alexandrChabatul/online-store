@@ -1,20 +1,27 @@
 export class NewElement {
     static createBaseElement(elementType: string, className: string): HTMLElement {
         const element = document.createElement(elementType);
-        element.classList.add(className);
+        element.className = className;
+        return element;
+    }
+
+    static createBaseElementWithText(elementType: string, className: string, text: string): HTMLElement {
+        const element = document.createElement(elementType);
+        element.className = className;
+        element.textContent = text;
         return element;
     }
 
     static createButton(className: string, text: string): HTMLButtonElement {
         const element = document.createElement('button');
-        element.classList.add(className);
+        element.className = className;
         element.textContent = text;
         return element;
     }
 
     static createAnchor(className: string, text: string, link: string): HTMLAnchorElement {
         const element = document.createElement('a');
-        element.classList.add(className);
+        element.className = className;
         element.href = link;
         element.textContent = text;
         return element;
@@ -23,7 +30,7 @@ export class NewElement {
     static createInputRange(className: string): HTMLInputElement {
         const element = document.createElement('input');
         element.type = 'range';
-        element.classList.add(className);
+        element.className = className;
         return element;
     }
 
@@ -31,7 +38,7 @@ export class NewElement {
         const element = document.createElement('input');
         element.type = 'text';
         element.placeholder = placeholder;
-        element.classList.add(className);
+        element.className = className;
         return element;
     }
 
@@ -39,7 +46,7 @@ export class NewElement {
         const element = document.createElement('input');
         element.type = 'number';
         element.value = value;
-        element.classList.add(className);
+        element.className = className;
         return element;
     }
 
@@ -49,18 +56,19 @@ export class NewElement {
         element.id = id;
         element.name = name;
         element.value = value;
-        element.classList.add(className);
+        element.className = className;
         return element;
     }
 
     static createSelect(className: string): HTMLSelectElement {
         const element = document.createElement('select');
-        element.classList.add(className);
+        element.className = className;
         return element;
     }
 
-    static createOPtion(value: string, text: string): HTMLOptionElement {
+    static createOPtion(className: string, value: string, text: string): HTMLOptionElement {
         const element = document.createElement('option');
+        element.className = className;
         element.value = value;
         element.textContent = text;
         return element;

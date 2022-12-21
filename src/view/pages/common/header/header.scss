@@ -1,0 +1,67 @@
+.header {
+    display: grid;
+    grid-template: auto / repeat(3, 1fr);
+    align-items: center;
+    background-color: $color-elements;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+
+.logo {
+    font-family: $font-header;
+    font-weight: 700;
+    font-size: xx-large;
+    padding-left: 10px;
+}
+
+.logo-block {
+    display: flex;
+    align-items: center;
+    color: $color-text-main;
+    text-decoration: none;
+    justify-self: start;
+}
+
+.logo-icon {
+    display: inline-block;
+    background-image: url('./../../../../assets/icons/shop.svg');
+    width: 50px;
+    height: 50px;
+}
+
+.cart-total {
+    font-family: $font-primary;
+    font-weight: 600;
+    font-size: x-large;
+    color: $color-text-secondary;
+    justify-self: center;
+
+}
+
+.cart-total-sum {
+    color: $color-text-main;
+}
+
+.cart-icon {
+    width: 50px;
+    height: 50px;
+    background-image: url('./../../../../assets/icons/cart.png');
+    background-size: contain;
+    position: relative;
+    justify-self: end;
+}
+
+.cart-counter {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    color: white;
+
+}
