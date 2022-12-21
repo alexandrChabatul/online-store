@@ -25,10 +25,6 @@ const baseConfig = {
                     },
                   },
                 ],
-        },
-              {
-                test: /\.css$/,
-                use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
             },
             {
                 test: /\.(ico|jpg|svg|png)$/,
