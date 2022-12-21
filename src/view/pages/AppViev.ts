@@ -1,3 +1,4 @@
+import { ProductAnswer } from '../../common/types';
 import ErrorPage from './404/404';
 import Cart from './cart/Cart';
 import Main from './main/Main';
@@ -22,8 +23,8 @@ class AppView {
     renderCart() {
         this.cart.render();
     }
-    renderProduct() {
-        this.product.render();
+    renderProduct(data: ProductAnswer) {
+        this.product.render(data);
     }
     renderError() {
         this.error.render();

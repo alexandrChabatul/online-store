@@ -49,10 +49,10 @@ class Router {
         });
         document.addEventListener('click', (e) => {
             const target = <HTMLElement>e.target;
-            if (target && target.hasAttribute('href') && target.classList.contains('router-link')) {
-                const linkTarget = <HTMLLinkElement>target;
+            const closesetLink = <HTMLAnchorElement>target.closest('.router-link');
+            if (closesetLink && closesetLink.hasAttribute('href') && closesetLink.classList.contains('router-link')) {
                 e.preventDefault();
-                const { pathname: path, search: params } = new URL(linkTarget.href);
+                const { pathname: path, search: params } = new URL(closesetLink.href);
                 const gotoPath = path + params;
                 this.goTo(gotoPath);
             }

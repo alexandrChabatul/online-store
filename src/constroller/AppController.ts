@@ -1,7 +1,8 @@
 import Router from '../services/Router';
 import appConstants from '../common/constants';
-import { params } from '../common/types';
+import { params, ProductAnswer } from '../common/types';
 import AppView from '../view/pages/AppViev';
+import data from '../assets/tempData/data.json';
 
 class AppController {
     router: Router;
@@ -21,8 +22,8 @@ class AppController {
         this.view.renderCart();
     }
 
-    renderProduct(params?: params) {
-        this.view.renderProduct();
+    async renderProduct(params?: params) {
+        this.view.renderProduct(data.products[33]);
     }
 
     renderError() {

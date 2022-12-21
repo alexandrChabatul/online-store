@@ -1,0 +1,26 @@
+.product-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+
+    a {
+        display: block;
+        width: calc((100% - 10px) / 2);
+    }
+}
+
+.product-button {
+    margin-top: 20px;
+    border: none;
+    border-radius: 10px;
+    width: calc((100% - 10px) / 2);
+    height: 50px;
+    box-shadow: $small-shadow;
+    background: $button-bg-collor;
+    color: $button-text-color;
+}
+
+.product-buttons__buy {
+    width: 100%;
+}

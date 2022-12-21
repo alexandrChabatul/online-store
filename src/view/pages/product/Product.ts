@@ -1,12 +1,49 @@
+import { ProductAnswer } from '../../../common/types';
+import { NewElement } from '../../../utils/element-generator';
+import Breadcrumbs from './breadcrumbs/Breadcrumbs';
+import ImageSlider from './image-slider/ImageSlider';
+import ProductButtons from './product-description/buttons-block/ProductButtons';
+import ProductDescription from './product-description/desc-block/ProductDescription';
+import ProductPrice from './product-description/price-block/ProductPrice';
+import ProductTitle from './product-title/ProductTitle';
+import './product.scss';
+
 class Product {
-    constructor() {
-        //do nothing
+    imageSlider: ImageSlider = new ImageSlider();
+    productDesc: ProductDescription = new ProductDescription();
+    productTitle: ProductTitle = new ProductTitle();
+    productPrice: ProductPrice = new ProductPrice();
+    productButtons: ProductButtons = new ProductButtons();
+    breadcrumbs: Breadcrumbs = new Breadcrumbs();
+
+    render(product: ProductAnswer) {
+        const productWrapper = NewElement.createDivElement('wrapper product-wrapper');
+        const breadcrumbsUl = this.breadcrumbs.getBreadcrumbs(product);
+        const productBlock = NewElement.createDivElement('product');
+        const titleImageContainer = this.getTitleAndImageBlock(product);
+        const priceDescContainer = this.getPriceAndDescBlock(product);
+
+        productBlock.append(titleImageContainer, priceDescContainer);
+        productWrapper.append(breadcrumbsUl, productBlock);
+        const app = <HTMLDivElement>document.getElementById('app');
+        app.append(productWrapper);
     }
 
-    render(params?: { [key: string]: string }) {
-        console.log('render product');
-        const app = <HTMLDivElement>document.getElementById('app');
-        app.textContent = `This id product! Product id - ${params?.id}`;
+    getTitleAndImageBlock(product: ProductAnswer) {
+        const titleImageContainer = NewElement.createDivElement('title-image-container');
+        const productTitleBlock = this.productTitle.getProductTitle(product.title, product.rating);
+        const imageSliderBlock = this.imageSlider.getImageSlider(product.thumbnail, product.images, product.title);
+        titleImageContainer.append(productTitleBlock, imageSliderBlock);
+        return titleImageContainer;
+    }
+
+    getPriceAndDescBlock(product: ProductAnswer) {
+        const productDescription = NewElement.createDivElement('product-description');
+        const productPriceBlock = this.productPrice.getProductPriceBlock(product.price, product.discountPercentage);
+        const productButtonsBlock = this.productButtons.getButtonsBlock(product.id);
+        const productDescBlock = this.productDesc.getDescription(product);
+        productDescription.append(productPriceBlock, productButtonsBlock, productDescBlock);
+        return productDescription;
     }
 }
 
