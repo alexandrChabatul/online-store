@@ -1,0 +1,36 @@
+.checkout-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    width: 400px;
+    border: 1px solid $color-text-main;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-family: $font-primary;
+}
+
+.popup-field {
+    width: 300px;
+    height: 25px;
+    background-color: $color-bg-main;
+    border: 1px solid $color-text-main;
+    border-radius: 5px;
+    font-size: medium;
+}
+
+.popup-title {
+    text-align: center;
+    font-size: larger;
+}
+
+.error-message {
+    font-size: smaller;
+    margin-top: 3px;
+    color: red;
+}

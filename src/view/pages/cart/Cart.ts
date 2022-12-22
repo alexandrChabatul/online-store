@@ -1,11 +1,16 @@
+import CheckoutPopup from './checkout-popup/checkout-popup';
+
 class Cart {
+    popup: CheckoutPopup;
+
     constructor() {
-        //do nothing
+        this.popup = new CheckoutPopup();
     }
 
     render() {
         const app = <HTMLDivElement>document.getElementById('app');
-        app.textContent = 'This is cart!';
+        const checkoutPopup = this.popup.createCheckoutPopup();
+        app.append(checkoutPopup);
     }
 }
 
