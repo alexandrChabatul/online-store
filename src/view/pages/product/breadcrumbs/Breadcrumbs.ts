@@ -1,9 +1,9 @@
-import { ProductAnswer } from '../../../../common/types';
+import { Product } from '../../../../common/types';
 import { NewElement } from '../../../../utils/element-generator';
 import './breadcrumbs.scss';
 
 class Breadcrumbs {
-    getBreadcrumbs(product: ProductAnswer) {
+    getBreadcrumbs(product: Product) {
         const ul = NewElement.createBaseElement('ul', 'breadcrumbs');
         const mainItem = NewElement.createBaseElement('li', 'breadcrumbs__item');
         mainItem.append(NewElement.createAnchor('router-link', 'Main', '/'));

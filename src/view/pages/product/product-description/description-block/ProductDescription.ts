@@ -1,10 +1,10 @@
-import { ProductAnswer } from '../../../../../common/types';
+import { Product } from '../../../../../common/types';
 import { NewElement } from '../../../../../utils/element-generator';
 import './product-description.scss';
 
 class ProductDescription {
-    getDescription(product: ProductAnswer) {
-        const desc = NewElement.createDivElement('product-desc');
+    getDescription(product: Product) {
+        const descriptionBlock = NewElement.createDivElement('product-desc');
         let html = '';
         if (product.category) {
             html += `<p class="product-desc__name">Category: <span class="product-desc__value">${product.category.toLowerCase()}</span></p>`;
@@ -20,9 +20,9 @@ class ProductDescription {
                 product.description[0].toUpperCase() + product.description.slice(1)
             }</p>`;
         }
-        desc.innerHTML = html;
+        descriptionBlock.innerHTML = html;
 
-        return desc;
+        return descriptionBlock;
     }
 }
 
