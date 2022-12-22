@@ -17,12 +17,9 @@ export class Header {
         const logoIcon = NewElement.createBaseElement('span', 'logo-icon');
         const cartIcon = NewElement.createAnchor('router-link cart-icon', '', '/cart');
         const cartTotal = NewElement.createBaseElementWithText('div', 'cart-total', 'Cart total: ');
-        header.append(logoBlock);
-        logoBlock.append(logoIcon);
-        logoBlock.append(logo);
-        header.append(cartTotal);
+        header.append(logoBlock, cartTotal, cartIcon);
+        logoBlock.append(logoIcon, logo);
         cartTotal.append(this.total);
-        header.append(cartIcon);
         cartIcon.append(this.cart);
 
         return header;

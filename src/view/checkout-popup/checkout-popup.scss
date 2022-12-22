@@ -1,0 +1,71 @@
+.checkout-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    border: 2px solid $color-text-main;
+    border-radius: 10px;
+    padding: 10px 10px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-family: $font-primary;
+}
+
+.personal-details-container,
+.credit-cart-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.popup-field {
+    box-sizing: border-box;
+    width: 400px;
+    height: 32px;
+    background-color: $color-bg-main;
+    border: 1px solid $color-text-main;
+    border-radius: 5px;
+    font-size: medium;
+    padding: 3px 10px;
+    // border: 2px solid red;
+
+    &:focus-visible {
+        outline: none;
+        border-width: 2px;
+    }
+
+    &-invalid {
+        border: 1px solid red;
+    }
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.popup-title {
+    text-align: center;
+    font-size: larger;
+}
+
+.error-message {
+    font-size: smaller;
+    margin-top: 3px;
+    color: red;
+    visibility: hidden;
+
+    &-visible {
+        visibility: visible;
+    }
+}
+
+.confirm-button {
+    @extend %button;
+    margin: 10px;
+}

@@ -20,3 +20,17 @@ $small-shadow: rgba(0, 0, 0, 0.1) 0px 5px 5px -3px, rgba(0, 0, 0, 0.05) 2px 4px 
 //Borders
 $product-slider-border: 1px solid #e8e8e8;
 $product-slider-border-active: 1px solid #ff5300;
+
+%button {
+    border: none;
+    border-radius: 10px;
+    width: 150px;
+    height: 50px;
+    box-shadow: $small-shadow;
+    background: $button-bg-collor;
+    color: $button-text-color;
+
+    &:hover {
+        opacity: 0.7;
+    }
+}

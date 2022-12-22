@@ -14,11 +14,8 @@ export class Footer {
             'https://github.com/dziana-babrova'
         );
 
-        footer.append(courseIcon);
-        footer.append(copyrightInfo);
-        footer.append(githubBlock);
-        githubBlock.append(githubAccount1);
-        githubBlock.append(githubAccount2);
+        footer.append(courseIcon, copyrightInfo, githubBlock);
+        githubBlock.append(githubAccount1, githubAccount2);
         return footer;
     }
 }
