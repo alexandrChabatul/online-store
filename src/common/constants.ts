@@ -25,6 +25,7 @@ const appConstants = {
             },
         },
     },
+    currency: '€',
 };
 
 export default appConstants;

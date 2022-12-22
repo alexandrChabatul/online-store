@@ -1,0 +1,16 @@
+.breadcrumbs {
+    display: flex;
+    list-style: none;
+    gap: 10px;
+    margin: 30px 0px 0px 0px;
+    a:active,
+    a:hover,
+    a {
+        color: #000;
+    }
+    
+    :not(:first-child)::before{
+      content: '/';
+      margin-right: 10px;
+    }
+}

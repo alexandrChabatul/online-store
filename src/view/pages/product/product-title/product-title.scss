@@ -1,0 +1,13 @@
+.title-rating {
+    width: 100%;
+    margin: 0px 0px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.title-rating__title {
+    font-weight: 500;
+    font-size: 24px;
+    margin: 0px;
+}
