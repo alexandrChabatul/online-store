@@ -26,7 +26,7 @@ export class Header {
     }
 
     public upateCart(counter: string, total: string): void {
-        this.cart.textContent = total;
+        this.total.textContent = total;
         this.cart.textContent = counter;
     }
 }
