@@ -12,6 +12,20 @@ export class NewElement {
         return element;
     }
 
+    static createDivElement(className: string): HTMLDivElement {
+        const element = document.createElement('div');
+        element.className = className;
+        return element;
+    }
+
+    static createImgElement(className: string, src: string, alt: string): HTMLImageElement {
+        const element = document.createElement('img');
+        element.className = className;
+        element.src = src;
+        element.alt = alt;
+        return element;
+    }
+
     static createButton(className: string, text: string): HTMLButtonElement {
         const element = document.createElement('button');
         element.className = className;

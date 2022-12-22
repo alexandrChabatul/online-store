@@ -1,8 +1,22 @@
-// To scss vars file
-$color-bg-main: #D8D7DB;
+@import './normalize';
+
+$color-bg-main: #d8d7db;
 $color-elements: white;
 $color-text-main: #414751;
-$color-text-secondary: #5E5C5B;
+$color-text-secondary: #5e5c5b;
+$color-stars-default: rgb(107, 101, 101);
+$color-stars-active: #ffd300;
+$product-cart-color: #fff;
+$button-bg-collor: #000;
+$button-text-color: #fff;
 
 $font-header: 'Righteous', cursive;
 $font-primary: 'sora', sans-serif;
+
+//Shadows
+$main-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 2px 14px 6px -2px;
+$small-shadow: rgba(0, 0, 0, 0.1) 0px 5px 5px -3px, rgba(0, 0, 0, 0.05) 2px 4px 6px -2px;
+
+//Borders
+$product-slider-border: 1px solid #e8e8e8;
+$product-slider-border-active: 1px solid #ff5300;

@@ -1,7 +1,8 @@
 import Router from '../services/Router';
 import appConstants from '../common/constants';
-import { params } from '../common/types';
+import { params, Product, ProductResponse } from '../common/types';
 import AppView from '../view/pages/AppViev';
+import data from '../assets/tempData/data.json';
 
 class AppController {
     router: Router;
@@ -21,8 +22,11 @@ class AppController {
         this.view.renderCart();
     }
 
-    renderProduct(params?: params) {
-        this.view.renderProduct();
+    async renderProduct(params?: params) {
+        const product: ProductResponse = data.products[33];
+        const currentPrice = Math.ceil(product.price * (100 - product.discountPercentage)) / 100;
+        const productWithPrice: Product = Object.assign(product, { currentPrice: currentPrice });
+        this.view.renderProduct(productWithPrice);
     }
 
     renderError() {
