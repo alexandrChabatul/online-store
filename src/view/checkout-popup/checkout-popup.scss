@@ -6,7 +6,7 @@
     width: 500px;
     border: 2px solid $color-text-main;
     border-radius: 10px;
-    padding: 10px 10px 30px;
+    padding: 20px 10px 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,22 +16,57 @@
 }
 
 .personal-details-container,
-.credit-cart-container {
+.credit-card-container {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    column-gap: 10px;
+}
+
+.credit-card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .card-number-block {
+        box-sizing: border-box;
+        flex-basis: 350px;
+
+        .card-number-field {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+
+    .card-image {
+        width: 40px;
+        height: 35px;
+        background-image: url('./../../assets/icons/card.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+    }
+
+    .card-validness-block,
+    .card-cvv-block {
+        flex-basis: 195px;
+
+        .card-validness-field,
+        .card-cvv-field {
+            width: 100%;
+        }
+    }
 }
 
 .popup-field {
     box-sizing: border-box;
-    width: 400px;
-    height: 32px;
     background-color: $color-bg-main;
     border: 1px solid $color-text-main;
     border-radius: 5px;
     font-size: medium;
+    height: 32px;
     padding: 3px 10px;
-    // border: 2px solid red;
 
     &:focus-visible {
         outline: none;
@@ -40,6 +75,13 @@
 
     &-invalid {
         border: 1px solid red;
+    }
+}
+
+.personal-details-container {
+    .popup-field {
+        width: 400px;
+        // border: 2px solid red;
     }
 }
 
