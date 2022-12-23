@@ -1,21 +1,29 @@
 import CheckoutPopup from './checkout-popup/checkout-popup';
+import { CartMap, CartParams, CartSummary } from '../../../common/types';
+import { NewElement } from '../../../utils/element-generator';
+import CartBlock from './cart-block/CartBlock';
 
 class Cart {
     popup: CheckoutPopup;
+    cartBlock: CartBlock;
+    summaryBlock: HTMLDivElement;
+
     constructor() {
         this.popup = new CheckoutPopup();
+        this.cartBlock = new CartBlock();
+        this.summaryBlock = NewElement.createDivElement('summary');        
     }
 
-    render() {
-        const app = <HTMLDivElement>document.getElementById('app');
-        const popup = this.popup.createCheckoutPopup();
-        app.append(popup);
-        this.popup.markInvalid(this.popup.cardDetails.cardCVV, this.popup.cardDetails.cardCVVError);
-        this.popup.cardDetails.cardCVV.addEventListener('click', () => {
-            //something
-        });
-        this.popup.selectCardImage('');
-        // app.textContent = 'This is cart!';
+    render(cart: CartMap, params: CartParams, summary: CartSummary) {
+        this.renderCartBlock(cart, params); 
+        this.renderSummaryBlock(summary);               
+    }
+
+    renderCartBlock(cart: CartMap, params: CartParams) {
+    }
+
+    renderSummaryBlock(summary: CartSummary) {
+
     }
 }
 
