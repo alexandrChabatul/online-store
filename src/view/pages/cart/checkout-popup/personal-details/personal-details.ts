@@ -1,4 +1,4 @@
-import { NewElement } from '../../../utils/element-generator';
+import { NewElement } from '../../../../../utils/element-generator';
 
 export class PersonalDetails {
     nameField: HTMLInputElement;

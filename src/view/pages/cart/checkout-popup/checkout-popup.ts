@@ -1,5 +1,5 @@
 import './checkout-popup.scss';
-import { NewElement } from '../../utils/element-generator';
+import { NewElement } from '../../../../utils/element-generator';
 import { PersonalDetails } from './personal-details/personal-details';
 import { CardDetails } from './card-details/card-details';
 import visa from './../../assets/icons/visa.svg';

@@ -23,6 +23,12 @@
     column-gap: 10px;
 }
 
+.personal-details-container {
+    .popup-field {
+        width: 400px;
+    }
+}
+
 .credit-card-container {
     display: flex;
     flex-direction: row;
@@ -75,13 +81,6 @@
 
     &-invalid {
         border: 1px solid red;
-    }
-}
-
-.personal-details-container {
-    .popup-field {
-        width: 400px;
-        // border: 2px solid red;
     }
 }
 
