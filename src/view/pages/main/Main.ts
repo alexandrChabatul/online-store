@@ -1,5 +1,5 @@
-import { Footer } from '../common/footer/footer';
-import { Header } from '../common/header/header';
+import { Footer } from '../../common-components/footer/footer';
+import { Header } from '../../common-components/header/header';
 
 class Main {
     header: Header;
