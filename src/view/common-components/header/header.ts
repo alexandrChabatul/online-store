@@ -1,4 +1,4 @@
-import { NewElement } from '../../../../utils/element-generator';
+import { NewElement } from '../../../utils/element-generator';
 import './header.scss';
 
 export class Header {

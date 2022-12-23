@@ -1,4 +1,4 @@
-import { NewElement } from '../../../../utils/element-generator';
+import { NewElement } from '../../../utils/element-generator';
 import './footer.scss';
 
 export class Footer {
