@@ -3,6 +3,7 @@ import { IMainParameters, Product } from '../../../../common/types';
 import { NewElement } from '../../../../utils/element-generator';
 import './catalog.scss';
 import './catalog-row.scss';
+import { Search } from '../top-panel/search/search';
 
 export class Catalog {
     products: HTMLElement;
@@ -12,7 +13,7 @@ export class Catalog {
     }
 
     public createCatalog(data: Product[], filters: IMainParameters): HTMLElement {
-        this.setView(filters);
+        this.setView(filters.view);
 
         data.forEach((el: Product) => {
             const product = NewElement.createDivElement('product-item');
@@ -66,7 +67,7 @@ export class Catalog {
         }
     }
 
-    public setView(filters: IMainParameters) {
-        filters.view === 'row' ? this.products.classList.add('row-view') : this.products.classList.remove('row-view');
+    public setView(view: string) {
+        view === 'row' ? this.products.classList.add('row-view') : this.products.classList.remove('row-view');
     }
 }

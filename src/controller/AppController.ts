@@ -1,7 +1,7 @@
 import Router from '../services/Router';
 import appConstants from '../common/constants';
 import { IMainParameters, params, Product, ProductResponse } from '../common/types';
-import AppView from '../view/pages/AppViev';
+import AppView from '../view/pages/AppView';
 import data from '../assets/tempData/data.json';
 
 class AppController {
@@ -22,18 +22,7 @@ class AppController {
                 stock: [],
                 price: [],
             },
-            sort: '',
-            view: '',
-            search: '',
-        };
-        const mainFilters2: IMainParameters = {
-            filters: {
-                category: [],
-                brand: [],
-                stock: [],
-                price: [],
-            },
-            sort: '',
+            sort: 'sort',
             view: 'row',
             search: '',
         };
@@ -43,6 +32,18 @@ class AppController {
             return Object.assign(el, { currentPrice: currentPrice });
         });
         this.view.renderMain(productsWithPrice, mainFilters);
+        this.view.main.topPanel.viewBlockElement.viewBlock.addEventListener('click', (e) => {
+            const target: EventTarget | null = e.target;
+            if (target instanceof HTMLDivElement) {
+                if (target.className.includes('row')) {
+                    mainFilters.view = 'row';
+                } else if (target.className.includes('table')) {
+                    mainFilters.view = 'table';
+                }
+                this.view.main.catalog.setView(mainFilters.view);
+                this.view.main.topPanel.viewBlockElement.setView(mainFilters.view);
+            }
+        });
     }
 
     renderCart(params: params) {

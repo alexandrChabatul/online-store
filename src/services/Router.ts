@@ -1,5 +1,5 @@
 import { IParamsWithCallback, renderCallback, Route, IRouteWithCallback } from '../common/types';
-import AppController from '../constroller/AppController';
+import AppController from '../controller/AppController';
 import RouterParser from './RouteParser';
 
 class Router {

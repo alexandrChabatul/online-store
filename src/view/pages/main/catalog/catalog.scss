@@ -1,26 +1,6 @@
-.main {
-    background-color: $color-bg-main;
-    padding-top: 70px;
-}
-
-.wrapper {
-    max-width: 1440px;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin: 0 auto;
-}
-
-.main-wrapper {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
 .products-block {
     display: flex;
     flex-wrap: wrap;
-    flex-basis: 75%;
     gap: 10px;
 }
 
