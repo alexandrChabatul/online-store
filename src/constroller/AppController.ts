@@ -1,6 +1,6 @@
 import Router from '../services/Router';
 import appConstants from '../common/constants';
-import { params, Product, ProductResponse } from '../common/types';
+import { IMainParameters, params, Product, ProductResponse } from '../common/types';
 import AppView from '../view/pages/AppViev';
 import data from '../assets/tempData/data.json';
 
@@ -15,7 +15,34 @@ class AppController {
     }
 
     renderMain(params?: params) {
-        this.view.renderMain();
+        const mainFilters: IMainParameters = {
+            filters: {
+                category: [],
+                brand: [],
+                stock: [],
+                price: [],
+            },
+            sort: '',
+            view: '',
+            search: '',
+        };
+        const mainFilters2: IMainParameters = {
+            filters: {
+                category: [],
+                brand: [],
+                stock: [],
+                price: [],
+            },
+            sort: '',
+            view: 'row',
+            search: '',
+        };
+        const products: ProductResponse[] = data.products;
+        const productsWithPrice: Product[] = products.map((el) => {
+            const currentPrice = Math.ceil(el.price * (100 - el.discountPercentage)) / 100;
+            return Object.assign(el, { currentPrice: currentPrice });
+        });
+        this.view.renderMain(productsWithPrice, mainFilters);
     }
 
     renderCart(params: params) {

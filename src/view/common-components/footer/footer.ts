@@ -3,7 +3,8 @@ import './footer.scss';
 
 export class Footer {
     createFooter(): HTMLElement {
-        const footer = NewElement.createBaseElement('div', 'footer');
+        const footer = NewElement.createBaseElement('footer', 'footer');
+        const footerWrapper = NewElement.createDivElement('wrapper footer-wrapper');
         const courseIcon = NewElement.createAnchor('course-icon', '', 'https://rs.school/js/');
         const copyrightInfo = NewElement.createBaseElementWithText('span', 'copyright-info', '2022©Online Store');
         const githubBlock = NewElement.createBaseElement('div', 'links-block');
@@ -14,7 +15,8 @@ export class Footer {
             'https://github.com/dziana-babrova'
         );
 
-        footer.append(courseIcon, copyrightInfo, githubBlock);
+        footer.append(footerWrapper);
+        footerWrapper.append(courseIcon, copyrightInfo, githubBlock);
         githubBlock.append(githubAccount1, githubAccount2);
         return footer;
     }

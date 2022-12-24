@@ -1,4 +1,4 @@
-import { Product } from '../../common/types';
+import { IMainParameters, Product } from '../../common/types';
 import ErrorPage from './404/404';
 import Cart from './cart/Cart';
 import Main from './main/Main';
@@ -17,8 +17,8 @@ class AppView {
         this.error = new ErrorPage();
     }
 
-    renderMain() {
-        this.main.render();
+    renderMain(data: Product[], filters: IMainParameters) {
+        this.main.render(data, filters);
     }
     renderCart() {
         this.cart.render();
