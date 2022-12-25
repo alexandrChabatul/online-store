@@ -13,13 +13,13 @@ export class StockBlock extends Range {
         super();
         this.StockMinRange = NewElement.createInputRange('input-Stock-min', 'from-slider');
         this.StockMaxRange = NewElement.createInputRange('input-Stock-max', 'to-slider');
-        this.StockMinValue = NewElement.createBaseElement('span', 'Stock-min');
-        this.StockMaxValue = NewElement.createBaseElement('span', 'Stock-max');
+        this.StockMinValue = NewElement.createBaseElement('span', 'stock-min');
+        this.StockMaxValue = NewElement.createBaseElement('span', 'stock-max');
     }
 
     public createStockBlock(filtering: IMainParameters): HTMLDivElement {
-        const StockBlock = NewElement.createDivElement('Stock-block');
-        const StockTitle = NewElement.createBaseElementWithText('h3', 'Stock-title', 'Stock');
+        const StockBlock = NewElement.createDivElement('stock-block');
+        const StockTitle = NewElement.createBaseElementWithText('h3', 'stock-title', 'Stock');
         this.StockMinRange.min = String(filtering.filters.stock.min);
         this.StockMinRange.max = String(filtering.filters.stock.max);
         this.StockMinRange.value = this.StockMinRange.min;

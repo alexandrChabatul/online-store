@@ -1,5 +1,6 @@
 .products-block {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
 }
@@ -81,4 +82,12 @@
     width: 120px;
     flex-shrink: 0;
     align-self: flex-start;
+}
+
+.no-products {
+    padding: 40px;
+    font-family: $font-primary;
+    font-weight: 600;
+    text-align: center;
+    font-size: larger;
 }

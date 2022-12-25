@@ -95,6 +95,7 @@ class AppController {
             search: '',
         };
         const products: ProductResponse[] = data.products;
+        // const products: ProductResponse[] = [];
         const productsWithPrice: Product[] = products.map((el) => {
             const currentPrice = Math.ceil(el.price * (100 - el.discountPercentage)) / 100;
             return Object.assign(el, { currentPrice: currentPrice });
