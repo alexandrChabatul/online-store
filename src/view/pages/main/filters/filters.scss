@@ -1,0 +1,41 @@
+.filters {
+    width: 100%;
+    padding: 15px 10px;
+}
+
+.reset-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.reset-button,
+.copy-button {
+    @extend %button;
+}
+
+.copy-button-copied {
+    opacity: 0.7;
+}
+
+.filters {
+    font-family: $font-primary;
+}
+
+.filters-list {
+    list-style: none;
+    max-height: 180px;
+    padding: 0;
+    border-radius: 10px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.category-block,
+.brand-block,
+.price-block,
+.stock-block {
+    padding: 0 10px;
+}

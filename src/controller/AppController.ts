@@ -17,10 +17,78 @@ class AppController {
     renderMain(params?: params) {
         const mainFilters: IMainParameters = {
             filters: {
-                category: [],
-                brand: [],
-                stock: [],
-                price: [],
+                category: {
+                    smartphones: {
+                        checked: false,
+                        active: 5,
+                        total: 5,
+                    },
+                    laptops: {
+                        checked: false,
+                        active: 5,
+                        total: 5,
+                    },
+                    fragrances: {
+                        checked: false,
+                        active: 5,
+                        total: 5,
+                    },
+                    skincare: {
+                        checked: false,
+                        active: 5,
+                        total: 5,
+                    },
+                },
+                brand: {
+                    Apple: {
+                        checked: false,
+                        active: 5,
+                        total: 5,
+                    },
+                    Samsung: {
+                        checked: false,
+                        active: 5,
+                        total: 5,
+                    },
+                    OPPO: {
+                        checked: false,
+                        active: 5,
+                        total: 5,
+                    },
+                    Huawei: {
+                        checked: false,
+                        active: 5,
+                        total: 5,
+                    },
+                    Infinix: {
+                        checked: false,
+                        active: 5,
+                        total: 5,
+                    },
+                    Motorola: {
+                        checked: false,
+                        active: 5,
+                        total: 5,
+                    },
+                    Xiaomi: {
+                        checked: false,
+                        active: 5,
+                        total: 5,
+                    },
+                    Bork: {
+                        checked: false,
+                        active: 5,
+                        total: 5,
+                    },
+                },
+                stock: {
+                    min: 10,
+                    max: 3000,
+                },
+                price: {
+                    min: 10,
+                    max: 3000,
+                },
             },
             sort: 'sort',
             view: 'row',
@@ -44,6 +112,10 @@ class AppController {
                 this.view.main.topPanel.viewBlockElement.setView(mainFilters.view);
             }
         });
+        this.view.main.filters.resetBlock.copyButton.addEventListener(
+            'click',
+            this.view.main.filters.resetBlock.applyCopiedState.bind(this.view.main.filters.resetBlock)
+        );
     }
 
     renderCart(params: params) {

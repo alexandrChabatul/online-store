@@ -3,7 +3,6 @@ import { IMainParameters, Product } from '../../../../common/types';
 import { NewElement } from '../../../../utils/element-generator';
 import './catalog.scss';
 import './catalog-row.scss';
-import { Search } from '../top-panel/search/search';
 
 export class Catalog {
     products: HTMLElement;
