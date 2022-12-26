@@ -1,6 +1,6 @@
 import Router from '../services/Router';
 import appConstants from '../common/constants';
-import { IMainParameters, params, Product, ProductResponse } from '../common/types';
+import { CartParams, CartProduct, CartSummary, IMainParameters, params, Product, ProductResponse, PromoCode } from '../common/types';
 import AppView from '../view/pages/AppView';
 import data from '../assets/tempData/data.json';
 
@@ -120,7 +120,20 @@ class AppController {
     }
 
     renderCart(params: params) {
-        this.view.renderCart();
+        const products = data.products.slice(1, 10);
+        const productsWithPrice: CartProduct[] = products.map((el) => {
+            const currentPrice = Math.ceil(el.price * (100 - el.discountPercentage)) / 100;
+            const subtotal = currentPrice * 5;
+            return Object.assign(el, { currentPrice: currentPrice, quantity: 5, subtotal: subtotal });
+        });
+        const parameters: CartParams = {
+            itemsPerPage: 3,
+            page: 1,
+            numOfPages: 4,
+        };
+        const summary: CartSummary = { productQty: 10, totalPrice: 100000, prevPrice: 110000 };
+        const codes: PromoCode[] = [{ name: 'RS', value: 10 }];
+        this.view.renderCart(productsWithPrice, parameters, summary, codes);
     }
 
     async renderProduct(params?: params) {

@@ -21,7 +21,7 @@ class AppView {
         this.main.render(data, filters);
     }
     renderCart(cart: CartProduct[], params: CartParams, summary: CartSummary, codes: PromoCode[]) {
-        this.cart.renderCart([], params, summary, codes);
+        this.cart.renderCart(cart, params, summary, codes);
     }
     renderProduct(data: Product) {
         this.product.render(data);
