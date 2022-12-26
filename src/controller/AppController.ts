@@ -1,6 +1,15 @@
 import Router from '../services/Router';
 import appConstants from '../common/constants';
-import { CartParams, CartProduct, CartSummary, IMainParameters, params, Product, ProductResponse, PromoCode } from '../common/types';
+import {
+    CartParams,
+    CartProduct,
+    CartSummary,
+    IMainParameters,
+    params,
+    Product,
+    ProductResponse,
+    PromoCode,
+} from '../common/types';
 import AppView from '../view/pages/AppView';
 import data from '../assets/tempData/data.json';
 

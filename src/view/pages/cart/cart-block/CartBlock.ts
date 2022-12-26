@@ -1,9 +1,9 @@
 import { CartParams, CartProduct } from '../../../../common/types';
 import { NewElement } from '../../../../utils/element-generator';
 import CartItem from './cart-item/CartItem';
-import './cart-page.scss';
+import './cart-block.scss';
 
-export default class CartPage {
+export default class CartBlock {
     items: HTMLDivElement;
     pagination: HTMLUListElement;
 
@@ -12,8 +12,8 @@ export default class CartPage {
         this.pagination = NewElement.createBaseElement('ul', 'cart-pagination') as HTMLUListElement;
     }
 
-    getCardPage(cart: CartProduct[], params: CartParams) {
-        const cartBlock = NewElement.createDivElement('cart-page');
+    getCartPage(cart: CartProduct[], params: CartParams) {
+        const cartBlock = NewElement.createDivElement('cart-block');
         this.renderItems(cart);
         this.renderPagination(params.page, params.numOfPages);
         cartBlock.append(this.items, this.pagination);
