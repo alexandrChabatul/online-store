@@ -1,5 +1,5 @@
 import { Product } from '../../common/types';
-import ErrorPage from './404/404';
+import ErrorPage from './404/404View';
 import Cart from './cart/Cart';
 import Main from './main/Main';
 import ProductView from './product/ProductView';
