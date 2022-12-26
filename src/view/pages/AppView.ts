@@ -1,5 +1,5 @@
 import { IMainParameters, Product } from '../../common/types';
-import ErrorPage from './404/404';
+import ErrorPage from './404/404View';
 import Cart from './cart/Cart';
 import MainView from './main/MainView';
 import ProductView from './product/ProductView';
