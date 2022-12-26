@@ -19,7 +19,7 @@ class MainView {
         this.catalog = new Catalog();
     }
 
-    render(params: Product[], filters: IMainParameters) {
+    render(products: Product[], filters: IMainParameters) {
         const app = <HTMLDivElement>document.getElementById('root');
         const header = this.header.createHeader();
         const main = NewElement.createDivElement('main');
@@ -27,8 +27,8 @@ class MainView {
         const leftPart = NewElement.createDivElement('main-left');
         const rightPart = NewElement.createDivElement('main-right');
         const filtering = this.filters.createFilters(filters);
-        const topPanel = this.topPanel.createTopPanel(params, filters);
-        const catalog = this.catalog.createCatalog(params, filters);
+        const topPanel = this.topPanel.createTopPanel(products, filters);
+        const catalog = this.catalog.createCatalog(products, filters);
 
         app.append(header, main);
         main.append(mainWrapper);

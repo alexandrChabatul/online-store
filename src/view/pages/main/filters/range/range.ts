@@ -18,13 +18,13 @@ export class Range {
         const fromPosition = Number(from.value) - Number(to.min);
         const toPosition = Number(to.value) - Number(to.min);
         controlSlider.style.background = `linear-gradient(
-      to right,
-      ${sliderColor} 0%,
-      ${sliderColor} ${(fromPosition / rangeDistance) * 100}%,
-      ${rangeColor} ${(fromPosition / rangeDistance) * 100}%,
-      ${rangeColor} ${(toPosition / rangeDistance) * 100}%,
-      ${sliderColor} ${(toPosition / rangeDistance) * 100}%,
-      ${sliderColor} 100%)`;
+        to right,
+        ${sliderColor} 0%,
+        ${sliderColor} ${(fromPosition / rangeDistance) * 100}%,
+        ${rangeColor} ${(fromPosition / rangeDistance) * 100}%,
+        ${rangeColor} ${(toPosition / rangeDistance) * 100}%,
+        ${sliderColor} ${(toPosition / rangeDistance) * 100}%,
+        ${sliderColor} 100%)`;
     }
 
     private setToggleAccessible(currentTarget: HTMLInputElement): void {

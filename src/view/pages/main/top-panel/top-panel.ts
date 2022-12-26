@@ -18,7 +18,7 @@ export class TopPanel {
 
     createTopPanel(data: Product[], filters: IMainParameters): HTMLElement {
         const topPanel = NewElement.createDivElement('top-panel');
-        const sortMethod = this.sortMethod.createSortBlock(data, filters.sort);
+        const sortMethod = this.sortMethod.createSortBlock(filters.sort);
         const searchResults = this.search.createSearchResultsBlock(data);
         const searchField = this.search.createSearch(filters.search);
         const viewBlock = this.viewBlockElement.createViewBlock(filters.view);

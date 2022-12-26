@@ -1,7 +1,7 @@
 .input-block {
-  padding-top: 12px;
-  position: relative;
-  min-height: 30px;
+    padding-top: 12px;
+    position: relative;
+    min-height: 30px;
 }
 
 .value-block {
@@ -12,46 +12,46 @@
 }
 
 input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  height: 2px;
-  width: 100%;
-  position: absolute;
-  background-color: #C6C6C6;
-  pointer-events: none;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    background-color: #C6C6C6;
+    pointer-events: none;
 }
 
 input[type=range]::-webkit-slider-thumb {
     appearance: none;
-  -webkit-appearance: none;
-  pointer-events: all;
-  width: 24px;
-  height: 24px;
-  background-color: #fff;
-  border-radius: 50%;
-  box-shadow: 0 0 0 1px #C6C6C6;
-  cursor: pointer;
+    -webkit-appearance: none;
+    pointer-events: all;
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px #C6C6C6;
+    cursor: pointer;
 }
 
-// input[type=range]::-moz-range-thumb {
-//     appearance: none;
-//   -webkit-appearance: none;
-//   pointer-events: all;
-//   width: 24px;
-//   height: 24px;
-//   background-color: #fff;
-//   border-radius: 50%;
-//   box-shadow: 0 0 0 1px #C6C6C6;
-//   cursor: pointer;
-// }
+input[type=range]::-moz-range-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    pointer-events: all;
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px #C6C6C6;
+    cursor: pointer;
+}
 
 input[type=range]::-webkit-slider-thumb:hover {
-  background: #f7f7f7;
+    background: #f7f7f7;
 }
 
 input[type=range]::-webkit-slider-thumb:active {
-  box-shadow: inset 0 0 3px $color-text-main, 0 0 9px $color-text-main;
-  -webkit-box-shadow: inset 0 0 3px $color-text-main, 0 0 9px $color-text-main;
+    box-shadow: inset 0 0 3px $color-text-main, 0 0 9px $color-text-main;
+    -webkit-box-shadow: inset 0 0 3px $color-text-main, 0 0 9px $color-text-main;
 }
 
 #from-slider {
