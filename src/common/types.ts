@@ -63,3 +63,11 @@ interface IRange {
     min: number;
     max: number;
 }
+
+export type CartProduct = Product & { quantity: number; subtotal: number };
+
+export type CartSummary = { productQty: number; prevPrice: number; totalPrice: number };
+
+export type PromoCode = { name: string; value: number };
+
+export type CartParams = { itemsPerPage: number; page: number; numOfPages: number };

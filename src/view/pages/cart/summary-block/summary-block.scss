@@ -1,0 +1,98 @@
+.cart-summary__heading {
+    margin: 0;
+    border-bottom: 2px solid $summary-block-color;
+}
+
+.summary-description {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-bottom: 1px solid $summary-block-color;
+
+    p {
+        margin: 0;
+    }
+}
+
+.products-summary,
+.subtotal-summary,
+.total-summary {
+    display: flex;
+    justify-content: space-between;
+}
+
+.subtotal-summary {
+    color: $cart-description-color;
+}
+
+.applied-codes {
+    display: none;
+}
+
+.applied-codes__list {
+    margin: 5px 0px 0px;
+    padding: 0;
+}
+
+.applied-code {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px;
+    margin-left: 20px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: $summary-block-color;
+}
+
+.applied-codes__active {
+    display: block;
+}
+
+.applied-code__image,
+.clean-input-button {
+    background-image: url('../../../../assets/icons/cross.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.code-input-container {
+    position: relative;
+}
+
+.clean-input-button {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    display: none;
+}
+
+.clean-input-button__active {
+    display: block;
+}
+
+.code-input {
+    box-sizing: border-box;
+    border: 1px solid;
+    border-radius: 5px;
+    font-size: medium;
+    height: 32px;
+    padding: 3px 10px;
+}
+
+.code-input-helper {
+    text-align: center;
+    font-size: 70%;
+    color: $cart-description-color;
+    margin: 5px 0px 0px;
+}
+
+.cart-summary__button {
+    @extend %button;
+    width: 100%;
+}
