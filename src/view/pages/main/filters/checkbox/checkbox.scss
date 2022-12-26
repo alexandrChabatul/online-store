@@ -1,0 +1,73 @@
+.checkbox {
+    position: absolute;
+    visibility: hidden;
+}
+
+.filter-label {
+    display: flex;
+    justify-content: space-between;
+}
+
+ label {
+    box-sizing: border-box;
+    padding: 12px;
+    padding-left: 40px;
+    width: 100%;
+    // display: block;
+    text-align: left;
+    color: $color-text-main;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    transition: color 200ms ease-in;
+    overflow: hidden;
+
+      &:after {
+          width: 30px;
+          height: 30px;
+          content: '';
+          border: 2px solid #D1D7DC;
+          background-color: #fff;
+          background-repeat: no-repeat;
+          background-size: contain;
+          border-radius: 5px;
+          z-index: 2;
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          cursor: pointer;
+          transition: all 200ms ease-in;
+      }
+    }
+
+    input:checked ~ label {
+        color: $color-elements;
+        background-color: $color-text-secondary;
+
+        &:before {
+            transform: translate(-50%, -50%) scale3d(56, 56, 1);
+            opacity: 1;
+        }
+
+        &:after {
+            background-color: $color-bg-main;
+            border-color: $color-text-main;
+            position: absolute;
+            background-image: url('./../../../../../assets/icons/checkmark.svg');
+        }
+ }
+
+ .filters-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+ .filters-list::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px $color-bg-main;
+      border-radius: 10px;
+}
+
+ .filters-list::-webkit-scrollbar-thumb {
+      background: red;
+      border-radius: 10px;
+}

@@ -1,10 +1,16 @@
 .header {
+    width: 100%;
+    position: fixed;
+    background-color: $color-elements;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    z-index: 3;
+}
+
+.header-wrapper {
     display: grid;
     grid-template: auto / repeat(3, 1fr);
     align-items: center;
-    background-color: $color-elements;
     padding: 10px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 }
 
 .logo {
@@ -24,7 +30,7 @@
 
 .logo-icon {
     display: inline-block;
-    background-image: url('./../../../../assets/icons/shop.svg');
+    background-image: url('./../../../assets/icons/shop.svg');
     width: 50px;
     height: 50px;
 }
@@ -45,7 +51,7 @@
 .cart-icon {
     width: 50px;
     height: 50px;
-    background-image: url('./../../../../assets/icons/cart.png');
+    background-image: url('./../../../assets/icons/cart.png');
     background-size: contain;
     position: relative;
     justify-self: end;
