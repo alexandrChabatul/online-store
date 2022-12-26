@@ -26,6 +26,32 @@ const appConstants = {
         },
     },
     currency: '€',
+    sortParams: [
+        {
+            value: 'price ASC',
+            text: 'Price (Low-High)',
+        },
+        {
+            value: 'price DESC',
+            text: 'Price (High-Low)',
+        },
+        {
+            value: 'rating ASC',
+            text: 'Rating (Low-High)',
+        },
+        {
+            value: 'rating DESC',
+            text: 'Rating (High-Low)',
+        },
+        {
+            value: 'discount ASC',
+            text: 'Discount (Low-High)',
+        },
+        {
+            value: 'discount DESC',
+            text: 'Discount (High-Low)',
+        },
+    ],
 };
 
 export default appConstants;

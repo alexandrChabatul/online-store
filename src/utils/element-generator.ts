@@ -41,10 +41,11 @@ export class NewElement {
         return element;
     }
 
-    static createInputRange(className: string): HTMLInputElement {
+    static createInputRange(className: string, id: string): HTMLInputElement {
         const element = document.createElement('input');
         element.type = 'range';
         element.className = className;
+        element.id = id;
         return element;
     }
 
@@ -72,6 +73,14 @@ export class NewElement {
         element.name = name;
         element.value = value;
         element.className = className;
+        return element;
+    }
+
+    static createLabel(className: string, forId: string, text: string): HTMLLabelElement {
+        const element = document.createElement('label');
+        element.className = className;
+        element.htmlFor = forId;
+        element.textContent = text;
         return element;
     }
 

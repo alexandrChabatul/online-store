@@ -29,6 +29,7 @@ $product-slider-border-active: 1px solid #ff5300;
     box-shadow: $small-shadow;
     background: $button-bg-collor;
     color: $button-text-color;
+    font-family: $font-primary;
 
     &:hover {
         opacity: 0.7;

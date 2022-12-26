@@ -1,24 +1,24 @@
-import { Product } from '../../common/types';
+import { IMainParameters, Product } from '../../common/types';
 import ErrorPage from './404/404View';
 import Cart from './cart/Cart';
-import Main from './main/Main';
+import MainView from './main/MainView';
 import ProductView from './product/ProductView';
 
 class AppView {
-    main: Main;
+    main: MainView;
     cart: Cart;
     product: ProductView;
     error: ErrorPage;
 
     constructor() {
-        this.main = new Main();
+        this.main = new MainView();
         this.cart = new Cart();
         this.product = new ProductView();
         this.error = new ErrorPage();
     }
 
-    renderMain() {
-        this.main.render();
+    renderMain(data: Product[], filters: IMainParameters) {
+        this.main.render(data, filters);
     }
     renderCart() {
         this.cart.render();
