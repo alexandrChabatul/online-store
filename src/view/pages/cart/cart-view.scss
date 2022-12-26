@@ -1,0 +1,36 @@
+.app {
+    display: flex;
+    padding: 30px;
+    background-color: $color-bg-main;
+}
+
+.cart-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-family: $font-primary;
+}
+
+.cart {
+    display: flex;
+    gap: 30px;
+}
+
+.cart-block {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.summary {
+    position: sticky;
+    margin-top: 85px;
+    top: 30px;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    border-radius: 20px;
+    background-color: $color-elements;
+    padding: 30px 20px;
+    height: min-content;
+}

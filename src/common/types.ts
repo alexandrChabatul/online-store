@@ -64,6 +64,10 @@ interface IRange {
     max: number;
 }
 
-export type CartMap = Map<Product, number>;
-export type CartSummary = {productNum: number, price: number};
-export type CartParams = {itemsPerPage: number, page: number, numOfpages: number}
+export type CartProduct = Product & { quantity: number; subtotal: number };
+
+export type CartSummary = { productQty: number; prevPrice: number; totalPrice: number };
+
+export type PromoCode = { name: string; value: number };
+
+export type CartParams = { itemsPerPage: number; page: number; numOfPages: number };

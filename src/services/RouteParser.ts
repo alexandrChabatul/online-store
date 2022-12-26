@@ -6,7 +6,7 @@ class PouterParser {
     }
 
     /**
-     * Returns parametrs object(maybe empty) or false if path is not exist to template.
+     * Returns parameters object(maybe empty) or false if path is not exist to template.
      * @param {string} path - path to check
      * @param {Route} template - object of Route type (contains path RegExp and available params)
      * @return {params | false}

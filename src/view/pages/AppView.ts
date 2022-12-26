@@ -1,6 +1,6 @@
-import { IMainParameters, Product } from '../../common/types';
+import { IMainParameters, CartProduct, CartParams, CartSummary, Product, PromoCode } from '../../common/types';
 import ErrorPage from './404/404View';
-import Cart from './cart/Cart';
+import Cart from './cart/CartView';
 import MainView from './main/MainView';
 import ProductView from './product/ProductView';
 
@@ -20,8 +20,8 @@ class AppView {
     renderMain(data: Product[], filters: IMainParameters) {
         this.main.render(data, filters);
     }
-    renderCart() {
-        this.cart.render();
+    renderCart(cart: CartProduct[], params: CartParams, summary: CartSummary, codes: PromoCode[]) {
+        this.cart.renderCart([], params, summary, codes);
     }
     renderProduct(data: Product) {
         this.product.render(data);
