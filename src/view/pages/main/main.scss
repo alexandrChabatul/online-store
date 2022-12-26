@@ -4,7 +4,7 @@
 }
 
 .wrapper {
-    max-width: 1460px;
+    max-width: 1360px;
     padding-left: 20px;
     padding-right: 20px;
     margin: 0 auto;
@@ -35,9 +35,15 @@
     flex: 1 0 23%;
     width: 22%;
     height: fit-content;
+    max-height: calc(100vh - 90px);
     position: sticky;
     top: 90px;
     background-color: $color-elements;
     border-radius: 10px;
     display: flex;
+    overflow-y: scroll;
+}
+
+ .main-left::-webkit-scrollbar {
+    display: none;
 }

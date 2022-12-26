@@ -1,6 +1,7 @@
 .filters {
     width: 100%;
     padding: 15px 10px;
+    position: sticky;
 }
 
 .reset-block {
@@ -14,6 +15,7 @@
 .reset-button,
 .copy-button {
     @extend %button;
+    width: 130px;
 }
 
 .copy-button-copied {
