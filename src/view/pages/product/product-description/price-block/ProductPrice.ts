@@ -1,5 +1,5 @@
-import appConstants from '../../../../../common/constants';
-import { ElementsFactory } from '../../../../../utils/element-generator';
+import appConstants from 'common/constants';
+import { ElementsFactory } from 'utils/element-generator';
 import './product-price.scss';
 
 class ProductPrice {

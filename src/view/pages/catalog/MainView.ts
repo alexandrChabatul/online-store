@@ -1,5 +1,5 @@
-import { IMainParameters, Product } from '../../../common/types';
-import { ElementsFactory } from '../../../utils/element-generator';
+import { IMainParameters, Product } from 'common/types';
+import { ElementsFactory } from 'utils/element-generator';
 import { Catalog } from './products/products';
 import { TopPanel } from './top-panel/top-panel';
 import './main.scss';

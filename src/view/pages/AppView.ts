@@ -1,4 +1,4 @@
-import { IMainParameters, CartProduct, CartParams, CartSummary, Product, PromoCode } from '../../common/types';
+import { IMainParameters, CartProduct, CartParams, CartSummary, Product, PromoCode } from 'common/types';
 import ErrorPage from './404/404View';
 import Cart from './cart/CartView';
 import MainView from './catalog/MainView';

@@ -1,6 +1,6 @@
-import appConstants from '../../../../../common/constants';
-import { CartProduct } from '../../../../../common/types';
-import { ElementsFactory } from '../../../../../utils/element-generator';
+import appConstants from 'common/constants';
+import { CartProduct } from 'common/types';
+import { ElementsFactory } from 'utils/element-generator';
 import './cart-item.scss';
 
 export default class CartItem {

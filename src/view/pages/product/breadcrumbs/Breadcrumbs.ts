@@ -1,5 +1,5 @@
-import { Product } from '../../../../common/types';
-import { ElementsFactory } from '../../../../utils/element-generator';
+import { Product } from 'common/types';
+import { ElementsFactory } from 'utils/element-generator';
 import './breadcrumbs.scss';
 
 class Breadcrumbs {

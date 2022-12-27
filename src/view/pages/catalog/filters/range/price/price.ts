@@ -1,5 +1,5 @@
-import { IMainParameters } from '../../../../../../common/types';
-import { ElementsFactory } from '../../../../../../utils/element-generator';
+import { IMainParameters } from 'common/types';
+import { ElementsFactory } from 'utils/element-generator';
 import { Range } from '../range';
 import '../range.scss';
 

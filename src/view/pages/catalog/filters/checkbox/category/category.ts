@@ -1,5 +1,5 @@
-import { IMainParameters } from '../../../../../../common/types';
-import { ElementsFactory } from '../../../../../../utils/element-generator';
+import { IMainParameters } from 'common/types';
+import { ElementsFactory } from 'utils/element-generator';
 
 export class CategoryBlock {
     categories: HTMLElement;

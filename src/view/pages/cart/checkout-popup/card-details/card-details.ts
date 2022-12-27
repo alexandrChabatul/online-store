@@ -1,4 +1,4 @@
-import { ElementsFactory } from '../../../../../utils/element-generator';
+import { ElementsFactory } from 'utils/element-generator';
 
 export class CardDetails {
     cardNumber: HTMLInputElement;

@@ -1,4 +1,4 @@
-import { ElementsFactory } from '../../../utils/element-generator';
+import { ElementsFactory } from 'utils/element-generator';
 import { Footer } from '../../common-components/footer/footer';
 import { Header } from '../../common-components/header/header';
 import './404.scss';
