@@ -12,6 +12,7 @@ import {
 } from 'common/types';
 import AppView from '../view/pages/AppView';
 import data from 'assets/tempData/data.json';
+import { SearchService } from './../services/Search';
 
 class AppController {
     router: Router;
@@ -101,7 +102,7 @@ class AppController {
             },
             sort: 'sort',
             view: 'row',
-            search: '',
+            search: 'dummy',
         };
         const products: ProductResponse[] = data.products;
         // const products: ProductResponse[] = [];
@@ -109,6 +110,8 @@ class AppController {
             const currentPrice = Math.ceil(el.price * (100 - el.discountPercentage)) / 100;
             return Object.assign(el, { currentPrice: currentPrice });
         });
+        const filtered: Product[] = SearchService.getSearchResults(productsWithPrice, mainFilters.search);
+        console.log(filtered);
         this.view.renderMain(productsWithPrice, mainFilters);
         this.view.catalog.topPanel.viewBlockElement.viewBlock.addEventListener('click', (e) => {
             const target: EventTarget | null = e.target;

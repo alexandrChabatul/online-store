@@ -19,7 +19,7 @@ export interface IRouteWithCallback {
     cb: renderCallback;
 }
 
-interface IProductResponse {
+export interface IProductResponse {
     id: number;
     title: string;
     description: string;
@@ -33,7 +33,7 @@ interface IProductResponse {
     images: Array<string>;
 }
 
-export type ProductResponse = Readonly<IProductResponse>;
+export type ProductResponse = IProductResponse;
 
 export type Product = ProductResponse & { currentPrice: number };
 
