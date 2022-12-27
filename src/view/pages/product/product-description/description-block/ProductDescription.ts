@@ -1,10 +1,10 @@
 import { Product } from '../../../../../common/types';
-import { NewElement } from '../../../../../utils/element-generator';
+import { ElementsFactory } from '../../../../../utils/element-generator';
 import './product-description.scss';
 
 class ProductDescription {
     getDescription(product: Product) {
-        const descriptionBlock = NewElement.createDivElement('product-desc');
+        const descriptionBlock = ElementsFactory.createDivElement('product-desc');
         let html = '';
         if (product.category) {
             html += `<p class="product-desc__name">Category: <span class="product-desc__value">${product.category.toLowerCase()}</span></p>`;

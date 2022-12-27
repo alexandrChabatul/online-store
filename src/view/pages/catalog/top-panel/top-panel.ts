@@ -1,9 +1,9 @@
 import { IMainParameters, Product } from '../../../../common/types';
-import { NewElement } from '../../../../utils/element-generator';
+import { ElementsFactory } from '../../../../utils/element-generator';
 import { Search } from './search/search';
 import { Sort } from './sorting/sorting';
 import './top-panel.scss';
-import { ViewBlock } from './view-block/vew-block';
+import { ViewBlock } from './view-block/view-block';
 
 export class TopPanel {
     sortMethod: Sort;
@@ -17,7 +17,7 @@ export class TopPanel {
     }
 
     createTopPanel(data: Product[], filters: IMainParameters): HTMLElement {
-        const topPanel = NewElement.createDivElement('top-panel');
+        const topPanel = ElementsFactory.createDivElement('top-panel');
         const sortMethod = this.sortMethod.createSortBlock(filters.sort);
         const searchResults = this.search.createSearchResultsBlock(data);
         const searchField = this.search.createSearch(filters.search);

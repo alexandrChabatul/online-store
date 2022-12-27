@@ -1,7 +1,7 @@
 import { IMainParameters } from '../../../../../../common/types';
-import { NewElement } from '../../../../../../utils/element-generator';
+import { ElementsFactory } from '../../../../../../utils/element-generator';
 import { Range } from '../range';
-import './../range.scss';
+import '../range.scss';
 
 export class PriceBlock extends Range {
     priceMinRange: HTMLInputElement;
@@ -11,15 +11,15 @@ export class PriceBlock extends Range {
 
     constructor() {
         super();
-        this.priceMinRange = NewElement.createInputRange('input-price-min', 'from-slider');
-        this.priceMaxRange = NewElement.createInputRange('input-price-max', 'to-slider');
-        this.priceMinValue = NewElement.createBaseElement('span', 'price-min');
-        this.priceMaxValue = NewElement.createBaseElement('span', 'price-max');
+        this.priceMinRange = ElementsFactory.createInputRange('input-price-min', 'from-slider');
+        this.priceMaxRange = ElementsFactory.createInputRange('input-price-max', 'to-slider');
+        this.priceMinValue = ElementsFactory.createBaseElement('span', 'price-min');
+        this.priceMaxValue = ElementsFactory.createBaseElement('span', 'price-max');
     }
 
     public createPriceBlock(filtering: IMainParameters): HTMLDivElement {
-        const priceBlock = NewElement.createDivElement('price-block');
-        const priceTitle = NewElement.createBaseElementWithText('h3', 'price-title', 'Price');
+        const priceBlock = ElementsFactory.createDivElement('price-block');
+        const priceTitle = ElementsFactory.createBaseElementWithText('h3', 'price-title', 'Price');
         this.priceMinRange.min = String(filtering.filters.price.min);
         this.priceMinRange.max = String(filtering.filters.price.max);
         this.priceMinRange.value = this.priceMinRange.min;
@@ -27,8 +27,8 @@ export class PriceBlock extends Range {
         this.priceMaxRange.max = String(filtering.filters.price.max);
         this.priceMaxRange.value = this.priceMinRange.max;
 
-        const inputBlock = NewElement.createDivElement('input-block');
-        const valueBlock = NewElement.createDivElement('value-block');
+        const inputBlock = ElementsFactory.createDivElement('input-block');
+        const valueBlock = ElementsFactory.createDivElement('value-block');
         this.priceMinValue.textContent = String(filtering.filters.price.min);
         this.priceMaxValue.textContent = String(filtering.filters.price.max);
 

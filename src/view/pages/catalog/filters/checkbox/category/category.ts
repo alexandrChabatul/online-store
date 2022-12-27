@@ -1,23 +1,23 @@
 import { IMainParameters } from '../../../../../../common/types';
-import { NewElement } from '../../../../../../utils/element-generator';
+import { ElementsFactory } from '../../../../../../utils/element-generator';
 
 export class CategoryBlock {
     categories: HTMLElement;
 
     constructor() {
-        this.categories = NewElement.createBaseElement('ul', 'filters-list');
+        this.categories = ElementsFactory.createBaseElement('ul', 'filters-list');
     }
 
     public createCategoryBlock(filtering: IMainParameters): HTMLDivElement {
-        const categoryBlock = NewElement.createDivElement('category-block');
-        const categoryTitle = NewElement.createBaseElementWithText('h3', 'category-title', 'Category');
+        const categoryBlock = ElementsFactory.createDivElement('category-block');
+        const categoryTitle = ElementsFactory.createBaseElementWithText('h3', 'category-title', 'Category');
 
         for (const el in filtering.filters.category) {
-            const categoryItem = NewElement.createBaseElement('li', 'filters-element');
-            const categoryName = NewElement.createCheckbox('checkbox', `${el}`, 'category', `${el}`);
-            const categoryLabel = NewElement.createLabel('filter-label', `${el}`, `${el} `);
+            const categoryItem = ElementsFactory.createBaseElement('li', 'filters-element');
+            const categoryName = ElementsFactory.createCheckbox('checkbox', `${el}`, 'category', `${el}`);
+            const categoryLabel = ElementsFactory.createLabel('filter-label', `${el}`, `${el} `);
             categoryName.checked = filtering.filters.category[el].checked;
-            const categoryCount = NewElement.createBaseElementWithText(
+            const categoryCount = ElementsFactory.createBaseElementWithText(
                 'span',
                 'filter-count',
                 `(${filtering.filters.category[el].active}/${filtering.filters.category[el].total})`

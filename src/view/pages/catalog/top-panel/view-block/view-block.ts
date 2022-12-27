@@ -1,4 +1,4 @@
-import { NewElement } from './../../../../../utils/element-generator';
+import { ElementsFactory } from '../../../../../utils/element-generator';
 
 export class ViewBlock {
     viewBlock: HTMLDivElement;
@@ -6,9 +6,9 @@ export class ViewBlock {
     tableView: HTMLDivElement;
 
     constructor() {
-        this.viewBlock = NewElement.createDivElement('view-block');
-        this.rowView = NewElement.createDivElement('view-block-icon view-block-row');
-        this.tableView = NewElement.createDivElement('view-block-icon view-block-table');
+        this.viewBlock = ElementsFactory.createDivElement('view-block');
+        this.rowView = ElementsFactory.createDivElement('view-block-icon view-block-row');
+        this.tableView = ElementsFactory.createDivElement('view-block-icon view-block-table');
     }
 
     public createViewBlock(view: string): HTMLDivElement {

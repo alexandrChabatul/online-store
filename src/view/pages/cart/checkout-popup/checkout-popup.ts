@@ -1,5 +1,5 @@
 import './checkout-popup.scss';
-import { NewElement } from '../../../../utils/element-generator';
+import { ElementsFactory } from '../../../../utils/element-generator';
 import { PersonalDetails } from './personal-details/personal-details';
 import { CardDetails } from './card-details/card-details';
 import visa from './../../../../assets/icons/visa.svg';
@@ -15,11 +15,11 @@ export default class CheckoutPopup {
     constructor() {
         this.personalDetails = new PersonalDetails();
         this.cardDetails = new CardDetails();
-        this.confirmButton = NewElement.createButton('confirm-button', 'Confirm');
+        this.confirmButton = ElementsFactory.createButton('confirm-button', 'Confirm');
     }
 
     public createCheckoutPopup(): HTMLElement {
-        const popup = NewElement.createBaseElement('div', 'checkout-popup');
+        const popup = ElementsFactory.createBaseElement('div', 'checkout-popup');
         const personalDetailsBlock = this.personalDetails.createPersonalDetailsBlock();
         const cardDetailsBlock = this.cardDetails.createCardDetailsBlock();
         popup.append(personalDetailsBlock, cardDetailsBlock, this.confirmButton);

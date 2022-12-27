@@ -1,5 +1,5 @@
 import './filters.scss';
-import { NewElement } from './../../../../utils/element-generator';
+import { ElementsFactory } from '../../../../utils/element-generator';
 import { ResetBlock } from './reset/reset';
 import { IMainParameters } from '../../../../common/types';
 import { CategoryBlock } from './checkbox/category/category';
@@ -23,7 +23,7 @@ export class Filters {
     }
 
     public createFilters(existingFilters: IMainParameters): HTMLDivElement {
-        const filters = NewElement.createDivElement('filters');
+        const filters = ElementsFactory.createDivElement('filters');
         const resetBlock = this.resetBlock.createResetBlock();
         const categoryBlock = this.categoryBlock.createCategoryBlock(existingFilters);
         const brandBlock = this.brandBlock.createBrandBlock(existingFilters);

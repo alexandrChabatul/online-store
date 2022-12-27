@@ -110,7 +110,7 @@ class AppController {
             return Object.assign(el, { currentPrice: currentPrice });
         });
         this.view.renderMain(productsWithPrice, mainFilters);
-        this.view.main.topPanel.viewBlockElement.viewBlock.addEventListener('click', (e) => {
+        this.view.catalog.topPanel.viewBlockElement.viewBlock.addEventListener('click', (e) => {
             const target: EventTarget | null = e.target;
             if (target instanceof HTMLDivElement) {
                 if (target.className.includes('row')) {
@@ -118,13 +118,13 @@ class AppController {
                 } else if (target.className.includes('table')) {
                     mainFilters.view = 'table';
                 }
-                this.view.main.catalog.setView(mainFilters.view);
-                this.view.main.topPanel.viewBlockElement.setView(mainFilters.view);
+                this.view.catalog.products.setView(mainFilters.view);
+                this.view.catalog.topPanel.viewBlockElement.setView(mainFilters.view);
             }
         });
-        this.view.main.filters.resetBlock.copyButton.addEventListener(
+        this.view.catalog.filters.resetBlock.copyButton.addEventListener(
             'click',
-            this.view.main.filters.resetBlock.applyCopiedState.bind(this.view.main.filters.resetBlock)
+            this.view.catalog.filters.resetBlock.applyCopiedState.bind(this.view.catalog.filters.resetBlock)
         );
     }
 

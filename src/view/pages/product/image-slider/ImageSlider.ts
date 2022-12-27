@@ -1,12 +1,12 @@
-import { NewElement } from '../../../../utils/element-generator';
+import { ElementsFactory } from '../../../../utils/element-generator';
 import './image-slider.scss';
 
 class ImageSlider {
     getImageSlider(thumbnail: string, images: string[], name: string) {
-        const productImages = NewElement.createDivElement('product-images');
+        const productImages = ElementsFactory.createDivElement('product-images');
 
-        const thumbnailContainer = NewElement.createDivElement('product-images__thumbnail');
-        const thumbnailImg = NewElement.createImgElement('', thumbnail, name);
+        const thumbnailContainer = ElementsFactory.createDivElement('product-images__thumbnail');
+        const thumbnailImg = ElementsFactory.createImgElement('', thumbnail, name);
         thumbnailContainer.append(thumbnailImg);
 
         const slider = this.createSlider(thumbnailImg, images, name);
@@ -16,14 +16,14 @@ class ImageSlider {
     }
 
     private createSlider(thumbnailImg: HTMLImageElement, images: string[], name: string) {
-        const slider = NewElement.createDivElement('product-images__slider');
+        const slider = ElementsFactory.createDivElement('product-images__slider');
         images.forEach((el) => {
             const className =
                 el === thumbnailImg.src
                     ? 'product-images__slide product-images__slide_active'
                     : 'product-images__slide';
-            const container = NewElement.createDivElement(className);
-            container.append(NewElement.createImgElement('', el, name));
+            const container = ElementsFactory.createDivElement(className);
+            container.append(ElementsFactory.createImgElement('', el, name));
 
             container.addEventListener('click', this.sliderClickHandler.bind(this, thumbnailImg, slider));
 

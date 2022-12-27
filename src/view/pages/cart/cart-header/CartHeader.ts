@@ -1,18 +1,18 @@
-import { NewElement } from '../../../../utils/element-generator';
+import { ElementsFactory } from '../../../../utils/element-generator';
 import './cart-header.scss';
 
 export default class CartHeader {
     header: HTMLDivElement;
 
     constructor() {
-        this.header = NewElement.createDivElement('cart-header');
+        this.header = ElementsFactory.createDivElement('cart-header');
     }
 
     renderCartHeader(itemsPerPage: number) {
-        const title = NewElement.createBaseElementWithText('p', 'cart-header__title', 'Products in cart:');
-        const itemsPerPageContainer = NewElement.createDivElement('items-per-page');
-        const itemsPerPageText = NewElement.createBaseElementWithText('p', 'items-per-page', 'Items:');
-        const itemsPerPageInput = NewElement.createInputNumber('items-per-page__input', String(itemsPerPage), '');
+        const title = ElementsFactory.createBaseElementWithText('p', 'cart-header__title', 'Products in cart:');
+        const itemsPerPageContainer = ElementsFactory.createDivElement('items-per-page');
+        const itemsPerPageText = ElementsFactory.createBaseElementWithText('p', 'items-per-page', 'Items:');
+        const itemsPerPageInput = ElementsFactory.createInputNumber('items-per-page__input', String(itemsPerPage), '');
         itemsPerPageContainer.append(itemsPerPageText, itemsPerPageInput);
         this.header.append(title, itemsPerPageContainer);
         return this.header;

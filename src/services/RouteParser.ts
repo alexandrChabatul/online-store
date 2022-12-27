@@ -1,6 +1,6 @@
 import { params, Route } from '../common/types';
 
-class PouterParser {
+class RouterParser {
     constructor() {
         //empty
     }
@@ -46,4 +46,4 @@ class PouterParser {
     }
 }
 
-export default PouterParser;
+export default RouterParser;

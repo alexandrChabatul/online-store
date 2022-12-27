@@ -1,6 +1,6 @@
 import CheckoutPopup from './checkout-popup/checkout-popup';
 import { CartParams, CartProduct, CartSummary, PromoCode } from '../../../common/types';
-import { NewElement } from '../../../utils/element-generator';
+import { ElementsFactory } from '../../../utils/element-generator';
 import CartBlock from './cart-block/CartBlock';
 import './cart-view.scss';
 import SummaryBlock from './summary-block/SummaryBlock';
@@ -20,7 +20,7 @@ class Cart {
     }
 
     renderCart(cart: CartProduct[], params: CartParams, summary: CartSummary, codes: PromoCode[]) {
-        const container = NewElement.createDivElement('wrapper cart-wrapper');
+        const container = ElementsFactory.createDivElement('wrapper cart-wrapper');
         if (cart.length === 0) {
             container.append(this.getEmptyCartMessage());
         } else {
@@ -33,16 +33,16 @@ class Cart {
     getCart(cart: CartProduct[], params: CartParams, summary: CartSummary, codes: PromoCode[]) {
         const cartHeaderBlock = this.cartHeader.renderCartHeader(params.itemsPerPage);
         const cartPage = this.cartBlock.getCartPage(cart, params);
-        const cartBlock = NewElement.createDivElement('cart-block-container');
+        const cartBlock = ElementsFactory.createDivElement('cart-block-container');
         cartBlock.append(cartHeaderBlock, cartPage);
         const summaryBlock = this.summary.getSummary(summary, codes);
-        const cartContainer = NewElement.createDivElement('cart');
+        const cartContainer = ElementsFactory.createDivElement('cart');
         cartContainer.append(cartBlock, summaryBlock);
         return cartContainer;
     }
 
     getEmptyCartMessage() {
-        return NewElement.createBaseElementWithText('div', 'no-cart-items', 'Cart is empty.');
+        return ElementsFactory.createBaseElementWithText('div', 'no-cart-items', 'Cart is empty.');
     }
 }
 

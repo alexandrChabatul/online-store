@@ -1,23 +1,23 @@
 import { IMainParameters } from '../../../../../../common/types';
-import { NewElement } from '../../../../../../utils/element-generator';
-import './../checkbox.scss';
+import { ElementsFactory } from '../../../../../../utils/element-generator';
+import '../checkbox.scss';
 
 export class BrandBlock {
     brands: HTMLElement;
 
     constructor() {
-        this.brands = NewElement.createBaseElement('ul', 'filters-list');
+        this.brands = ElementsFactory.createBaseElement('ul', 'filters-list');
     }
 
     public createBrandBlock(filtering: IMainParameters): HTMLDivElement {
-        const brandBlock = NewElement.createDivElement('brand-block');
-        const brandTitle = NewElement.createBaseElementWithText('h3', 'brand-title', 'Brand');
+        const brandBlock = ElementsFactory.createDivElement('brand-block');
+        const brandTitle = ElementsFactory.createBaseElementWithText('h3', 'brand-title', 'Brand');
 
         for (const el in filtering.filters.brand) {
-            const brandItem = NewElement.createBaseElement('li', 'filters-element');
-            const brandName = NewElement.createCheckbox('checkbox', `${el}`, 'brand', `${el}`);
-            const brandLabel = NewElement.createLabel('filter-label', `${el}`, `${el} `);
-            const categoryCount = NewElement.createBaseElementWithText(
+            const brandItem = ElementsFactory.createBaseElement('li', 'filters-element');
+            const brandName = ElementsFactory.createCheckbox('checkbox', `${el}`, 'brand', `${el}`);
+            const brandLabel = ElementsFactory.createLabel('filter-label', `${el}`, `${el} `);
+            const categoryCount = ElementsFactory.createBaseElementWithText(
                 'span',
                 'filter-count',
                 `(${filtering.filters.brand[el].active}/${filtering.filters.brand[el].total})`

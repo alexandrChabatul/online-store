@@ -1,16 +1,16 @@
-import { NewElement } from './../../../../../utils/element-generator';
+import { ElementsFactory } from '../../../../../utils/element-generator';
 
 export class ResetBlock {
     resetButton: HTMLButtonElement;
     copyButton: HTMLButtonElement;
 
     constructor() {
-        this.resetButton = NewElement.createButton('reset-button', 'Reset filters');
-        this.copyButton = NewElement.createButton('copy-button', 'Copy link');
+        this.resetButton = ElementsFactory.createButton('reset-button', 'Reset filters');
+        this.copyButton = ElementsFactory.createButton('copy-button', 'Copy link');
     }
 
     public createResetBlock(): HTMLDivElement {
-        const resetBlock = NewElement.createDivElement('reset-block');
+        const resetBlock = ElementsFactory.createDivElement('reset-block');
         resetBlock.append(this.resetButton, this.copyButton);
 
         return resetBlock;
