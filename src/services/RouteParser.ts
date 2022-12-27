@@ -1,4 +1,4 @@
-import { params, Route } from '../common/types';
+import { params, Route } from 'common/types';
 
 class RouteParser {
     constructor() {

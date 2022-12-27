@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const EslingPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { NetlifyPlugin } = require('netlify-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const baseConfig = {
     entry: path.resolve(__dirname, './src/index'),
@@ -15,15 +16,15 @@ const baseConfig = {
             {
                 test: /\.s[ac]ss$/i,
                 use: [
-                  MiniCssExtractPlugin.loader,
-                  "css-loader",
-                  "sass-loader",
-                  {
-                    loader: "sass-resources-loader",
-                    options: {
-                      resources: [path.join(__dirname, "src", "common", "vars.scss")],
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'sass-loader',
+                    {
+                        loader: 'sass-resources-loader',
+                        options: {
+                            resources: [path.join(__dirname, 'src', 'common', 'vars.scss')],
+                        },
                     },
-                  },
                 ],
             },
             {
@@ -33,10 +34,11 @@ const baseConfig = {
         ],
     },
     resolve: {
+        plugins: [new TsconfigPathsPlugin()],
         extensions: ['.ts', '.js'],
     },
     output: {
-        publicPath: "/",
+        publicPath: '/',
         filename: 'index.js',
         path: path.resolve(__dirname, './dist'),
     },
@@ -48,16 +50,15 @@ const baseConfig = {
         }),
         new CleanWebpackPlugin(),
         new EslingPlugin({ extensions: 'ts' }),
-        new MiniCssExtractPlugin({
-        }),
+        new MiniCssExtractPlugin({}),
         new NetlifyPlugin({
             redirects: [
-              {
-                from: "/*",
-                to: "/index.html",
-                status: 200,
-              }
-            ]
+                {
+                    from: '/*',
+                    to: '/index.html',
+                    status: 200,
+                },
+            ],
         }),
     ],
 };

@@ -1,12 +1,12 @@
-import { IMainParameters, Product } from '../../../common/types';
-import { ElementsFactory } from '../../../utils/element-generator';
+import { IMainParameters, Product } from 'common/types';
+import { ElementsFactory } from 'utils/element-generator';
 import { Catalog } from './products/products';
 import { TopPanel } from './top-panel/top-panel';
 import './main.scss';
 import { Filters } from './filters/filters';
 import { Header } from '../../common-components/header/header';
 
-class MainView {
+class CatalogView {
     header: Header;
     filters: Filters;
     topPanel: TopPanel;
@@ -38,4 +38,4 @@ class MainView {
     }
 }
 
-export default MainView;
+export default CatalogView;

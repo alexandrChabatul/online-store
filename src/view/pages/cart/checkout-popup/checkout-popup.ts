@@ -1,11 +1,11 @@
 import './checkout-popup.scss';
-import { ElementsFactory } from '../../../../utils/element-generator';
+import { ElementsFactory } from 'utils/element-generator';
 import { PersonalDetails } from './personal-details/personal-details';
 import { CardDetails } from './card-details/card-details';
-import visa from './../../../../assets/icons/visa.svg';
-import mastercard from './../../../../assets/icons/mastercard.svg';
-import amex from './../../../../assets/icons/amex.svg';
-import defaultCard from './../../../../assets/icons/card.svg';
+import visa from 'assets/icons/visa.svg';
+import mastercard from 'assets/icons/mastercard.svg';
+import amex from 'assets/icons/amex.svg';
+import defaultCard from 'assets/icons/card.svg';
 
 export default class CheckoutPopup {
     personalDetails: PersonalDetails;

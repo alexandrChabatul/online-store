@@ -1,4 +1,4 @@
-import { ElementsFactory } from '../../../../utils/element-generator';
+import { ElementsFactory } from 'utils/element-generator';
 import Rating from '../../../common-components/rating/Rating';
 import './product-title.scss';
 

@@ -1,5 +1,5 @@
-import { IMainParameters, Product } from '../../../../common/types';
-import { ElementsFactory } from '../../../../utils/element-generator';
+import { IMainParameters, Product } from 'common/types';
+import { ElementsFactory } from 'utils/element-generator';
 import { Search } from './search/search';
 import { Sort } from './sorting/sorting';
 import './top-panel.scss';

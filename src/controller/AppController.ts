@@ -1,5 +1,5 @@
 import Router from '../services/Router';
-import appConstants from '../common/constants';
+import appConstants from 'common/constants';
 import {
     CartParams,
     CartProduct,
@@ -9,9 +9,9 @@ import {
     Product,
     ProductResponse,
     PromoCode,
-} from '../common/types';
+} from 'common/types';
 import AppView from '../view/pages/AppView';
-import data from '../assets/tempData/data.json';
+import data from 'assets/tempData/data.json';
 
 class AppController {
     router: Router;

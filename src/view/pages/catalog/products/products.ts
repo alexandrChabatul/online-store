@@ -1,6 +1,6 @@
-import appConstants from '../../../../common/constants';
-import { IMainParameters, Product } from '../../../../common/types';
-import { ElementsFactory } from '../../../../utils/element-generator';
+import appConstants from 'common/constants';
+import { IMainParameters, Product } from 'common/types';
+import { ElementsFactory } from 'utils/element-generator';
 import './products.scss';
 import './products-row-view.scss';
 
