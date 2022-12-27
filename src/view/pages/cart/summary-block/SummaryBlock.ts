@@ -1,6 +1,6 @@
 import appConstants from '../../../../common/constants';
 import { CartSummary, PromoCode } from '../../../../common/types';
-import { NewElement } from '../../../../utils/element-generator';
+import { ElementsFactory } from '../../../../utils/element-generator';
 import './summary-block.scss';
 
 export default class SummaryBlock {
@@ -12,24 +12,24 @@ export default class SummaryBlock {
     buyButton: HTMLButtonElement;
 
     constructor() {
-        this.heading = NewElement.createBaseElementWithText(
+        this.heading = ElementsFactory.createBaseElementWithText(
             'h3',
             'cart-summary__heading',
             ' Summary'
         ) as HTMLHeadingElement;
-        this.description = NewElement.createDivElement('summary-description');
-        this.appliedCodes = NewElement.createBaseElementWithText(
+        this.description = ElementsFactory.createDivElement('summary-description');
+        this.appliedCodes = ElementsFactory.createBaseElementWithText(
             'div',
             'applied-codes',
             'Applied codes:'
         ) as HTMLDivElement;
-        this.codeInput = NewElement.createDivElement('codes-input-block');
-        this.potentialCode = NewElement.createDivElement('cart-summary__potential-code');
-        this.buyButton = NewElement.createButton('cart-summary__button', 'BUY');
+        this.codeInput = ElementsFactory.createDivElement('codes-input-block');
+        this.potentialCode = ElementsFactory.createDivElement('cart-summary__potential-code');
+        this.buyButton = ElementsFactory.createButton('cart-summary__button', 'BUY');
     }
 
     getSummary(summary: CartSummary, codes: PromoCode[]) {
-        const summaryBlock = NewElement.createDivElement('summary');
+        const summaryBlock = ElementsFactory.createDivElement('summary');
         this.renderDescription(summary);
         this.renderAppliedCodes(codes);
         this.renderCodeInput();
@@ -59,16 +59,16 @@ export default class SummaryBlock {
             return null;
         }
         this.appliedCodes.classList.add('applied-codes__active');
-        const ul = NewElement.createBaseElement('ul', 'applied-codes__list');
+        const ul = ElementsFactory.createBaseElement('ul', 'applied-codes__list');
         codes.forEach((el) => {
             console.log(el);
-            const code = NewElement.createBaseElement('li', 'applied-code');
-            const codeValue = NewElement.createBaseElementWithText(
+            const code = ElementsFactory.createBaseElement('li', 'applied-code');
+            const codeValue = ElementsFactory.createBaseElementWithText(
                 'div',
                 'applied-code__text',
                 `${el.name} - ${el.value}%`
             );
-            const imageContainer = NewElement.createDivElement('applied-code__image');
+            const imageContainer = ElementsFactory.createDivElement('applied-code__image');
             code.append(codeValue, imageContainer);
             ul.append(code);
         });
@@ -76,17 +76,17 @@ export default class SummaryBlock {
     }
 
     renderCodeInput() {
-        const inputContainer = NewElement.createDivElement('code-input-container');
-        const codeInput = NewElement.createInputText('code-input', 'Enter promo code');
-        const inputButton = NewElement.createDivElement('clean-input-button');
+        const inputContainer = ElementsFactory.createDivElement('code-input-container');
+        const codeInput = ElementsFactory.createInputText('code-input', 'Enter promo code');
+        const inputButton = ElementsFactory.createDivElement('clean-input-button');
         inputButton.onclick = this.cleanInputButtonHandler.bind(this, codeInput);
         inputContainer.append(codeInput, inputButton);
-        const helper = NewElement.createBaseElementWithText('p', 'code-input-helper', 'Promo for test: RS, EPM');
+        const helper = ElementsFactory.createBaseElementWithText('p', 'code-input-helper', 'Promo for test: RS, EPM');
         this.codeInput.append(inputContainer, helper);
     }
 
     renderPotentialCode(potentialCode: PromoCode) {
-        const codeBlock = NewElement.createBaseElementWithText(
+        const codeBlock = ElementsFactory.createBaseElementWithText(
             'div',
             'potential-code',
             `${potentialCode.name} - ${potentialCode.value}`

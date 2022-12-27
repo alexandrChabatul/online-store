@@ -1,12 +1,12 @@
 import { IParamsWithCallback, renderCallback, Route, IRouteWithCallback } from '../common/types';
 import AppController from '../controller/AppController';
-import RouterParser from './RouteParser';
+import RouteParser from './RouteParser';
 
 class Router {
     // private routes: { [key: string]: Route };
     private routes: IRouteWithCallback[];
     private controller: AppController;
-    private parser: RouterParser = new RouterParser();
+    private parser: RouteParser = new RouteParser();
 
     constructor() {
         this.routes = [];

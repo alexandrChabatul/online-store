@@ -1,6 +1,6 @@
 import appConstants from '../../../../../common/constants';
 import { CartProduct } from '../../../../../common/types';
-import { NewElement } from '../../../../../utils/element-generator';
+import { ElementsFactory } from '../../../../../utils/element-generator';
 import './cart-item.scss';
 
 export default class CartItem {
@@ -12,7 +12,7 @@ export default class CartItem {
         const quantityBlock = this.getQuantityBlock(item.quantity, item.stock);
         const subtotalBlock = this.getSubtotalBlock(item.subtotal);
         const deleteBlock = this.getDeleteBlock();
-        const cartItem = NewElement.createDivElement('cart-item');
+        const cartItem = ElementsFactory.createDivElement('cart-item');
         cartItem.append(
             counterBlock,
             imageBlock,
@@ -26,18 +26,18 @@ export default class CartItem {
     }
 
     private static getCounterBlock(index: number) {
-        return NewElement.createBaseElementWithText('div', 'cart-item__counter', String(index));
+        return ElementsFactory.createBaseElementWithText('div', 'cart-item__counter', String(index));
     }
 
     private static getImageBlock(imageSrc: string, title: string) {
-        const itemImgContainer = NewElement.createDivElement('cart-item__img-container');
-        const image = NewElement.createImgElement('', imageSrc, title);
+        const itemImgContainer = ElementsFactory.createDivElement('cart-item__img-container');
+        const image = ElementsFactory.createImgElement('', imageSrc, title);
         itemImgContainer.append(image);
         return itemImgContainer;
     }
 
     private static getDescriptionBlock(title: string, category: string, brand: string, description: string) {
-        const descriptionBlock = NewElement.createDivElement('cart-description');
+        const descriptionBlock = ElementsFactory.createDivElement('cart-description');
         let html = '';
         if (title) {
             html += `<h3 class="cart-description__title">${title}</h3>`;
@@ -58,19 +58,19 @@ export default class CartItem {
     }
 
     private static getPriceBlock(prevPrice: number, currentPrice: number) {
-        const priceBlock = NewElement.createDivElement('cart-price');
+        const priceBlock = ElementsFactory.createDivElement('cart-price');
         priceBlock.innerHTML = `<p class="cart-price__prev">${appConstants.currency}${prevPrice}</p><p class="cart-price__real">${appConstants.currency}${currentPrice}</p>`;
         return priceBlock;
     }
 
     private static getQuantityBlock(count: number, stock: number) {
-        const quantityBlock = NewElement.createDivElement('cart-quantity');
-        const quantityButtonsContainer = NewElement.createDivElement('quantity-buttons-container');
-        const quantity = NewElement.createBaseElementWithText('p', 'item-quantity', String(count));
-        // const buttons = NewElement.createDivElement('quantity-buttons');
-        const increaseButton = NewElement.createDivElement('increase-button');
-        const reduceButton = NewElement.createDivElement('reduce-button');
-        const stockBlock = NewElement.createBaseElementWithText('p', 'item-stock', `Stock: ${String(stock)}`);
+        const quantityBlock = ElementsFactory.createDivElement('cart-quantity');
+        const quantityButtonsContainer = ElementsFactory.createDivElement('quantity-buttons-container');
+        const quantity = ElementsFactory.createBaseElementWithText('p', 'item-quantity', String(count));
+        // const buttons = ElementsFactory.createDivElement('quantity-buttons');
+        const increaseButton = ElementsFactory.createDivElement('increase-button');
+        const reduceButton = ElementsFactory.createDivElement('reduce-button');
+        const stockBlock = ElementsFactory.createBaseElementWithText('p', 'item-stock', `Stock: ${String(stock)}`);
         // buttons.append(increaseButton, reduceButton);
         quantityButtonsContainer.append(reduceButton, quantity, increaseButton);
         quantityBlock.append(quantityButtonsContainer, stockBlock);
@@ -78,7 +78,7 @@ export default class CartItem {
     }
 
     private static getSubtotalBlock(subtotal: number) {
-        return NewElement.createBaseElementWithText(
+        return ElementsFactory.createBaseElementWithText(
             'div',
             'cart-item-subtotal',
             `${appConstants.currency + subtotal.toFixed(2)}`
@@ -86,6 +86,6 @@ export default class CartItem {
     }
 
     private static getDeleteBlock() {
-        return NewElement.createDivElement('cart-item-cross');
+        return ElementsFactory.createDivElement('cart-item-cross');
     }
 }

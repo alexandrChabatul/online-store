@@ -1,4 +1,4 @@
-import { NewElement } from '../../../../../utils/element-generator';
+import { ElementsFactory } from '../../../../../utils/element-generator';
 
 export class PersonalDetails {
     nameField: HTMLInputElement;
@@ -11,28 +11,32 @@ export class PersonalDetails {
     emailErrorMessage: HTMLElement;
 
     constructor() {
-        this.nameField = NewElement.createInputText('popup-field name-field', 'Name Surname');
-        this.nameErrorMessage = NewElement.createBaseElementWithText('div', 'error-message name-error', 'Invalid name');
-        this.phoneField = NewElement.createInputText('popup-field phone-field', 'Phone number');
+        this.nameField = ElementsFactory.createInputText('popup-field name-field', 'Name Surname');
+        this.nameErrorMessage = ElementsFactory.createBaseElementWithText(
+            'div',
+            'error-message name-error',
+            'Invalid name'
+        );
+        this.phoneField = ElementsFactory.createInputText('popup-field phone-field', 'Phone number');
         this.phoneField.type = 'tel';
         this.phoneField.pattern =
             '(^s*(?:+?(d{1,3}))?([-. (]*(d{3})[-. )]*)?((d{3})[-. ]*(d{2,4})(?:[-.x ]*(d+))?)s*$)';
-        this.phoneErrorMessage = NewElement.createBaseElementWithText(
+        this.phoneErrorMessage = ElementsFactory.createBaseElementWithText(
             'div',
             'error-message phone-error',
             'Invalid phone number'
         );
-        this.addressField = NewElement.createInputText('popup-field address-field', 'Address');
+        this.addressField = ElementsFactory.createInputText('popup-field address-field', 'Address');
         this.addressField.pattern = '^[a-zA-Z0-9.-]*$';
-        this.addressErrorMessage = NewElement.createBaseElementWithText(
+        this.addressErrorMessage = ElementsFactory.createBaseElementWithText(
             'div',
             'error-message address-error',
             'Invalid address'
         );
-        this.emailField = NewElement.createInputText('popup-field email-field', 'Email');
+        this.emailField = ElementsFactory.createInputText('popup-field email-field', 'Email');
         this.emailField.type = 'email';
         this.emailField.pattern = '^[w.%+-]+@[w.-]+.[w]{2,6}$';
-        this.emailErrorMessage = NewElement.createBaseElementWithText(
+        this.emailErrorMessage = ElementsFactory.createBaseElementWithText(
             'div',
             'error-message email-error',
             'Invalid email'
@@ -40,16 +44,16 @@ export class PersonalDetails {
     }
 
     public createPersonalDetailsBlock(): HTMLElement {
-        const personalDetailsContainer = NewElement.createBaseElement('div', 'personal-details-container');
-        const title = NewElement.createBaseElementWithText(
+        const personalDetailsContainer = ElementsFactory.createBaseElement('div', 'personal-details-container');
+        const title = ElementsFactory.createBaseElementWithText(
             'h3',
             'popup-title checkout-popup-title',
             'Personal Details'
         );
-        const nameBlock = NewElement.createBaseElement('div', 'name-block');
-        const phoneBlock = NewElement.createBaseElement('div', 'phone-block');
-        const addressBlock = NewElement.createBaseElement('div', 'address-block');
-        const emailBlock = NewElement.createBaseElement('div', 'email-block');
+        const nameBlock = ElementsFactory.createBaseElement('div', 'name-block');
+        const phoneBlock = ElementsFactory.createBaseElement('div', 'phone-block');
+        const addressBlock = ElementsFactory.createBaseElement('div', 'address-block');
+        const emailBlock = ElementsFactory.createBaseElement('div', 'email-block');
 
         personalDetailsContainer.append(title, nameBlock, phoneBlock, addressBlock, emailBlock);
         nameBlock.append(this.nameField, this.nameErrorMessage);

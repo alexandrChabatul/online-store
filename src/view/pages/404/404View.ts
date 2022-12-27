@@ -1,4 +1,4 @@
-import { NewElement } from '../../../utils/element-generator';
+import { ElementsFactory } from '../../../utils/element-generator';
 import { Footer } from '../../common-components/footer/footer';
 import { Header } from '../../common-components/header/header';
 import './404.scss';
@@ -15,10 +15,10 @@ class ErrorPage {
     render() {
         const app = <HTMLDivElement>document.getElementById('root');
         const header = this.header.createHeader();
-        const main = NewElement.createBaseElement('main', 'main');
-        const container = NewElement.createDivElement('wrapper wrapper-404');
-        const image = NewElement.createDivElement('image-404');
-        const message = NewElement.createBaseElementWithText(
+        const main = ElementsFactory.createBaseElement('main', 'main');
+        const container = ElementsFactory.createDivElement('wrapper wrapper-404');
+        const image = ElementsFactory.createDivElement('image-404');
+        const message = ElementsFactory.createBaseElementWithText(
             'p',
             'message-404',
             "We can't find the page you're looking for."

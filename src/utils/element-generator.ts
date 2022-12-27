@@ -1,4 +1,4 @@
-export class NewElement {
+export class ElementsFactory {
     static createBaseElement(elementType: string, className: string): HTMLElement {
         const element = document.createElement(elementType);
         element.className = className;

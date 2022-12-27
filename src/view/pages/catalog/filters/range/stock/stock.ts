@@ -1,7 +1,7 @@
 import { IMainParameters } from '../../../../../../common/types';
-import { NewElement } from '../../../../../../utils/element-generator';
+import { ElementsFactory } from '../../../../../../utils/element-generator';
 import { Range } from '../range';
-import './../range.scss';
+import '../range.scss';
 
 export class StockBlock extends Range {
     StockMinRange: HTMLInputElement;
@@ -11,15 +11,15 @@ export class StockBlock extends Range {
 
     constructor() {
         super();
-        this.StockMinRange = NewElement.createInputRange('input-Stock-min', 'from-slider');
-        this.StockMaxRange = NewElement.createInputRange('input-Stock-max', 'to-slider');
-        this.StockMinValue = NewElement.createBaseElement('span', 'stock-min');
-        this.StockMaxValue = NewElement.createBaseElement('span', 'stock-max');
+        this.StockMinRange = ElementsFactory.createInputRange('input-Stock-min', 'from-slider');
+        this.StockMaxRange = ElementsFactory.createInputRange('input-Stock-max', 'to-slider');
+        this.StockMinValue = ElementsFactory.createBaseElement('span', 'stock-min');
+        this.StockMaxValue = ElementsFactory.createBaseElement('span', 'stock-max');
     }
 
     public createStockBlock(filtering: IMainParameters): HTMLDivElement {
-        const StockBlock = NewElement.createDivElement('stock-block');
-        const StockTitle = NewElement.createBaseElementWithText('h3', 'stock-title', 'Stock');
+        const StockBlock = ElementsFactory.createDivElement('stock-block');
+        const StockTitle = ElementsFactory.createBaseElementWithText('h3', 'stock-title', 'Stock');
         this.StockMinRange.min = String(filtering.filters.stock.min);
         this.StockMinRange.max = String(filtering.filters.stock.max);
         this.StockMinRange.value = this.StockMinRange.min;
@@ -27,8 +27,8 @@ export class StockBlock extends Range {
         this.StockMaxRange.max = String(filtering.filters.stock.max);
         this.StockMaxRange.value = this.StockMinRange.max;
 
-        const inputBlock = NewElement.createDivElement('input-block');
-        const valueBlock = NewElement.createDivElement('value-block');
+        const inputBlock = ElementsFactory.createDivElement('input-block');
+        const valueBlock = ElementsFactory.createDivElement('value-block');
         this.StockMinValue.textContent = String(filtering.filters.stock.min);
         this.StockMaxValue.textContent = String(filtering.filters.stock.max);
 

@@ -1,20 +1,20 @@
 import appConstants from '../../../../common/constants';
 import { IMainParameters, Product } from '../../../../common/types';
-import { NewElement } from '../../../../utils/element-generator';
-import './catalog.scss';
-import './catalog-row.scss';
+import { ElementsFactory } from '../../../../utils/element-generator';
+import './products.scss';
+import './products-row-view.scss';
 
 export class Catalog {
     products: HTMLElement;
 
     constructor() {
-        this.products = NewElement.createDivElement('products-block');
+        this.products = ElementsFactory.createDivElement('products-block');
     }
 
-    public createCatalog(data: Product[], filters: IMainParameters): HTMLElement {
+    public createProductsCatalog(data: Product[], filters: IMainParameters): HTMLElement {
         this.setView(filters.view);
         if (data.length === 0) {
-            const noProductsMessage = NewElement.createBaseElementWithText(
+            const noProductsMessage = ElementsFactory.createBaseElementWithText(
                 'div',
                 'no-products',
                 'No products found. Reset filters or search input'
@@ -23,44 +23,44 @@ export class Catalog {
             return this.products;
         }
 
-        data.forEach((el: Product) => this.createProduct(el));
+        data.forEach((el: Product) => this.createProductItem(el));
         return this.products;
     }
 
-    private createProduct(product: Product) {
-        const productContainer = NewElement.createDivElement('product-item');
-        const productImage = NewElement.createAnchor('product-image router-link', '', `/product/${product.id}`);
+    private createProductItem(product: Product) {
+        const productContainer = ElementsFactory.createDivElement('product-item');
+        const productImage = ElementsFactory.createAnchor('product-image router-link', '', `/product/${product.id}`);
         this.setImage(product.thumbnail, productImage);
-        const productElements = NewElement.createDivElement('product-elements');
-        const productName = NewElement.createAnchor(
+        const productElements = ElementsFactory.createDivElement('product-elements');
+        const productName = ElementsFactory.createAnchor(
             'product-name router-link',
             `${product.title}`,
             `/product/${product.id}`
         );
-        const productInfo = NewElement.createDivElement('product-info');
-        const productPrice = NewElement.createDivElement('product-price');
-        const productPriceOriginal = NewElement.createBaseElementWithText(
+        const productInfo = ElementsFactory.createDivElement('product-info');
+        const productPrice = ElementsFactory.createDivElement('product-price');
+        const productPriceOriginal = ElementsFactory.createBaseElementWithText(
             'span',
             'product-price-original',
             `${appConstants.currency}${product.price}`
         );
-        const productPriceFinal = NewElement.createBaseElementWithText(
+        const productPriceFinal = ElementsFactory.createBaseElementWithText(
             'span',
             'product-price-final',
             `${appConstants.currency}${product.currentPrice}`
         );
-        const productDescription = NewElement.createBaseElement('div', 'product-description-main');
-        const productDescriptionTitle = NewElement.createBaseElementWithText(
+        const productDescription = ElementsFactory.createBaseElement('div', 'product-description-main');
+        const productDescriptionTitle = ElementsFactory.createBaseElementWithText(
             'span',
             'product-description-title',
             'Description: '
         );
-        const productDescriptionContent = NewElement.createBaseElementWithText(
+        const productDescriptionContent = ElementsFactory.createBaseElementWithText(
             'span',
             'product-description-content',
             `${product.description}`
         );
-        const addToCartButton = NewElement.createButton('add-button', 'Add to Cart');
+        const addToCartButton = ElementsFactory.createButton('add-button', 'Add to Cart');
         productContainer.append(productImage, productElements);
         productElements.append(productName, productInfo, addToCartButton);
         productInfo.append(productPrice, productDescription);

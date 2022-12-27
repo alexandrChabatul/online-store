@@ -1,4 +1,4 @@
-import { NewElement } from '../../../utils/element-generator';
+import { ElementsFactory } from '../../../utils/element-generator';
 import './header.scss';
 
 export class Header {
@@ -6,18 +6,18 @@ export class Header {
     total: HTMLElement;
 
     constructor(counter: string, total: string) {
-        this.cart = NewElement.createBaseElementWithText('span', 'cart-counter', counter);
-        this.total = NewElement.createBaseElementWithText('span', 'cart-total-sum', `€${total}`);
+        this.cart = ElementsFactory.createBaseElementWithText('span', 'cart-counter', counter);
+        this.total = ElementsFactory.createBaseElementWithText('span', 'cart-total-sum', `€${total}`);
     }
 
     public createHeader(): HTMLElement {
-        const header = NewElement.createBaseElement('header', 'header');
-        const headerWrapper = NewElement.createDivElement('wrapper header-wrapper');
-        const logoBlock = NewElement.createAnchor('router-link logo-block', '', '/');
-        const logo = NewElement.createBaseElementWithText('span', 'logo', 'Online Store');
-        const logoIcon = NewElement.createBaseElement('span', 'logo-icon');
-        const cartIcon = NewElement.createAnchor('router-link cart-icon', '', '/cart');
-        const cartTotal = NewElement.createBaseElementWithText('div', 'cart-total', 'Cart total: ');
+        const header = ElementsFactory.createBaseElement('header', 'header');
+        const headerWrapper = ElementsFactory.createDivElement('wrapper header-wrapper');
+        const logoBlock = ElementsFactory.createAnchor('router-link logo-block', '', '/');
+        const logo = ElementsFactory.createBaseElementWithText('span', 'logo', 'Online Store');
+        const logoIcon = ElementsFactory.createBaseElement('span', 'logo-icon');
+        const cartIcon = ElementsFactory.createAnchor('router-link cart-icon', '', '/cart');
+        const cartTotal = ElementsFactory.createBaseElementWithText('div', 'cart-total', 'Cart total: ');
         header.append(headerWrapper);
         headerWrapper.append(logoBlock, cartTotal, cartIcon);
         logoBlock.append(logoIcon, logo);
