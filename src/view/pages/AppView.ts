@@ -1,17 +1,17 @@
 import { IMainParameters, CartProduct, CartParams, CartSummary, Product, PromoCode } from 'common/types';
 import ErrorPage from './404/404View';
 import Cart from './cart/CartView';
-import MainView from './catalog/MainView';
+import CatalogView from './catalog/CatalogView';
 import ProductView from './product/ProductView';
 
 class AppView {
-    catalog: MainView;
+    catalog: CatalogView;
     cart: Cart;
     product: ProductView;
     error: ErrorPage;
 
     constructor() {
-        this.catalog = new MainView();
+        this.catalog = new CatalogView();
         this.cart = new Cart();
         this.product = new ProductView();
         this.error = new ErrorPage();

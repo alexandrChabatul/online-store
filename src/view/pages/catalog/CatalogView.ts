@@ -6,7 +6,7 @@ import './main.scss';
 import { Filters } from './filters/filters';
 import { Header } from '../../common-components/header/header';
 
-class MainView {
+class CatalogView {
     header: Header;
     filters: Filters;
     topPanel: TopPanel;
@@ -38,4 +38,4 @@ class MainView {
     }
 }
 
-export default MainView;
+export default CatalogView;
