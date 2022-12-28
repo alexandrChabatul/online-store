@@ -55,6 +55,21 @@ const appConstants = {
             text: 'Discount (High-Low)',
         },
     ],
+    formPatterns: {
+        name: '^[A-ZА-Я][a-zа-я]{2,}$',
+        phone: '^\\+\\d{9,}$',
+        address: '^[A-Za-zА-Яа-я0-9]{5,}$',
+        email: '^\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(.\\w{2,3})+$',
+        card: '^\\d{16}$',
+        date: '^\\d{4}$',
+        cvv: '^\\d{3}$',
+    },
+    cardProviders: {
+        4: 'Visa',
+        5: 'MasterCard',
+        3: 'American Express',
+        2: 'МИР',
+    },
 };
 
 export default appConstants;
