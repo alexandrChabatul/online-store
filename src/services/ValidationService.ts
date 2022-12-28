@@ -48,10 +48,10 @@ export default class ValidationService {
         return pattern.test(cvv);
     }
 
-    getProvider(cart: string): string | undefined {
+    getProvider(card: string): string | undefined {
         const result = undefined;
-        if (cart.length < 1) return result;
+        if (card.length < 1) return result;
         const providers: { [key: string]: string } = appConstants.cardProviders;
-        return providers[cart[0]];
+        return providers[card[0]];
     }
 }
