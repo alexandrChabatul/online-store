@@ -64,6 +64,8 @@ interface IRange {
     max: number;
 }
 
+export type CartResponse = { id: number; quantity: number };
+
 export type CartProduct = Product & { quantity: number; subtotal: number };
 
 export type CartSummary = { productQty: number; prevPrice: number; totalPrice: number };
