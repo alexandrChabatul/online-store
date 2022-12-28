@@ -4,6 +4,7 @@ import { Footer } from 'view/common-components/footer/footer';
 import { Header } from 'view/common-components/header/header';
 import CatalogView from 'view/pages/catalog/CatalogView';
 import data from 'assets/tempData/data.json';
+import { SearchService } from './../services/Search';
 
 export default class CatalogController implements IController {
     header: Header;
@@ -101,7 +102,7 @@ export default class CatalogController implements IController {
             },
             sort: 'sort',
             view: 'row',
-            search: '',
+            search: 'dummy',
         };
         const products: ProductResponse[] = data.products;
         // const products: ProductResponse[] = [];
@@ -109,6 +110,7 @@ export default class CatalogController implements IController {
             const currentPrice = Math.ceil(el.price * (100 - el.discountPercentage)) / 100;
             return Object.assign(el, { currentPrice: currentPrice });
         });
+        const filtered: Product[] = SearchService.getSearchResults(productsWithPrice, mainFilters.search);
         const catalog = this.view.render(productsWithPrice, mainFilters);
 
         this.view.topPanel.viewBlockElement.viewBlock.addEventListener('click', (e) => {
