@@ -1,6 +1,6 @@
 const appConstants = {
     routes: {
-        main: {
+        catalog: {
             name: 'catalog',
             path: '^/$',
             params: {
@@ -19,7 +19,7 @@ const appConstants = {
                 id: 'id',
             },
         },
-        cat: {
+        cart: {
             name: 'cart',
             path: '^/cart$',
             params: {
