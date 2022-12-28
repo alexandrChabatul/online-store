@@ -45,8 +45,8 @@ export type ProductResponse = Readonly<IProductResponse>;
 export type Product = ProductResponse & { currentPrice: number };
 
 export interface IFilters {
-    category: IFilter;
-    brand: IFilter;
+    category: IFilter[];
+    brand: IFilter[];
     price: IRange;
     stock: IRange;
 }
@@ -59,11 +59,10 @@ export interface IMainParameters {
 }
 
 interface IFilter {
-    [key: string]: {
-        checked: boolean;
-        active: number;
-        total: number;
-    };
+    filter: string;
+    checked: boolean;
+    active: number;
+    total: number;
 }
 
 interface IRange {

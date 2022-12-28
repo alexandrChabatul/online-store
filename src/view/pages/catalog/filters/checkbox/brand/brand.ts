@@ -13,20 +13,20 @@ export class BrandBlock {
         const brandBlock = ElementsFactory.createDivElement('brand-block');
         const brandTitle = ElementsFactory.createBaseElementWithText('h3', 'brand-title', 'Brand');
 
-        for (const el in filtering.filters.brand) {
+        filtering.filters.brand.forEach((el, i) => {
             const brandItem = ElementsFactory.createBaseElement('li', 'filters-element');
-            const brandName = ElementsFactory.createCheckbox('checkbox', `${el}`, 'brand', `${el}`);
-            const brandLabel = ElementsFactory.createLabel('filter-label', `${el}`, `${el} `);
+            const brandName = ElementsFactory.createCheckbox('checkbox', `${el.filter}`, 'brand', `${el.filter}`);
+            const brandLabel = ElementsFactory.createLabel('filter-label', `${el.filter}`, `${el.filter} `);
             const categoryCount = ElementsFactory.createBaseElementWithText(
                 'span',
                 'filter-count',
-                `(${filtering.filters.brand[el].active}/${filtering.filters.brand[el].total})`
+                `(${filtering.filters.brand[i].active}/${filtering.filters.brand[i].total})`
             );
-            brandName.checked = filtering.filters.brand[el].checked;
+            brandName.checked = filtering.filters.brand[i].checked;
             brandLabel.append(categoryCount);
             brandItem.append(brandName, brandLabel);
             this.brands.append(brandItem);
-        }
+        });
 
         brandBlock.append(brandTitle, this.brands);
 
