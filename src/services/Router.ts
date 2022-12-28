@@ -1,40 +1,36 @@
-import { IParamsWithCallback, renderCallback, Route, IRouteWithCallback } from 'common/types';
-import AppController from '../controller/AppController';
+import appConstants from 'common/constants';
+import { Route, dispatchObject } from 'common/types';
+import Dispatcher from 'controller/Dispatcher';
 import RouteParser from './RouteParser';
 
 class Router {
-    // private routes: { [key: string]: Route };
-    private routes: IRouteWithCallback[];
-    private controller: AppController;
-    private parser: RouteParser = new RouteParser();
+    private routes: Route[];
+    private parser: RouteParser;
+    private dispatcher: Dispatcher;
 
     constructor() {
-        this.routes = [];
-        this.controller = new AppController(this);
+        this.routes = Object.values(appConstants.routes);
+        this.parser = new RouteParser();
+        this.dispatcher = new Dispatcher();
     }
 
-    addRoute(path: Route, cb: renderCallback): void {
-        this.routes.push({
-            route: path,
-            cb: cb,
-        });
-    }
-
-    getParamsWithCallback(path: string): IParamsWithCallback | null {
-        const target = this.routes.find((el) => this.parser.match(path, el.route));
+    getParamsWithName(path: string): dispatchObject {
+        const target = this.routes.find((el) => this.parser.match(path, el));
         if (target) {
-            const params = this.parser.match(path, target.route) || {};
+            const params = this.parser.match(path, target) || {};
             return {
+                name: target.name,
                 params: params,
-                callback: target.cb,
             };
         }
-        return null;
+        return {
+            name: 'error',
+            params: {},
+        };
     }
 
     render(path: string): void {
-        const route = this.getParamsWithCallback(path);
-        route ? route.callback.call(null, route.params) : this.controller.renderError();
+        this.dispatcher.dispatch(this.getParamsWithName(path));
     }
 
     goTo(path: string): void {
@@ -49,10 +45,10 @@ class Router {
         });
         document.addEventListener('click', (e) => {
             const target = <HTMLElement>e.target;
-            const closesetLink = <HTMLAnchorElement>target.closest('.router-link');
-            if (closesetLink && closesetLink.hasAttribute('href') && closesetLink.classList.contains('router-link')) {
+            const closestLink = <HTMLAnchorElement>target.closest('.router-link');
+            if (closestLink && closestLink.hasAttribute('href') && closestLink.classList.contains('router-link')) {
                 e.preventDefault();
-                const { pathname: path, search: params } = new URL(closesetLink.href);
+                const { pathname: path, search: params } = new URL(closestLink.href);
                 const gotoPath = path + params;
                 this.goTo(gotoPath);
             }

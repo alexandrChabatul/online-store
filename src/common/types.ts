@@ -1,11 +1,18 @@
 export type params = { [key: string]: string };
 
 interface IRoute {
+    name: string;
     path: string;
     params?: params;
 }
 
 export type Route = Readonly<IRoute>;
+
+export interface IController {
+    render(params: params): void;
+}
+
+export type dispatchObject = { name: string; params: params };
 
 export type renderCallback = (params: params) => void;
 

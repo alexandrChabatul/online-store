@@ -1,17 +1,17 @@
 .product-wrapper {
   font-family: $font-primary;
-  width: 100%;
-  background: $color-bg-main;
   display: flex;
   flex-direction: column;
   gap: 30px;
 }
 
 .product {
-  width: 1200px;
+  width: 90%;
+  max-height: 500px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  align-self: center;
   gap: 20px;
   box-shadow: $main-shadow;
   padding: 30px 20px;

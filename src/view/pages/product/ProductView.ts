@@ -25,8 +25,7 @@ class ProductView {
 
         productBlock.append(titleImageContainer, priceDescContainer);
         productWrapper.append(breadcrumbsUl, productBlock);
-        const app = <HTMLDivElement>document.getElementById('app');
-        app.append(productWrapper);
+        return productWrapper;
     }
 
     getTitleAndImageBlock(product: Product) {

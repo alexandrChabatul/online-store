@@ -13,9 +13,9 @@
         "skipLibCheck": true,
         "baseUrl": "src",
         "paths": {
-            "assets": ["assets/*"],
-            "common": ["common/*"],
-            "utils": ["utils/*"]
+            "assets": ["assets/"],
+            "common": ["common/"],
+            "utils": ["utils/"]
         } /* Skip type checking all .d.ts files. */
     }
 }
