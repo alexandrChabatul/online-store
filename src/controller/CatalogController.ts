@@ -1,30 +1,30 @@
-import Router from '../services/Router';
-import appConstants from 'common/constants';
-import {
-    CartParams,
-    CartProduct,
-    CartSummary,
-    IMainParameters,
-    params,
-    Product,
-    ProductResponse,
-    PromoCode,
-} from 'common/types';
-import AppView from '../view/pages/AppView';
+import { IController, IMainParameters, params, Product, ProductResponse } from 'common/types';
+import { ElementsFactory } from 'utils/element-generator';
+import { Footer } from 'view/common-components/footer/footer';
+import { Header } from 'view/common-components/header/header';
+import CatalogView from 'view/pages/catalog/CatalogView';
 import data from 'assets/tempData/data.json';
-import { SearchService } from './../services/Search';
+import { SearchService } from '../services/SearchService';
 
-class AppController {
-    router: Router;
-    view: AppView;
+export default class CatalogController implements IController {
+    header: Header;
+    main: HTMLElement;
+    footer: Footer;
+    view: CatalogView;
 
-    constructor(router: Router) {
-        this.router = router;
-        this.initRouterPath();
-        this.view = new AppView();
+    constructor() {
+        this.header = new Header(String(4), String(1000));
+        this.main = ElementsFactory.createBaseElement('main', 'main');
+        this.footer = new Footer();
+        this.view = new CatalogView();
     }
 
-    renderMain(params?: params) {
+    render(params: params): void {
+        console.log('render');
+        const app = <HTMLDivElement>document.getElementById('app');
+        app.innerHTML = '';
+        this.main.innerHTML = '';
+        app.append(this.header.createHeader(), this.main, this.footer.createFooter());
         const mainFilters: IMainParameters = {
             filters: {
                 category: {
@@ -111,9 +111,9 @@ class AppController {
             return Object.assign(el, { currentPrice: currentPrice });
         });
         const filtered: Product[] = SearchService.getSearchResults(productsWithPrice, mainFilters.search);
-        console.log(filtered);
-        this.view.renderMain(productsWithPrice, mainFilters);
-        this.view.catalog.topPanel.viewBlockElement.viewBlock.addEventListener('click', (e) => {
+        const catalog = this.view.render(productsWithPrice, mainFilters);
+
+        this.view.topPanel.viewBlockElement.viewBlock.addEventListener('click', (e) => {
             const target: EventTarget | null = e.target;
             if (target instanceof HTMLDivElement) {
                 if (target.className.includes('row')) {
@@ -121,55 +121,15 @@ class AppController {
                 } else if (target.className.includes('table')) {
                     mainFilters.view = 'table';
                 }
-                this.view.catalog.products.setView(mainFilters.view);
-                this.view.catalog.topPanel.viewBlockElement.setView(mainFilters.view);
+                this.view.products.setView(mainFilters.view);
+                this.view.topPanel.viewBlockElement.setView(mainFilters.view);
             }
         });
-        this.view.catalog.filters.resetBlock.copyButton.addEventListener(
+        this.view.filters.resetBlock.copyButton.addEventListener(
             'click',
-            this.view.catalog.filters.resetBlock.applyCopiedState.bind(this.view.catalog.filters.resetBlock)
+            this.view.filters.resetBlock.applyCopiedState.bind(this.view.filters.resetBlock)
         );
-    }
-
-    renderCart(params: params) {
-        const products = data.products.slice(1, 10);
-        const productsWithPrice: CartProduct[] = products.map((el) => {
-            const currentPrice = Math.ceil(el.price * (100 - el.discountPercentage)) / 100;
-            const subtotal = currentPrice * 5;
-            return Object.assign(el, { currentPrice: currentPrice, quantity: 5, subtotal: subtotal });
-        });
-        const parameters: CartParams = {
-            itemsPerPage: 3,
-            page: 1,
-            numOfPages: 4,
-        };
-        const summary: CartSummary = { productQty: 10, totalPrice: 100000, prevPrice: 110000 };
-        const codes: PromoCode[] = [{ name: 'RS', value: 10 }];
-        this.view.renderCart(productsWithPrice, parameters, summary, codes);
-    }
-
-    async renderProduct(params?: params) {
-        const product: ProductResponse = data.products[33];
-        const currentPrice = Math.ceil(product.price * (100 - product.discountPercentage)) / 100;
-        const productWithPrice: Product = Object.assign(product, { currentPrice: currentPrice });
-        this.view.renderProduct(productWithPrice);
-    }
-
-    renderError() {
-        this.view.renderError();
-    }
-
-    private initRouterPath() {
-        this.router.addRoute(appConstants.routes.main, (params: params) => {
-            this.renderMain(params);
-        });
-        this.router.addRoute(appConstants.routes.cart, (params: params) => {
-            this.renderCart(params);
-        });
-        this.router.addRoute(appConstants.routes.product, (params: params) => {
-            this.renderProduct(params);
-        });
+        console.log(catalog);
+        this.main.append(catalog);
     }
 }
-
-export default AppController;

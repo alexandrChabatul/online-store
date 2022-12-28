@@ -6,7 +6,7 @@ import './cart-view.scss';
 import SummaryBlock from './summary-block/SummaryBlock';
 import CartHeader from './cart-header/CartHeader';
 
-class Cart {
+class CartView {
     popup: CheckoutPopup;
     cartHeader: CartHeader;
     cartBlock: CartBlock;
@@ -19,18 +19,17 @@ class Cart {
         this.summary = new SummaryBlock();
     }
 
-    renderCart(cart: CartProduct[], params: CartParams, summary: CartSummary, codes: PromoCode[]) {
+    getCart(cart: CartProduct[], params: CartParams, summary: CartSummary, codes: PromoCode[]) {
         const container = ElementsFactory.createDivElement('wrapper cart-wrapper');
         if (cart.length === 0) {
             container.append(this.getEmptyCartMessage());
         } else {
-            container.append(this.getCart(cart, params, summary, codes));
+            container.append(this.getItemsBlock(cart, params, summary, codes));
         }
-        const app = <HTMLDivElement>document.getElementById('app');
-        app.append(container);
+        return container;
     }
 
-    getCart(cart: CartProduct[], params: CartParams, summary: CartSummary, codes: PromoCode[]) {
+    getItemsBlock(cart: CartProduct[], params: CartParams, summary: CartSummary, codes: PromoCode[]) {
         const cartHeaderBlock = this.cartHeader.renderCartHeader(params.itemsPerPage);
         const cartPage = this.cartBlock.getCartPage(cart, params);
         const cartBlock = ElementsFactory.createDivElement('cart-block-container');
@@ -46,4 +45,4 @@ class Cart {
     }
 }
 
-export default Cart;
+export default CartView;
