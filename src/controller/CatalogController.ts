@@ -4,7 +4,7 @@ import { Footer } from 'view/common-components/footer/footer';
 import { Header } from 'view/common-components/header/header';
 import CatalogView from 'view/pages/catalog/CatalogView';
 import data from 'assets/tempData/data.json';
-import { SearchService } from './../services/Search';
+import { SearchService } from '../services/SearchService';
 
 export default class CatalogController implements IController {
     header: Header;
