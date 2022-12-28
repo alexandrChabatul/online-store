@@ -5,6 +5,7 @@ import { Header } from 'view/common-components/header/header';
 import CatalogView from 'view/pages/catalog/CatalogView';
 import data from 'assets/tempData/data.json';
 import { SearchService } from '../services/SearchService';
+import { FilterService } from 'services/FilterService';
 
 export default class CatalogController implements IController {
     header: Header;
@@ -27,70 +28,82 @@ export default class CatalogController implements IController {
         app.append(this.header.createHeader(), this.main, this.footer.createFooter());
         const mainFilters: IMainParameters = {
             filters: {
-                category: {
-                    smartphones: {
+                category: [
+                    {
+                        filter: 'smartphones',
                         checked: false,
                         active: 5,
                         total: 5,
                     },
-                    laptops: {
+                    {
+                        filter: 'laptops',
+                        checked: true,
+                        active: 5,
+                        total: 5,
+                    },
+                    {
+                        filter: 'laptops',
                         checked: false,
                         active: 5,
                         total: 5,
                     },
-                    fragrances: {
+                    {
+                        filter: 'laptops',
                         checked: false,
                         active: 5,
                         total: 5,
                     },
-                    skincare: {
+                ],
+                brand: [
+                    {
+                        filter: 'Apple',
+                        checked: true,
+                        active: 5,
+                        total: 5,
+                    },
+                    {
+                        filter: 'Samsung',
+                        checked: true,
+                        active: 5,
+                        total: 5,
+                    },
+                    {
+                        filter: 'OPPO',
                         checked: false,
                         active: 5,
                         total: 5,
                     },
-                },
-                brand: {
-                    Apple: {
+                    {
+                        filter: 'Huawei',
                         checked: false,
                         active: 5,
                         total: 5,
                     },
-                    Samsung: {
+                    {
+                        filter: 'Infinix',
                         checked: false,
                         active: 5,
                         total: 5,
                     },
-                    OPPO: {
+                    {
+                        filter: 'Motorola',
+                        checked: true,
+                        active: 5,
+                        total: 5,
+                    },
+                    {
+                        filter: 'Xiaomi',
+                        checked: true,
+                        active: 5,
+                        total: 5,
+                    },
+                    {
+                        filter: 'Bork',
                         checked: false,
                         active: 5,
                         total: 5,
                     },
-                    Huawei: {
-                        checked: false,
-                        active: 5,
-                        total: 5,
-                    },
-                    Infinix: {
-                        checked: false,
-                        active: 5,
-                        total: 5,
-                    },
-                    Motorola: {
-                        checked: false,
-                        active: 5,
-                        total: 5,
-                    },
-                    Xiaomi: {
-                        checked: false,
-                        active: 5,
-                        total: 5,
-                    },
-                    Bork: {
-                        checked: false,
-                        active: 5,
-                        total: 5,
-                    },
-                },
+                ],
                 stock: {
                     min: 10,
                     max: 3000,
@@ -111,6 +124,7 @@ export default class CatalogController implements IController {
             return Object.assign(el, { currentPrice: currentPrice });
         });
         const filtered: Product[] = SearchService.getSearchResults(productsWithPrice, mainFilters.search);
+        const byCategory = FilterService.getFilteredProducts(productsWithPrice, mainFilters.filters);
         const catalog = this.view.render(productsWithPrice, mainFilters);
 
         this.view.topPanel.viewBlockElement.viewBlock.addEventListener('click', (e) => {

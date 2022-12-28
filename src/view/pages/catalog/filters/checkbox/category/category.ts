@@ -12,20 +12,20 @@ export class CategoryBlock {
         const categoryBlock = ElementsFactory.createDivElement('category-block');
         const categoryTitle = ElementsFactory.createBaseElementWithText('h3', 'category-title', 'Category');
 
-        for (const el in filtering.filters.category) {
+        filtering.filters.category.forEach((el, i) => {
             const categoryItem = ElementsFactory.createBaseElement('li', 'filters-element');
-            const categoryName = ElementsFactory.createCheckbox('checkbox', `${el}`, 'category', `${el}`);
-            const categoryLabel = ElementsFactory.createLabel('filter-label', `${el}`, `${el} `);
-            categoryName.checked = filtering.filters.category[el].checked;
+            const categoryName = ElementsFactory.createCheckbox('checkbox', `${el.filter}`, 'category', `${el.filter}`);
+            const categoryLabel = ElementsFactory.createLabel('filter-label', `${el.filter}`, `${el.filter} `);
+            categoryName.checked = filtering.filters.category[i].checked;
             const categoryCount = ElementsFactory.createBaseElementWithText(
                 'span',
                 'filter-count',
-                `(${filtering.filters.category[el].active}/${filtering.filters.category[el].total})`
+                `(${filtering.filters.category[i].active}/${filtering.filters.category[i].total})`
             );
             categoryLabel.append(categoryCount);
             categoryItem.append(categoryName, categoryLabel);
             this.categories.append(categoryItem);
-        }
+        });
 
         categoryBlock.append(categoryTitle, this.categories);
 

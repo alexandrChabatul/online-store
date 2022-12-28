@@ -8,15 +8,15 @@ export default class CalculationService {
             acc.prevPrice = parseFloat((acc.prevPrice + el.currentPrice * el.quantity).toFixed(2));
             return acc;
         }, init);
-        
+
         let totalDiscount = 0;
-        if (promoCodes.length > 0){
-          totalDiscount = promoCodes.reduce((acc, el) => {
-            acc += el.value;
-            return acc;
-          }, 0)
+        if (promoCodes.length > 0) {
+            totalDiscount = promoCodes.reduce((acc, el) => {
+                acc += el.value;
+                return acc;
+            }, 0);
         }
-        result.totalPrice = parseFloat((result.prevPrice * (1 - totalDiscount / 100)).toFixed(2))
+        result.totalPrice = parseFloat((result.prevPrice * (1 - totalDiscount / 100)).toFixed(2));
         return result;
     }
 }
