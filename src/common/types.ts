@@ -51,6 +51,25 @@ export interface IFilters {
     stock: IRange;
 }
 
+export interface tempIFilters {
+    category: {
+        [key: string]: {
+            checked: boolean;
+            active: number;
+            total: number;
+        };
+    };
+    brand: {
+        [key: string]: {
+            checked: boolean;
+            active: number;
+            total: number;
+        };
+    };
+    price: IRange;
+    stock: IRange;
+}
+
 export interface IMainParameters {
     filters: IFilters;
     sort: string;
@@ -58,14 +77,14 @@ export interface IMainParameters {
     search: string;
 }
 
-interface IFilter {
+export interface IFilter {
     filter: string;
     checked: boolean;
     active: number;
     total: number;
 }
 
-interface IRange {
+export interface IRange {
     min: number;
     max: number;
 }
@@ -81,3 +100,5 @@ export type PromoCode = { name: string; value: number };
 export type CartParams = { itemsPerPage: number; page: number; numOfPages: number };
 
 export type APIResponse = { products: ProductResponse[] };
+
+export type tempType = { [key: string]: IFilter };

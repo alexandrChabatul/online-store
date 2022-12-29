@@ -8,8 +8,9 @@ const appConstants = {
                 brand: 'brand',
                 price: 'price',
                 stock: 'stock',
-                sort: 'category',
-                search: 'category',
+                sort: 'sort',
+                search: 'search',
+                view: 'view',
             },
         },
         product: {
@@ -72,7 +73,7 @@ const appConstants = {
     },
     localStorage: {
         cart: 'alexDianaStoreCart',
-    }
+    },
 };
 
 export default appConstants;
