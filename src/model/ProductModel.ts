@@ -1,4 +1,4 @@
-import { ProductResponse } from "common/types";
+import { ProductResponse } from 'common/types';
 
 export default class ProductModel {
     private static instance: ProductModel;
@@ -12,22 +12,22 @@ export default class ProductModel {
 
     public async getProduct(id: string): Promise<ProductResponse> {
         const response = fetch(`https://dummyjson.com/products/${id}`)
-        .then((res) => {
-            if (res.status >= 200 && res.status < 300) {
+            .then((res) => {
+                if (res.status >= 200 && res.status < 300) {
+                    return res;
+                } else {
+                    const error = new Error(`Product with id '${id}' not found`);
+                    throw error;
+                }
+            })
+            .then((res) => {
+                if (!res.headers.get('content-type')?.includes('application/json')) {
+                    const error = new Error('Incorrect response from the server');
+                    throw error;
+                }
                 return res;
-            } else {
-                let error = new Error(`Product with id '${id}' not found`);
-                throw error
-            }
-        })
-        .then((res) => {
-            if (!res.headers.get('content-type')?.includes('application/json')) {
-                let error = new Error('Incorrect response from the server');
-                throw error
-            }
-            return res;
-        })
-        .then(res => res.json())
+            })
+            .then((res) => res.json());
         return response;
     }
 }
