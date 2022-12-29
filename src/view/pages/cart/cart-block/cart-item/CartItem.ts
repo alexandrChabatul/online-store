@@ -4,8 +4,8 @@ import { ElementsFactory } from 'utils/element-generator';
 import './cart-item.scss';
 
 export default class CartItem {
-    static getCartItem(item: CartProduct, index: number) {
-        const counterBlock = this.getCounterBlock(index);
+    static getCartItem(item: CartProduct) {
+        const counterBlock = this.getCounterBlock(item.index);
         const imageBlock = this.getImageBlock(item.thumbnail, item.title);
         const descriptionBlock = this.getDescriptionBlock(item.title, item.category, item.brand, item.description);
         const priceBlock = this.getPriceBlock(item.price, item.currentPrice);
