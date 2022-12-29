@@ -39,12 +39,12 @@ export default class CartModel {
         return [];
     }
 
-    getCart(){
-      return this.cart;
+    getCart() {
+        return this.cart;
     }
 
     increaseItem(itemId: number) {
-      console.log('increase');
+        console.log('increase');
         const potentialItem = this.cart.find((el) => el.id === itemId);
         if (potentialItem) {
             potentialItem.quantity += 1;

@@ -11,23 +11,16 @@ export default class ProductModel {
     }
 
     public async getProduct(id: string): Promise<ProductResponse> {
-        const response = fetch(`https://dummyjson.com/products/${id}`)
-            .then((res) => {
-                if (res.status >= 200 && res.status < 300) {
-                    return res;
-                } else {
-                    const error = new Error(`Product with id '${id}' not found`);
-                    throw error;
-                }
-            })
-            .then((res) => {
-                if (!res.headers.get('content-type')?.includes('application/json')) {
-                    const error = new Error('Incorrect response from the server');
-                    throw error;
-                }
-                return res;
-            })
-            .then((res) => res.json());
-        return response;
+        const response = await fetch(`https://dummyjson.com/products/${id}`);
+        if (response.status >= 300 || response.status < 200) {
+            const error = new Error(`Product with id '${id}' not found`);
+            throw error;
+        }
+        if (!response.headers.get('content-type')?.includes('application/json')) {
+            const error = new Error('Incorrect response from the server');
+            throw error;
+        }
+        const data: ProductResponse = await response.json();
+        return data;
     }
 }

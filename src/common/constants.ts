@@ -72,7 +72,7 @@ const appConstants = {
     },
     localStorage: {
         cart: 'alexDianaStoreCart',
-    }
+    },
 };
 
 export default appConstants;
