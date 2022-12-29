@@ -10,13 +10,30 @@ export default class CalculationService {
         }, init);
 
         let totalDiscount = 0;
-        if (promoCodes.length > 0) {
-            totalDiscount = promoCodes.reduce((acc, el) => {
+        const codes = CalculationService.cleanPromoCodes(promoCodes);
+        if (codes.length > 0) {
+            totalDiscount = codes.reduce((acc, el) => {
                 acc += el.value;
                 return acc;
             }, 0);
         }
         result.totalPrice = parseFloat((result.prevPrice * (1 - totalDiscount / 100)).toFixed(2));
         return result;
+    }
+
+    private static cleanPromoCodes(codes: PromoCode[]): PromoCode[] {
+        if (codes.length >= 2) {
+            const init: { [key: string]: number } = {};
+            const codesObj = codes.reduce((acc, el) => {
+                acc[el.name] = el.value;
+                return acc;
+            }, init);
+            return Object.entries(codesObj).map(
+                (el): PromoCode => {
+                    return { name: el[0], value: el[1] };
+                }
+            );
+        }
+        return codes;
     }
 }

@@ -72,12 +72,26 @@ interface IRange {
 
 export type CartResponse = { id: number; quantity: number };
 
-export type CartProduct = Product & { quantity: number; subtotal: number };
+export type CartProduct = Product & { quantity: number; subtotal: number; index: number };
 
 export type CartSummary = { productQty: number; prevPrice: number; totalPrice: number };
 
 export type PromoCode = { name: string; value: number };
 
 export type CartParams = { itemsPerPage: number; page: number; numOfPages: number };
+
+export type CartInfo = {
+    products: CartProduct[];
+    params: CartParams;
+    summary: CartSummary;
+    promoCodes: PromoCode[];
+};
+
+export interface IPaginationResponse<T> {
+    items: T[];
+    page: number;
+    numOfPages: number;
+    itemsPerPage: number;
+}
 
 export type APIResponse = { products: ProductResponse[] };

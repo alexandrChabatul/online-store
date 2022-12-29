@@ -33,7 +33,7 @@ export default class CartBlock {
         const subtotalMark = ElementsFactory.createBaseElementWithText('p', 'items-header__subtotal', 'Subtotal');
         itemsHeader.append(itemsMark, descriptionMark, priceMark, quantityMark, subtotalMark);
         const itemsContainer = ElementsFactory.createDivElement('cart-items-container');
-        cart.forEach((item, index) => itemsContainer.append(CartItem.getCartItem(item, index + 1)));
+        cart.forEach((item) => itemsContainer.append(CartItem.getCartItem(item)));
         this.items.append(itemsHeader, itemsContainer);
     }
 

@@ -1,5 +1,5 @@
 import CheckoutPopup from './checkout-popup/checkout-popup';
-import { CartParams, CartProduct, CartSummary, PromoCode } from 'common/types';
+import { CartInfo, CartParams, CartProduct, CartSummary, PromoCode } from 'common/types';
 import { ElementsFactory } from 'utils/element-generator';
 import CartBlock from './cart-block/CartBlock';
 import './cart-view.scss';
@@ -19,12 +19,14 @@ class CartView {
         this.summary = new SummaryBlock();
     }
 
-    getCart(cart: CartProduct[], params: CartParams, summary: CartSummary, codes: PromoCode[]) {
+    getCart(cartInfo: CartInfo) {
         const container = ElementsFactory.createDivElement('wrapper cart-wrapper');
-        if (cart.length === 0) {
+        if (cartInfo.products.length === 0) {
             container.append(this.getEmptyCartMessage());
         } else {
-            container.append(this.getItemsBlock(cart, params, summary, codes));
+            container.append(
+                this.getItemsBlock(cartInfo.products, cartInfo.params, cartInfo.summary, cartInfo.promoCodes)
+            );
         }
         return container;
     }
