@@ -43,9 +43,11 @@ export default class CartService {
         cartItems
             .map((el) => this.mapper.mapFromCartResponseToCartProduct(el))
             .forEach((el) => {
-                if (el) cartProducts.push(el);
+                if (el) {
+                    el.index = cartProducts.length + 1;
+                    cartProducts.push(el);
+                }
             });
-        cartProducts.forEach((el, index) => (el.index = index + 1));
         return cartProducts;
     }
 
