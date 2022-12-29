@@ -79,3 +79,5 @@ export type CartSummary = { productQty: number; prevPrice: number; totalPrice: n
 export type PromoCode = { name: string; value: number };
 
 export type CartParams = { itemsPerPage: number; page: number; numOfPages: number };
+
+export type APIResponse = { products: ProductResponse[] };
