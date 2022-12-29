@@ -7,7 +7,6 @@ export default class CartModel {
 
     private constructor() {
         this.cart = this.setCart();
-        console.log(this.cart);
     }
 
     public static getInstance(): CartModel {
@@ -44,7 +43,6 @@ export default class CartModel {
     }
 
     increaseItem(itemId: number) {
-        console.log('increase');
         const potentialItem = this.cart.find((el) => el.id === itemId);
         if (potentialItem) {
             potentialItem.quantity += 1;

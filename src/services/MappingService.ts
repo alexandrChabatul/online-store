@@ -2,11 +2,14 @@ import { CartProduct, CartResponse, Product, ProductResponse } from 'common/type
 import dataAnswer from 'assets/tempData/data.json';
 
 export default class MappingService {
-    //It's Mock. There we will contain our class, that contains array of Product (response from API)
-    data: ProductResponse[];
+    private static instance: MappingService;
+    data = dataAnswer.products;
 
-    constructor() {
-        this.data = dataAnswer.products;
+    public static getInstance(): MappingService {
+        if (!MappingService.instance) {
+            MappingService.instance = new MappingService();
+        }
+        return MappingService.instance;
     }
 
     mapFromProductResponseToProduct(productResponse: ProductResponse): Product {
@@ -19,7 +22,7 @@ export default class MappingService {
         if (target) {
             const targetProduct = this.mapFromProductResponseToProduct(target);
             const subtotal = parseFloat((targetProduct.currentPrice * cartResponse.quantity).toFixed(2));
-            return Object.assign(targetProduct, { quantity: cartResponse.quantity, subtotal: subtotal });
+            return Object.assign(targetProduct, { quantity: cartResponse.quantity, subtotal: subtotal, index: 0 });
         }
         return null;
     }

@@ -73,6 +73,10 @@ const appConstants = {
     },
     localStorage: {
         cart: 'alexDianaStoreCart',
+        codes: 'alexDianaStoreCodes',
+    },
+    cartParams: {
+        itemPerPage: 3,
     },
 };
 
