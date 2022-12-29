@@ -6,7 +6,7 @@ import CatalogView from 'view/pages/catalog/CatalogView';
 import data from 'assets/tempData/data.json';
 import { SearchService } from '../services/SearchService';
 import { FilterService } from 'services/FilterService';
-import CatalogModel from './CatalogModel';
+import CatalogModel from '../model/CatalogModel';
 
 export default class CatalogController implements IController {
     header: Header;
@@ -120,7 +120,7 @@ export default class CatalogController implements IController {
             view: 'row',
             search: 'dummy',
         };
-        const products: ProductResponse[] = await this.model.getData();
+        const products: ProductResponse[] = await this.model.getProducts();
         const productsWithPrice: Product[] = products.map((el) => {
             const currentPrice = Math.ceil(el.price * (100 - el.discountPercentage)) / 100;
             return Object.assign(el, { currentPrice: currentPrice });

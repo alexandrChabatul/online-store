@@ -1,21 +1,21 @@
 import { ProductResponse, APIResponse } from 'common/types';
 
 class CatalogModel {
-    data: ProductResponse[];
+    products: ProductResponse[];
 
     constructor() {
-        this.data = [];
+        this.products = [];
     }
 
-    public async getData() {
-        if (this.data.length > 0) {
-            return this.data;
+    public async getProducts(): Promise<ProductResponse[]> {
+        if (this.products.length > 0) {
+            return this.products;
         }
 
         const response = await fetch('https://dummyjson.com/products?limit=100');
         const data: APIResponse = await response.json();
-        this.data = data.products;
-        return this.data;
+        this.products = data.products;
+        return this.products;
     }
 }
 
