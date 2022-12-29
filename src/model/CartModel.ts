@@ -7,6 +7,7 @@ export default class CartModel {
 
     private constructor() {
         this.cart = this.setCart();
+
     }
 
     public static getInstance(): CartModel {
