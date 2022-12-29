@@ -70,6 +70,9 @@ const appConstants = {
         3: 'American Express',
         2: 'МИР',
     },
+    localStorage: {
+        cart: 'alexDianaStoreCart',
+    }
 };
 
 export default appConstants;
