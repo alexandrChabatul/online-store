@@ -6,21 +6,24 @@ import CatalogView from 'view/pages/catalog/CatalogView';
 import data from 'assets/tempData/data.json';
 import { SearchService } from '../services/SearchService';
 import { FilterService } from 'services/FilterService';
+import CatalogModel from '../model/CatalogModel';
 
 export default class CatalogController implements IController {
     header: Header;
     main: HTMLElement;
     footer: Footer;
     view: CatalogView;
+    model: typeof CatalogModel;
 
     constructor() {
         this.header = new Header(String(4), String(1000));
         this.main = ElementsFactory.createBaseElement('main', 'main');
         this.footer = new Footer();
         this.view = new CatalogView();
+        this.model = CatalogModel;
     }
 
-    render(params: params): void {
+    async render(params: params): Promise<void> {
         console.log('render');
         const app = <HTMLDivElement>document.getElementById('app');
         app.innerHTML = '';
@@ -42,13 +45,13 @@ export default class CatalogController implements IController {
                         total: 5,
                     },
                     {
-                        filter: 'laptops',
+                        filter: 'fragrances',
                         checked: false,
                         active: 5,
                         total: 5,
                     },
                     {
-                        filter: 'laptops',
+                        filter: 'skincare',
                         checked: false,
                         active: 5,
                         total: 5,
@@ -117,8 +120,7 @@ export default class CatalogController implements IController {
             view: 'row',
             search: 'dummy',
         };
-        const products: ProductResponse[] = data.products;
-        // const products: ProductResponse[] = [];
+        const products: ProductResponse[] = await this.model.getProducts();
         const productsWithPrice: Product[] = products.map((el) => {
             const currentPrice = Math.ceil(el.price * (100 - el.discountPercentage)) / 100;
             return Object.assign(el, { currentPrice: currentPrice });
