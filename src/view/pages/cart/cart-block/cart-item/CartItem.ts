@@ -5,11 +5,17 @@ import './cart-item.scss';
 
 export default class CartItem {
     static getCartItem(item: CartProduct) {
+        const product = item.product;
         const counterBlock = this.getCounterBlock(item.index);
-        const imageBlock = this.getImageBlock(item.thumbnail, item.title);
-        const descriptionBlock = this.getDescriptionBlock(item.title, item.category, item.brand, item.description);
-        const priceBlock = this.getPriceBlock(item.price, item.currentPrice);
-        const quantityBlock = this.getQuantityBlock(item.quantity, item.stock);
+        const imageBlock = this.getImageBlock(product.thumbnail, product.title);
+        const descriptionBlock = this.getDescriptionBlock(
+            product.title,
+            product.category,
+            product.brand,
+            product.description
+        );
+        const priceBlock = this.getPriceBlock(product.price, product.currentPrice);
+        const quantityBlock = this.getQuantityBlock(item.quantity, product.stock);
         const subtotalBlock = this.getSubtotalBlock(item.subtotal);
         const deleteBlock = this.getDeleteBlock();
         const cartItem = ElementsFactory.createDivElement('cart-item');

@@ -1,4 +1,4 @@
-import { CartProduct, CartResponse, Product, ProductResponse } from 'common/types';
+import { CartResponse, Product, ProductResponse } from 'common/types';
 import dataAnswer from 'assets/tempData/data.json';
 
 export default class MappingService {
@@ -17,13 +17,8 @@ export default class MappingService {
         return Object.assign(productResponse, { currentPrice: currentPrice });
     }
 
-    mapFromCartResponseToCartProduct(cartResponse: CartResponse): CartProduct | null {
-        const target = this.data.find((el) => el.id === cartResponse.id);
-        if (target) {
-            const targetProduct = this.mapFromProductResponseToProduct(target);
-            const subtotal = parseFloat((targetProduct.currentPrice * cartResponse.quantity).toFixed(2));
-            return Object.assign(targetProduct, { quantity: cartResponse.quantity, subtotal: subtotal, index: 0 });
-        }
-        return null;
+    mapFromCartResponseToCartProduct(cartResponse: CartResponse, index: number) {
+        const subtotal = parseFloat((cartResponse.product.currentPrice * cartResponse.quantity).toFixed(2));
+        return Object.assign(cartResponse, { subtotal: subtotal, index: index });
     }
 }

@@ -1,5 +1,5 @@
 import appConstants from 'common/constants';
-import { CartResponse } from 'common/types';
+import { CartResponse, Product } from 'common/types';
 import StorageService from 'services/StorageService';
 import ValidationService from 'services/ValidationService';
 
@@ -31,18 +31,22 @@ export default class CartModel {
         return this.cart;
     }
 
-    increaseItem(itemId: number) {
-        const potentialItem = this.cart.find((el) => el.id === itemId);
+    getItemsIdList(): number[] {
+        return this.cart.map((el) => el.product.id);
+    }
+
+    increaseItem(product: Product) {
+        const potentialItem = this.cart.find((el) => el.product.id === product.id);
         if (potentialItem) {
             potentialItem.quantity += 1;
         } else {
-            this.cart.push({ id: itemId, quantity: 1 });
+            this.cart.push({ product: product, quantity: 1 });
         }
         this.storageService.setItem(CartModel.PATH, this.cart);
     }
 
     reduceItem(itemId: number) {
-        const potentialItem = this.cart.find((el) => el.id === itemId);
+        const potentialItem = this.cart.find((el) => el.product.id === itemId);
         if (potentialItem) {
             potentialItem.quantity -= 1;
         }
@@ -53,7 +57,7 @@ export default class CartModel {
     }
 
     deleteItem(itemId: number) {
-        this.cart = this.cart.filter((el) => el.id !== itemId);
+        this.cart = this.cart.filter((el) => el.product.id !== itemId);
         this.storageService.setItem(CartModel.PATH, this.cart);
     }
 }

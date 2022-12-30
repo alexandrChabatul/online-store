@@ -1,22 +1,23 @@
-import { CartProduct, CartSummary, PromoCode } from 'common/types';
+import { CartProduct, PromoCode } from 'common/types';
 
 export default class CalculationService {
-    static getCartSummary(cart: CartProduct[], promoCodes: PromoCode[]): CartSummary {
-        const init: CartSummary = { productQty: 0, totalPrice: 0, prevPrice: 0 };
-        const result = cart.reduce((acc, el) => {
-            acc.productQty += el.quantity;
-            acc.prevPrice = parseFloat((acc.prevPrice + el.currentPrice * el.quantity).toFixed(2));
-            return acc;
-        }, init);
+    getTotalQuantity(cart: CartProduct[]) {
+        if (cart.length === 0) return 0;
+        return cart.reduce((acc, el) => acc + el.quantity, 0);
+    }
 
-        let totalDiscount = 0;
-        if (promoCodes.length > 0) {
-            totalDiscount = promoCodes.reduce((acc, el) => {
-                acc += el.value;
-                return acc;
-            }, 0);
-        }
-        result.totalPrice = parseFloat((result.prevPrice * (1 - totalDiscount / 100)).toFixed(2));
-        return result;
+    getPrice(cart: CartProduct[]): number {
+        if (cart.length === 0) return 0;
+        const price = cart.reduce((acc, el) => acc + el.subtotal, 0);
+        return parseFloat(price.toFixed(2));
+    }
+
+    getDiscount(promoCodes: PromoCode[]): number {
+        if (promoCodes.length === 0) return 0;
+        return promoCodes.reduce((acc, el) => acc + el.value, 0);
+    }
+
+    getPriceWithDiscount(price: number, discount: number) {
+        return Math.round(price * (100 - discount)) / 100;
     }
 }

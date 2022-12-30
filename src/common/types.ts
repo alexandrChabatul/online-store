@@ -70,9 +70,9 @@ interface IRange {
     max: number;
 }
 
-export type CartResponse = { id: number; quantity: number };
+export type CartResponse = { product: Product; quantity: number };
 
-export type CartProduct = Product & { quantity: number; subtotal: number; index: number };
+export type CartProduct = CartResponse & { subtotal: number; index: number };
 
 export type CartSummary = { productQty: number; prevPrice: number; totalPrice: number };
 
