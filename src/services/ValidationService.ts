@@ -1,4 +1,5 @@
 import appConstants from 'common/constants';
+import { CartResponse, PromoCode } from 'common/types';
 
 export default class ValidationService {
     checkName(name: string) {
@@ -46,6 +47,32 @@ export default class ValidationService {
     checkCardCvv(cvv: string) {
         const pattern = new RegExp(appConstants.formPatterns.cvv);
         return pattern.test(cvv);
+    }
+
+    checkCartResponse(response: CartResponse[]): boolean {
+        if (!Array.isArray(response)) {
+            return false;
+        }
+        for (const element of response) {
+            if (!element.id || !element.quantity) {
+                console.error('Wrong format of cart data.');
+                return false;
+            }
+        }
+        return true;
+    }
+
+    checkPromoCodeResponse(response: PromoCode[]): boolean {
+        if (!Array.isArray(response)) {
+            return false;
+        }
+        for (const element of response) {
+            if (!element.name || !element.value) {
+                console.error('Wrong format of promo codes data.');
+                return false;
+            }
+        }
+        return true;
     }
 
     getProvider(card: string): string | undefined {
