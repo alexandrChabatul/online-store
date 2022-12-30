@@ -54,7 +54,7 @@ export default class ValidationService {
             return false;
         }
         for (const element of response) {
-            if (!element.id || !element.quantity) {
+            if (!element.product || !element.quantity) {
                 console.error('Wrong format of cart data.');
                 return false;
             }
@@ -73,12 +73,5 @@ export default class ValidationService {
             }
         }
         return true;
-    }
-
-    getProvider(card: string): string | undefined {
-        const result = undefined;
-        if (card.length < 1) return result;
-        const providers: { [key: string]: string } = appConstants.cardProviders;
-        return providers[card[0]];
     }
 }
