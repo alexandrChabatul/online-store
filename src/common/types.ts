@@ -95,3 +95,5 @@ export interface IPaginationResponse<T> {
 }
 
 export type APIResponse = { products: ProductResponse[] };
+
+export type BadResponse = { errorMessage: string };
