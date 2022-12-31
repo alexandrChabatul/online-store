@@ -1,4 +1,4 @@
-import { Product } from 'common/types';
+import { BadResponse, Product } from 'common/types';
 import { ElementsFactory } from 'utils/element-generator';
 import Breadcrumbs from './breadcrumbs/Breadcrumbs';
 import ImageSlider from './image-slider/ImageSlider';
@@ -6,6 +6,7 @@ import ProductButtons from './product-description/buttons-block/ProductButtons';
 import ProductDescription from './product-description/description-block/ProductDescription';
 import ProductPrice from './product-description/price-block/ProductPrice';
 import ProductTitle from './product-title/ProductTitle';
+import ErrorImage from 'assets/images/not-found.png';
 import './product.scss';
 
 class ProductView {
@@ -16,7 +17,7 @@ class ProductView {
     productButtons: ProductButtons = new ProductButtons();
     breadcrumbs: Breadcrumbs = new Breadcrumbs();
 
-    render(product: Product) {
+    renderProduct(product: Product) {
         const productWrapper = ElementsFactory.createDivElement('wrapper product-wrapper');
         const breadcrumbsUl = this.breadcrumbs.getBreadcrumbs(product);
         const productBlock = ElementsFactory.createDivElement('product');
@@ -25,6 +26,17 @@ class ProductView {
 
         productBlock.append(titleImageContainer, priceDescContainer);
         productWrapper.append(breadcrumbsUl, productBlock);
+        return productWrapper;
+    }
+
+    renderError(response: BadResponse) {
+        const productWrapper = ElementsFactory.createDivElement('wrapper product-wrapper');
+        const errorMessage = ElementsFactory.createBaseElementWithText('div', 'product-error', response.errorMessage);
+        const errorImageContainer = ElementsFactory.createDivElement('error-image-container');
+        const errorImage = new Image();
+        errorImage.src = ErrorImage;
+        errorImageContainer.append(errorImage);
+        productWrapper.append(errorMessage, errorImageContainer);
         return productWrapper;
     }
 

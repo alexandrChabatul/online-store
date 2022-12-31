@@ -1,8 +1,13 @@
 import appConstants from 'common/constants';
-import { CartResponse } from 'common/types';
+import { CartResponse, Product } from 'common/types';
+import StorageService from 'services/StorageService';
+import ValidationService from 'services/ValidationService';
 
 export default class CartModel {
     private static instance: CartModel;
+    private storageService: StorageService<CartResponse[]> = new StorageService<CartResponse[]>();
+    private static PATH: string = appConstants.localStorage.cart;
+    private validationService: ValidationService = new ValidationService();
     private cart: CartResponse[];
 
     private constructor() {
@@ -17,58 +22,42 @@ export default class CartModel {
     }
 
     setCart() {
-        const cartResponse = localStorage.getItem(appConstants.localStorage.cart);
-        if (cartResponse) {
-            try {
-                const result = JSON.parse(cartResponse);
-                if (Array.isArray(result)) {
-                    result.forEach((element) => {
-                        if (!element.id || !element.quantity) {
-                            return [];
-                        }
-                    });
-                    return result;
-                } else {
-                    return [];
-                }
-            } catch (e: unknown) {
-                console.error(e);
-            }
-        }
-        return [];
+        const cartResponse = this.storageService.getItem(CartModel.PATH);
+        if (!cartResponse) return [];
+        return this.validationService.checkCartResponse(cartResponse) ? cartResponse : [];
     }
 
     getCart() {
         return this.cart;
     }
 
-    increaseItem(itemId: number) {
-        const potentialItem = this.cart.find((el) => el.id === itemId);
+    getItemsIdList(): number[] {
+        return this.cart.map((el) => el.product.id);
+    }
+
+    increaseItem(product: Product) {
+        const potentialItem = this.cart.find((el) => el.product.id === product.id);
         if (potentialItem) {
             potentialItem.quantity += 1;
         } else {
-            this.cart.push({ id: itemId, quantity: 1 });
+            this.cart.push({ product: product, quantity: 1 });
         }
-        this.updateCartStorage();
+        this.storageService.setItem(CartModel.PATH, this.cart);
     }
 
     reduceItem(itemId: number) {
-        const potentialItem = this.cart.find((el) => el.id === itemId);
+        const potentialItem = this.cart.find((el) => el.product.id === itemId);
         if (potentialItem) {
             potentialItem.quantity -= 1;
         }
         if (potentialItem?.quantity === 0) {
             this.deleteItem(itemId);
         }
-        this.updateCartStorage();
+        this.storageService.setItem(CartModel.PATH, this.cart);
     }
 
     deleteItem(itemId: number) {
-        this.cart = this.cart.filter((el) => el.id !== itemId);
-        this.updateCartStorage();
-    }
-
-    private updateCartStorage() {
-        localStorage.setItem(appConstants.localStorage.cart, JSON.stringify(this.cart));
+        this.cart = this.cart.filter((el) => el.product.id !== itemId);
+        this.storageService.setItem(CartModel.PATH, this.cart);
     }
 }

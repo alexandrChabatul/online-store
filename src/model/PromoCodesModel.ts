@@ -1,8 +1,13 @@
 import appConstants from 'common/constants';
 import { PromoCode } from 'common/types';
+import StorageService from 'services/StorageService';
+import ValidationService from 'services/ValidationService';
 
 export default class PromoCodesModel {
     private static instance: PromoCodesModel;
+    private storageService: StorageService<PromoCode[]> = new StorageService<PromoCode[]>();
+    private validationService: ValidationService = new ValidationService();
+    private static PATH: string = appConstants.localStorage.codes;
 
     public static getInstance(): PromoCodesModel {
         if (!PromoCodesModel.instance) {
@@ -12,25 +17,9 @@ export default class PromoCodesModel {
     }
 
     getAppliedCodes(): PromoCode[] {
-        const promoResponse = localStorage.getItem(appConstants.localStorage.codes);
-        if (promoResponse) {
-            try {
-                const result = JSON.parse(promoResponse);
-                if (Array.isArray(result)) {
-                    result.forEach((element) => {
-                        if (!element.name || !element.value) {
-                            return [];
-                        }
-                    });
-                    return this.cleanPromoCodes(result);
-                } else {
-                    return [];
-                }
-            } catch (e: unknown) {
-                console.error(e);
-            }
-        }
-        return [];
+        const promoResponse = this.storageService.getItem(PromoCodesModel.PATH);
+        if (!promoResponse) return [];
+        return this.validationService.checkPromoCodeResponse(promoResponse) ? this.cleanPromoCodes(promoResponse) : [];
     }
 
     setPromoCode(code: PromoCode) {
@@ -38,18 +27,14 @@ export default class PromoCodesModel {
         const potentialCode = codes.find((el) => el.name === code.name);
         if (!potentialCode) {
             codes.push(code);
-            this.updatePromoCodeStorage(codes);
+            this.storageService.setItem(PromoCodesModel.PATH, codes);
         }
     }
 
     deleteItem(code: PromoCode) {
         let codes = this.getAppliedCodes();
         codes = codes.filter((el) => el.name !== code.name);
-        this.updatePromoCodeStorage(codes);
-    }
-
-    private updatePromoCodeStorage(codes: PromoCode[]) {
-        localStorage.setItem(appConstants.localStorage.codes, JSON.stringify(codes));
+        this.storageService.setItem(PromoCodesModel.PATH, codes);
     }
 
     private cleanPromoCodes(codes: PromoCode[]): PromoCode[] {

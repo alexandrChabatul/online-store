@@ -10,6 +10,7 @@ export default class CartService {
     private cartModel: CartModel = CartModel.getInstance();
     private mapper: MappingService = MappingService.getInstance();
     private codesModel: PromoCodesModel = PromoCodesModel.getInstance();
+    private calculationService: CalculationService = new CalculationService();
 
     getCartInfo(params: params): CartInfo {
         const { limit, page } = this.getPageParams(params);
@@ -38,17 +39,7 @@ export default class CartService {
     }
 
     getCartItems() {
-        const cartItems = this.cartModel.getCart();
-        const cartProducts: CartProduct[] = [];
-        cartItems
-            .map((el) => this.mapper.mapFromCartResponseToCartProduct(el))
-            .forEach((el) => {
-                if (el) {
-                    el.index = cartProducts.length + 1;
-                    cartProducts.push(el);
-                }
-            });
-        return cartProducts;
+        return this.cartModel.getCart().map((el, index) => this.mapper.mapFromCartResponseToCartProduct(el, index + 1));
     }
 
     getCartPageAndParams(cartProducts: CartProduct[], page: number, limit: number) {
@@ -68,6 +59,14 @@ export default class CartService {
     }
 
     getCartSummary(cartProducts: CartProduct[], codes: PromoCode[]) {
-        return CalculationService.getCartSummary(cartProducts, codes);
+        const discount = this.calculationService.getDiscount(codes);
+        const quantity = this.calculationService.getTotalQuantity(cartProducts);
+        const price = this.calculationService.getPrice(cartProducts);
+        const priceWithDiscount = this.calculationService.getPriceWithDiscount(price, discount);
+        return {
+            productQty: quantity,
+            prevPrice: price,
+            totalPrice: priceWithDiscount,
+        };
     }
 }
