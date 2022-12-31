@@ -15,14 +15,16 @@ export default class CatalogModel {
         return this.instance;
     }
 
-    public async getProducts() {
-        if (this.products.length > 0) {
-            return this.products;
+    public async setProducts(): Promise<void> {
+        if (this.products.length === 0) {
+            console.log('fetch');
+            const response = await fetch('https://dummyjson.com/products?limit=100');
+            const data: APIResponse = await response.json();
+            this.products = data.products;
         }
+    }
 
-        const response = await fetch('https://dummyjson.com/products?limit=100');
-        const data: APIResponse = await response.json();
-        this.products = data.products;
+    public getProducts(): ProductResponse[] {
         return this.products;
     }
 }

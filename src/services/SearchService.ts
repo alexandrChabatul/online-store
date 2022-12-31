@@ -1,14 +1,34 @@
-import { Product } from 'common/types';
+import { ProductIsInCart } from 'common/types';
 
 export class SearchService {
-    static getSearchResults(products: Product[], term: string): Product[] {
-        const productsWithSearchAplied = products.filter((el: Product): Product | undefined => {
-            const objCopy: { [key: string]: string | number | string[] } = { ...el };
+    private searchTerm: string;
+
+    constructor() {
+        this.searchTerm = '';
+    }
+
+    setSearchTerm(value: string) {
+        this.searchTerm = value;
+    }
+
+    getSearchTerm(search: string) {
+        if (search) {
+            this.searchTerm = search;
+        } else {
+            this.searchTerm = '';
+        }
+        return this.searchTerm;
+    }
+
+    getSearchResults(products: ProductIsInCart[]): ProductIsInCart[] {
+        console.log('search', products);
+        const productsWithSearchAplied = products.filter((el: ProductIsInCart): ProductIsInCart | undefined => {
+            const objCopy: { [key: string]: boolean | string | number | string[] } = { ...el };
             ['id', 'thumbnail', 'images'].forEach((element) => {
                 delete objCopy[element];
             });
             for (const key in objCopy) {
-                if (objCopy[key].toString().toLowerCase().includes(term.toLowerCase())) {
+                if (objCopy[key].toString().toLowerCase().includes(this.searchTerm.toLowerCase())) {
                     return el;
                 }
             }

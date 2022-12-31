@@ -1,122 +1,59 @@
-import { ProductResponse, params, Product, IMainParameters } from 'common/types';
+import { ProductResponse, params, Product, IMainParameters, ProductIsInCart } from 'common/types';
+import CartModel from 'model/CartModel';
 import CatalogModel from 'model/CatalogModel';
+import CartService from './CartService';
 import { FilterService } from './FilterService';
+import MappingService from './MappingService';
+import { SearchService } from './SearchService';
+import { SortService } from './SortService';
+import { ViewService } from './ViewService';
 
 export class CatalogService {
     model: CatalogModel;
     filterService: FilterService;
+    sortService: SortService;
+    searchService: SearchService;
+    viewService: ViewService;
+    mapper: MappingService;
+    cart: CartModel;
 
     constructor() {
         this.model = CatalogModel.getInstance();
         this.filterService = new FilterService();
+        this.sortService = new SortService();
+        this.searchService = new SearchService();
+        this.viewService = new ViewService();
+        this.mapper = MappingService.getInstance();
+        this.cart = CartModel.getInstance();
     }
 
-    getFilters(params: params) {
-        const mainFilters: IMainParameters = {
-            filters: {
-                category: [
-                    {
-                        filter: 'smartphones',
-                        checked: false,
-                        active: 5,
-                        total: 5,
-                    },
-                    {
-                        filter: 'laptops',
-                        checked: true,
-                        active: 5,
-                        total: 5,
-                    },
-                    {
-                        filter: 'fragrances',
-                        checked: false,
-                        active: 5,
-                        total: 5,
-                    },
-                    {
-                        filter: 'skincare',
-                        checked: false,
-                        active: 5,
-                        total: 5,
-                    },
-                ],
-                brand: [
-                    {
-                        filter: 'Apple',
-                        checked: true,
-                        active: 5,
-                        total: 5,
-                    },
-                    {
-                        filter: 'Samsung',
-                        checked: true,
-                        active: 5,
-                        total: 5,
-                    },
-                    {
-                        filter: 'OPPO',
-                        checked: false,
-                        active: 5,
-                        total: 5,
-                    },
-                    {
-                        filter: 'Huawei',
-                        checked: false,
-                        active: 5,
-                        total: 5,
-                    },
-                    {
-                        filter: 'Infinix',
-                        checked: false,
-                        active: 5,
-                        total: 5,
-                    },
-                    {
-                        filter: 'Motorola',
-                        checked: true,
-                        active: 5,
-                        total: 5,
-                    },
-                    {
-                        filter: 'Xiaomi',
-                        checked: true,
-                        active: 5,
-                        total: 5,
-                    },
-                    {
-                        filter: 'Bork',
-                        checked: false,
-                        active: 5,
-                        total: 5,
-                    },
-                ],
-                stock: {
-                    min: 10,
-                    max: 3000,
-                },
-                price: {
-                    min: 10,
-                    max: 3000,
-                },
-            },
-            sort: 'sort',
-            view: 'row',
-            search: 'dummy',
+    public getCatalogSettings(params: params): IMainParameters {
+        const { category, brand, price, stock, sort, search, view } = params;
+        this.filterService.activateAllFilters(category, brand, price, stock);
+        return {
+            filters: this.filterService.getFilters(category, brand, stock, price),
+            sort: this.sortService.getSortMethod(sort),
+            search: this.searchService.getSearchTerm(search),
+            view: this.viewService.getViewType(view),
         };
-
-        return mainFilters;
     }
 
-    public async getProducts() {
-        const products: ProductResponse[] = await this.model.getProducts();
-        const productsWithPrice: Product[] = products.map((el) => {
-            const currentPrice = Math.ceil(el.price * (100 - el.discountPercentage)) / 100;
-            return Object.assign(el, { currentPrice: currentPrice });
-        });
-        const tempfilters = this.filterService.createFilters(productsWithPrice);
-        // const filtered: Product[] = SearchService.getSearchResults(productsWithPrice, catalogSettings.search);
-        // const byCategory = FilterService.getFilteredProducts(productsWithPrice, catalogSettings.filters);
+    public getAllProducts(params: params): ProductIsInCart[] {
+        const products: ProductResponse[] = this.model.getProducts();
+        const mappedProducts: ProductIsInCart[] = products.map((el) =>
+            this.mapper.mapFromProductToProductIsInCart(this.cart.getCart(), el)
+        );
+        this.filterService.createFilters(mappedProducts, params);
+        return mappedProducts;
+    }
 
-        return productsWithPrice;
+    public getProducts(params: params): ProductIsInCart[] {
+        const products: ProductIsInCart[] = this.getAllProducts(params);
+        const filters = this.getCatalogSettings(params);
+        const filteredProducts = this.filterService.getFilteredProducts(products, filters.filters);
+        const searchedProducts = this.searchService.getSearchResults(filteredProducts);
+        const sortedProducts = this.sortService.getSortedResults(searchedProducts);
+        this.filterService.countActiveFilters(sortedProducts);
+        return sortedProducts;
     }
 }

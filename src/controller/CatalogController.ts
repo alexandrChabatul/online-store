@@ -31,8 +31,9 @@ export default class CatalogController implements IController {
         const footer = this.footer.createFooter();
         app.append(header, this.main, footer);
 
-        const catalogSettings = this.catalogService.getFilters(params);
-        const products = await this.catalogService.getProducts();
+        await this.catalogService.model.setProducts();
+        const products = this.catalogService.getProducts(params);
+        const catalogSettings = this.catalogService.getCatalogSettings(params);
 
         const catalog = this.view.render(products, catalogSettings);
         this.main.append(catalog);

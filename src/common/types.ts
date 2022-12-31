@@ -44,31 +44,16 @@ export type ProductResponse = Readonly<IProductResponse>;
 
 export type Product = ProductResponse & { currentPrice: number };
 
+export type ProductIsInCart = Product & { isInCart: boolean };
+
 export interface IFilters {
     category: IFilter[];
     brand: IFilter[];
-    price: IRange;
+    currentPrice: IRange;
     stock: IRange;
 }
 
-export interface tempIFilters {
-    category: {
-        [key: string]: {
-            checked: boolean;
-            active: number;
-            total: number;
-        };
-    };
-    brand: {
-        [key: string]: {
-            checked: boolean;
-            active: number;
-            total: number;
-        };
-    };
-    price: IRange;
-    stock: IRange;
-}
+export type tempType = { [key: string]: IFilter };
 
 export interface IMainParameters {
     filters: IFilters;
@@ -86,7 +71,9 @@ export interface IFilter {
 
 export interface IRange {
     min: number;
+    minValue: number;
     max: number;
+    maxValue: number;
 }
 
 export type CartResponse = { id: number; quantity: number };
@@ -114,5 +101,3 @@ export interface IPaginationResponse<T> {
 }
 
 export type APIResponse = { products: ProductResponse[] };
-
-export type tempType = { [key: string]: IFilter };
