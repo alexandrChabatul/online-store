@@ -28,7 +28,6 @@ export class CatalogService {
 
     public getCatalogSettings(params: params): ICatalogSettings {
         const { category, brand, price, stock, sort, search, view } = params;
-        this.filterService.activateAllFilters(category, brand, price, stock);
         return {
             filters: this.filterService.getFilters(category, brand, stock, price),
             sort: this.sortService.getSortMethod(sort),
@@ -37,17 +36,17 @@ export class CatalogService {
         };
     }
 
-    public getAllProducts(params: params): ProductIsInCart[] {
+    public getAllProducts(): ProductIsInCart[] {
         const products: ProductResponse[] = this.model.getProducts();
         const mappedProducts: ProductIsInCart[] = products.map((el) =>
             this.mapper.mapFromProductToProductIsInCart(this.cart.getCart(), el)
         );
-        this.filterService.createFilters(mappedProducts, params);
         return mappedProducts;
     }
 
-    public getProducts(params: params): ProductIsInCart[] {
-        const products: ProductIsInCart[] = this.getAllProducts(params);
+    public getFilteredProducts(params: params): ProductIsInCart[] {
+        const products: ProductIsInCart[] = this.getAllProducts();
+        this.filterService.createFilters(products, params);
         const filters = this.getCatalogSettings(params);
         const filteredProducts = this.filterService.getFilteredProducts(products, filters.filters);
         const searchedProducts = this.searchService.getSearchResults(filteredProducts);

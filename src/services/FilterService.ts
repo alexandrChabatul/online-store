@@ -1,5 +1,6 @@
 import { IRange, params, Product, ProductIsInCart, FilterStored } from 'common/types';
 import { IFilters } from 'common/types';
+import appConstants from 'common/constants';
 
 export class FilterService {
     categories: FilterStored;
@@ -71,21 +72,10 @@ export class FilterService {
                       writable: true,
                   });
 
-            if (this.currentPrice.min > product.currentPrice) {
-                this.currentPrice.min = Math.floor(product.currentPrice);
-            }
-
-            if (this.currentPrice.max < product.currentPrice) {
-                this.currentPrice.max = Math.ceil(product.currentPrice);
-            }
-
-            if (this.stock.min > product.stock) {
-                this.stock.min = product.stock;
-            }
-
-            if (this.stock.max < product.stock) {
-                this.stock.max = product.stock;
-            }
+            this.currentPrice.min = Math.min(this.currentPrice.min, Math.floor(product.currentPrice));
+            this.currentPrice.max = Math.max(this.currentPrice.max, Math.ceil(product.currentPrice));
+            this.stock.min = Math.min(this.stock.min, product.stock);
+            this.stock.max = Math.max(this.stock.max, product.stock);
         });
 
         this.currentPrice.maxValue = this.currentPrice.max;
@@ -106,7 +96,7 @@ export class FilterService {
 
     private activateCheckboxFilters(type: 'categories' | 'brands', params: string) {
         if (params) {
-            const paramsArray = params.split(',');
+            const paramsArray = params.split(appConstants.ParamsDelimeter);
             paramsArray.forEach((el) => {
                 if (this[type][el.toLowerCase()]) {
                     this[type][el.toLowerCase()].checked = true;
@@ -121,7 +111,7 @@ export class FilterService {
 
     private activateRangeFilters(type: 'stock' | 'currentPrice', params: string) {
         if (params) {
-            const paramsArray = params.split(',');
+            const paramsArray = params.split(appConstants.ParamsDelimeter);
             this[type].minValue = Number(paramsArray[0]);
             if (paramsArray[1]) {
                 this[type].maxValue = Number(paramsArray[1]);
@@ -140,7 +130,8 @@ export class FilterService {
     }
 
     public changeFilter(type: 'brands' | 'categories', name: string) {
-        this[type][name].checked != this[type][name].checked;
+        this[type][name].checked = !this[type][name].checked;
+        console.log(this[type][name]);
     }
 
     public changeRange(type: 'stock' | 'currentPrice', border: 'minValue' | 'maxValue', value: number) {

@@ -29,7 +29,7 @@ export default class CatalogController implements IController {
         app.append(header, this.main, footer);
 
         await this.catalogService.model.setProducts();
-        const products = this.catalogService.getProducts(params);
+        const products = this.catalogService.getFilteredProducts(params);
         const catalogSettings = this.catalogService.getCatalogSettings(params);
 
         const catalog = this.view.render(products, catalogSettings);
