@@ -1,4 +1,4 @@
-import { IMainParameters } from 'common/types';
+import { ICatalogSettings } from 'common/types';
 import { ElementsFactory } from 'utils/element-generator';
 import '../checkbox.scss';
 
@@ -9,7 +9,7 @@ export class BrandBlock {
         this.brands = ElementsFactory.createBaseElement('ul', 'filters-list');
     }
 
-    public createBrandBlock(catalogSettings: IMainParameters): HTMLDivElement {
+    public createBrandBlock(catalogSettings: ICatalogSettings): HTMLDivElement {
         const brandBlock = ElementsFactory.createDivElement('brand-block');
         const brandTitle = ElementsFactory.createBaseElementWithText('h3', 'brand-title', 'Brand');
 

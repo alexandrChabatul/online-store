@@ -1,4 +1,4 @@
-import { IMainParameters } from 'common/types';
+import { ICatalogSettings } from 'common/types';
 import { ElementsFactory } from 'utils/element-generator';
 
 export class CategoryBlock {
@@ -8,7 +8,7 @@ export class CategoryBlock {
         this.categories = ElementsFactory.createBaseElement('ul', 'filters-list');
     }
 
-    public createCategoryBlock(catalogSettings: IMainParameters): HTMLDivElement {
+    public createCategoryBlock(catalogSettings: ICatalogSettings): HTMLDivElement {
         const categoryBlock = ElementsFactory.createDivElement('category-block');
         const categoryTitle = ElementsFactory.createBaseElementWithText('h3', 'category-title', 'Category');
 

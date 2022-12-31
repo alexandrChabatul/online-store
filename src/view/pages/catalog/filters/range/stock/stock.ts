@@ -1,4 +1,4 @@
-import { IMainParameters } from 'common/types';
+import { ICatalogSettings } from 'common/types';
 import { ElementsFactory } from 'utils/element-generator';
 import { Range } from '../range';
 import '../range.scss';
@@ -17,7 +17,7 @@ export class StockBlock extends Range {
         this.StockMaxValue = ElementsFactory.createBaseElement('span', 'stock-max');
     }
 
-    public createStockBlock(catalogSettings: IMainParameters): HTMLDivElement {
+    public createStockBlock(catalogSettings: ICatalogSettings): HTMLDivElement {
         const StockBlock = ElementsFactory.createDivElement('stock-block');
         const StockTitle = ElementsFactory.createBaseElementWithText('h3', 'stock-title', 'Stock');
         this.StockMinRange.min = String(catalogSettings.filters.stock.min);

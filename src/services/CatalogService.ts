@@ -1,7 +1,6 @@
-import { ProductResponse, params, Product, IMainParameters, ProductIsInCart } from 'common/types';
+import { ProductResponse, params, ICatalogSettings, ProductIsInCart } from 'common/types';
 import CartModel from 'model/CartModel';
 import CatalogModel from 'model/CatalogModel';
-import CartService from './CartService';
 import { FilterService } from './FilterService';
 import MappingService from './MappingService';
 import { SearchService } from './SearchService';
@@ -27,7 +26,7 @@ export class CatalogService {
         this.cart = CartModel.getInstance();
     }
 
-    public getCatalogSettings(params: params): IMainParameters {
+    public getCatalogSettings(params: params): ICatalogSettings {
         const { category, brand, price, stock, sort, search, view } = params;
         this.filterService.activateAllFilters(category, brand, price, stock);
         return {

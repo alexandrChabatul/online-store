@@ -3,7 +3,6 @@ import { ElementsFactory } from 'utils/element-generator';
 import { Footer } from 'view/common-components/footer/footer';
 import { Header } from 'view/common-components/header/header';
 import CatalogView from 'view/pages/catalog/CatalogView';
-import CatalogModel from '../model/CatalogModel';
 import { CatalogService } from 'services/CatalogService';
 
 export default class CatalogController implements IController {
@@ -11,7 +10,6 @@ export default class CatalogController implements IController {
     main: HTMLElement;
     footer: Footer;
     view: CatalogView;
-    model: CatalogModel;
     catalogService: CatalogService;
 
     constructor() {
@@ -19,7 +17,6 @@ export default class CatalogController implements IController {
         this.main = ElementsFactory.createBaseElement('main', 'main');
         this.footer = new Footer();
         this.view = new CatalogView();
-        this.model = CatalogModel.getInstance();
         this.catalogService = new CatalogService();
     }
 
@@ -38,7 +35,7 @@ export default class CatalogController implements IController {
         const catalog = this.view.render(products, catalogSettings);
         this.main.append(catalog);
 
-        this.view.topPanel.viewBlockElement.viewBlock.addEventListener('click', (e) => {
+        this.view.catalogHeader.viewBlockElement.viewBlock.addEventListener('click', (e) => {
             const target: EventTarget | null = e.target;
             if (target instanceof HTMLDivElement) {
                 if (target.className.includes('row')) {
@@ -47,7 +44,7 @@ export default class CatalogController implements IController {
                     catalogSettings.view = 'table';
                 }
                 this.view.products.setView(catalogSettings.view);
-                this.view.topPanel.viewBlockElement.setView(catalogSettings.view);
+                this.view.catalogHeader.viewBlockElement.setView(catalogSettings.view);
             }
         });
         this.view.filters.resetBlock.copyButton.addEventListener(

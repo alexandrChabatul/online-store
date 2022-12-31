@@ -53,9 +53,9 @@ export interface IFilters {
     stock: IRange;
 }
 
-export type tempType = { [key: string]: IFilter };
+export type FilterStored = { [key: string]: IFilter };
 
-export interface IMainParameters {
+export interface ICatalogSettings {
     filters: IFilters;
     sort: string;
     view: string;

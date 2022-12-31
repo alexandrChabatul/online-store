@@ -1,11 +1,11 @@
-import { IMainParameters, Product } from 'common/types';
+import { ICatalogSettings, Product } from 'common/types';
 import { ElementsFactory } from 'utils/element-generator';
 import { Search } from './search/search';
 import { Sort } from './sorting/sorting';
-import './top-panel.scss';
+import './catalog-header.scss';
 import { ViewBlock } from './view-block/view-block';
 
-export class TopPanel {
+export class CatalogHeader {
     sortMethod: Sort;
     search: Search;
     viewBlockElement: ViewBlock;
@@ -16,14 +16,14 @@ export class TopPanel {
         this.viewBlockElement = new ViewBlock();
     }
 
-    createTopPanel(data: Product[], filters: IMainParameters): HTMLElement {
-        const topPanel = ElementsFactory.createDivElement('top-panel');
+    createCatalogHeader(data: Product[], filters: ICatalogSettings): HTMLElement {
+        const catalogHeader = ElementsFactory.createDivElement('top-panel');
         const sortMethod = this.sortMethod.createSortBlock(filters.sort);
         const searchResults = this.search.createSearchResultsBlock(data);
         const searchField = this.search.createSearch(filters.search);
         const viewBlock = this.viewBlockElement.createViewBlock(filters.view);
-        topPanel.append(sortMethod, searchResults, searchField, viewBlock);
+        catalogHeader.append(sortMethod, searchResults, searchField, viewBlock);
 
-        return topPanel;
+        return catalogHeader;
     }
 }

@@ -1,9 +1,9 @@
-import { IFilter, IRange, params, Product, ProductIsInCart, tempType } from 'common/types';
+import { IRange, params, Product, ProductIsInCart, FilterStored } from 'common/types';
 import { IFilters } from 'common/types';
 
 export class FilterService {
-    categories: tempType;
-    brands: tempType;
+    categories: FilterStored;
+    brands: FilterStored;
     stock: IRange;
     currentPrice: IRange;
 
@@ -24,7 +24,7 @@ export class FilterService {
         };
     }
 
-    getFilters(categories: string, brands: string, stock: string, price: string) {
+    public getFilters(categories: string, brands: string, stock: string, price: string) {
         this.activateAllFilters(categories, brands, price, stock);
         return {
             category: Object.values(this.categories),

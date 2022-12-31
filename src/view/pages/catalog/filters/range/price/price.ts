@@ -1,4 +1,4 @@
-import { IMainParameters } from 'common/types';
+import { ICatalogSettings } from 'common/types';
 import { ElementsFactory } from 'utils/element-generator';
 import { Range } from '../range';
 import '../range.scss';
@@ -17,7 +17,7 @@ export class PriceBlock extends Range {
         this.priceMaxValue = ElementsFactory.createBaseElement('span', 'price-max');
     }
 
-    public createPriceBlock(catalogSettings: IMainParameters): HTMLDivElement {
+    public createPriceBlock(catalogSettings: ICatalogSettings): HTMLDivElement {
         const priceBlock = ElementsFactory.createDivElement('price-block');
         const priceTitle = ElementsFactory.createBaseElementWithText('h3', 'price-title', 'Price');
         this.priceMinRange.min = String(catalogSettings.filters.currentPrice.min);
