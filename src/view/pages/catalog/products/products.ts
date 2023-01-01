@@ -1,5 +1,5 @@
 import appConstants from 'common/constants';
-import { IMainParameters, Product } from 'common/types';
+import { ICatalogSettings, ProductIsInCart } from 'common/types';
 import { ElementsFactory } from 'utils/element-generator';
 import './products.scss';
 import './products-row-view.scss';
@@ -11,7 +11,7 @@ export class Catalog {
         this.products = ElementsFactory.createDivElement('products-block');
     }
 
-    public createProductsCatalog(data: Product[], filters: IMainParameters): HTMLElement {
+    public createProductsCatalog(data: ProductIsInCart[], filters: ICatalogSettings): HTMLElement {
         this.setView(filters.view);
         if (data.length === 0) {
             const noProductsMessage = ElementsFactory.createBaseElementWithText(
@@ -23,11 +23,11 @@ export class Catalog {
             return this.products;
         }
 
-        data.forEach((el: Product) => this.createProductItem(el));
+        data.forEach((el: ProductIsInCart) => this.createProductItem(el));
         return this.products;
     }
 
-    private createProductItem(product: Product) {
+    private createProductItem(product: ProductIsInCart) {
         const productContainer = ElementsFactory.createDivElement('product-item');
         const productImage = ElementsFactory.createAnchor('product-image router-link', '', `/product/${product.id}`);
         this.setImage(product.thumbnail, productImage);
@@ -61,6 +61,11 @@ export class Catalog {
             `${product.description}`
         );
         const addToCartButton = ElementsFactory.createButton('add-button', 'Add to Cart');
+        if (product.isInCart) {
+            addToCartButton.classList.add('in-cart');
+            addToCartButton.textContent = 'Remove';
+        }
+
         productContainer.append(productImage, productElements);
         productElements.append(productName, productInfo, addToCartButton);
         productInfo.append(productPrice, productDescription);

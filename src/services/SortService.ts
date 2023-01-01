@@ -1,13 +1,32 @@
-import { Product } from 'common/types';
+import { ProductIsInCart } from 'common/types';
 
 export class SortService {
-    static getSortedResults(products: Product[], sortType: string): Product[] {
-        const [type, order] = sortType.split(' ');
+    sortMethod: string;
+
+    constructor() {
+        this.sortMethod = 'sort';
+    }
+
+    setSortMethod(value: string) {
+        this.sortMethod = value;
+    }
+
+    getSortMethod(sortParams: string) {
+        if (sortParams) {
+            this.setSortMethod(sortParams.split('-').join(' '));
+        } else {
+            this.setSortMethod('sort');
+        }
+        return this.sortMethod;
+    }
+
+    getSortedResults(products: ProductIsInCart[]): ProductIsInCart[] {
+        const [type, order] = this.sortMethod.split(' ');
         switch (order) {
             case 'ASC':
                 return products.sort((a, b) => {
-                    const aPseudo: { [key: string]: string | number | string[] } = { ...a };
-                    const bPseudo: { [key: string]: string | number | string[] } = { ...b };
+                    const aPseudo: { [key: string]: boolean | string | number | string[] } = { ...a };
+                    const bPseudo: { [key: string]: boolean | string | number | string[] } = { ...b };
                     if (aPseudo[type] > bPseudo[type]) {
                         return 1;
                     }
@@ -20,8 +39,8 @@ export class SortService {
                 });
             case 'DESC':
                 return products.sort((a, b) => {
-                    const aPseudo: { [key: string]: string | number | string[] } = { ...a };
-                    const bPseudo: { [key: string]: string | number | string[] } = { ...b };
+                    const aPseudo: { [key: string]: boolean | string | number | string[] } = { ...a };
+                    const bPseudo: { [key: string]: boolean | string | number | string[] } = { ...b };
                     if (aPseudo[type] > bPseudo[type]) {
                         return -1;
                     }

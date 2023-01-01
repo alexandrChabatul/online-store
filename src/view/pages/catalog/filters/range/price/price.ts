@@ -1,4 +1,4 @@
-import { IMainParameters } from 'common/types';
+import { ICatalogSettings } from 'common/types';
 import { ElementsFactory } from 'utils/element-generator';
 import { Range } from '../range';
 import '../range.scss';
@@ -17,20 +17,22 @@ export class PriceBlock extends Range {
         this.priceMaxValue = ElementsFactory.createBaseElement('span', 'price-max');
     }
 
-    public createPriceBlock(filtering: IMainParameters): HTMLDivElement {
+    public createPriceBlock(catalogSettings: ICatalogSettings): HTMLDivElement {
         const priceBlock = ElementsFactory.createDivElement('price-block');
         const priceTitle = ElementsFactory.createBaseElementWithText('h3', 'price-title', 'Price');
-        this.priceMinRange.min = String(filtering.filters.price.min);
-        this.priceMinRange.max = String(filtering.filters.price.max);
-        this.priceMinRange.value = this.priceMinRange.min;
-        this.priceMaxRange.min = String(filtering.filters.price.min);
-        this.priceMaxRange.max = String(filtering.filters.price.max);
-        this.priceMaxRange.value = this.priceMinRange.max;
+        this.priceMinRange.min = String(catalogSettings.filters.currentPrice.min);
+        this.priceMinRange.max = String(catalogSettings.filters.currentPrice.max);
+        this.priceMinRange.step = '0,01';
+        this.priceMinRange.value = String(catalogSettings.filters.currentPrice.minValue);
+        this.priceMaxRange.min = String(catalogSettings.filters.currentPrice.min);
+        this.priceMaxRange.max = String(catalogSettings.filters.currentPrice.max);
+        this.priceMaxRange.step = '0,01';
+        this.priceMaxRange.value = String(catalogSettings.filters.currentPrice.maxValue);
 
         const inputBlock = ElementsFactory.createDivElement('input-block');
         const valueBlock = ElementsFactory.createDivElement('value-block');
-        this.priceMinValue.textContent = String(filtering.filters.price.min);
-        this.priceMaxValue.textContent = String(filtering.filters.price.max);
+        this.priceMinValue.textContent = this.priceMinRange.value;
+        this.priceMaxValue.textContent = this.priceMaxRange.value;
 
         inputBlock.append(this.priceMinRange, this.priceMaxRange);
         valueBlock.append(this.priceMinValue, this.priceMaxValue);

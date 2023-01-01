@@ -1,7 +1,7 @@
 import './filters.scss';
 import { ElementsFactory } from 'utils/element-generator';
 import { ResetBlock } from './reset/reset';
-import { IMainParameters } from 'common/types';
+import { ICatalogSettings } from 'common/types';
 import { CategoryBlock } from './checkbox/category/category';
 import { BrandBlock } from './checkbox/brand/brand';
 import { PriceBlock } from './range/price/price';
@@ -22,13 +22,13 @@ export class Filters {
         this.stockBlock = new StockBlock();
     }
 
-    public createFilters(existingFilters: IMainParameters): HTMLDivElement {
+    public createFilters(catalogSettings: ICatalogSettings): HTMLDivElement {
         const filters = ElementsFactory.createDivElement('filters');
         const resetBlock = this.resetBlock.createResetBlock();
-        const categoryBlock = this.categoryBlock.createCategoryBlock(existingFilters);
-        const brandBlock = this.brandBlock.createBrandBlock(existingFilters);
-        const priceBlock = this.priceBlock.createPriceBlock(existingFilters);
-        const stockBlock = this.stockBlock.createStockBlock(existingFilters);
+        const categoryBlock = this.categoryBlock.createCategoryBlock(catalogSettings);
+        const brandBlock = this.brandBlock.createBrandBlock(catalogSettings);
+        const priceBlock = this.priceBlock.createPriceBlock(catalogSettings);
+        const stockBlock = this.stockBlock.createStockBlock(catalogSettings);
 
         filters.append(resetBlock, categoryBlock, brandBlock, priceBlock, stockBlock);
         return filters;

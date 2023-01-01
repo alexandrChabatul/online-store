@@ -33,6 +33,7 @@ class RouteParser {
     private getParams(str: string): params {
         const pairs = str.split('&');
         const entrySet = pairs.map((el) => el.split('='));
+        console.log('params', Object.fromEntries(entrySet));
         return Object.fromEntries(entrySet);
     }
 

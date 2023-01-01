@@ -1,4 +1,4 @@
-import { IMainParameters } from 'common/types';
+import { ICatalogSettings } from 'common/types';
 import { ElementsFactory } from 'utils/element-generator';
 import { Range } from '../range';
 import '../range.scss';
@@ -17,20 +17,20 @@ export class StockBlock extends Range {
         this.StockMaxValue = ElementsFactory.createBaseElement('span', 'stock-max');
     }
 
-    public createStockBlock(filtering: IMainParameters): HTMLDivElement {
+    public createStockBlock(catalogSettings: ICatalogSettings): HTMLDivElement {
         const StockBlock = ElementsFactory.createDivElement('stock-block');
         const StockTitle = ElementsFactory.createBaseElementWithText('h3', 'stock-title', 'Stock');
-        this.StockMinRange.min = String(filtering.filters.stock.min);
-        this.StockMinRange.max = String(filtering.filters.stock.max);
-        this.StockMinRange.value = this.StockMinRange.min;
-        this.StockMaxRange.min = String(filtering.filters.stock.min);
-        this.StockMaxRange.max = String(filtering.filters.stock.max);
-        this.StockMaxRange.value = this.StockMinRange.max;
+        this.StockMinRange.min = String(catalogSettings.filters.stock.min);
+        this.StockMinRange.max = String(catalogSettings.filters.stock.max);
+        this.StockMinRange.value = String(catalogSettings.filters.stock.minValue);
+        this.StockMaxRange.min = String(catalogSettings.filters.stock.min);
+        this.StockMaxRange.max = String(catalogSettings.filters.stock.max);
+        this.StockMaxRange.value = String(catalogSettings.filters.stock.maxValue);
 
         const inputBlock = ElementsFactory.createDivElement('input-block');
         const valueBlock = ElementsFactory.createDivElement('value-block');
-        this.StockMinValue.textContent = String(filtering.filters.stock.min);
-        this.StockMaxValue.textContent = String(filtering.filters.stock.max);
+        this.StockMinValue.textContent = String(catalogSettings.filters.stock.minValue);
+        this.StockMaxValue.textContent = String(catalogSettings.filters.stock.maxValue);
 
         inputBlock.append(this.StockMinRange, this.StockMaxRange);
         valueBlock.append(this.StockMinValue, this.StockMaxValue);

@@ -8,8 +8,9 @@ const appConstants = {
                 brand: 'brand',
                 price: 'price',
                 stock: 'stock',
-                sort: 'category',
-                search: 'category',
+                sort: 'sort',
+                search: 'search',
+                view: 'view',
             },
         },
         product: {
@@ -78,6 +79,7 @@ const appConstants = {
     cartParams: {
         itemPerPage: 3,
     },
+    ParamsDelimeter: ',',
 };
 
 export default appConstants;

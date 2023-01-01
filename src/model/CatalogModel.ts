@@ -1,22 +1,30 @@
 import { ProductResponse, APIResponse } from 'common/types';
 
-class CatalogModel {
-    products: ProductResponse[];
+export default class CatalogModel {
+    private static instance: CatalogModel;
+    private products: ProductResponse[];
 
-    constructor() {
+    private constructor() {
         this.products = [];
     }
 
-    public async getProducts(): Promise<ProductResponse[]> {
-        if (this.products.length > 0) {
-            return this.products;
+    public static getInstance(): CatalogModel {
+        if (!this.instance) {
+            this.instance = new CatalogModel();
         }
+        return this.instance;
+    }
 
-        const response = await fetch('https://dummyjson.com/products?limit=100');
-        const data: APIResponse = await response.json();
-        this.products = data.products;
+    public async setProducts(): Promise<void> {
+        if (this.products.length === 0) {
+            console.log('fetch');
+            const response = await fetch('https://dummyjson.com/products?limit=100');
+            const data: APIResponse = await response.json();
+            this.products = data.products;
+        }
+    }
+
+    public getProducts(): ProductResponse[] {
         return this.products;
     }
 }
-
-export default new CatalogModel();
