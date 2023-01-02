@@ -45,8 +45,8 @@ export default class CartModel {
         this.storageService.setItem(CartModel.PATH, this.cart);
     }
 
-    reduceItem(itemId: number) {
-        const potentialItem = this.cart.find((el) => el.product.id === itemId);
+    reduceItem(itemId: string) {
+        const potentialItem = this.cart.find((el) => String(el.product.id) === itemId);
         if (potentialItem) {
             potentialItem.quantity -= 1;
         }
@@ -56,8 +56,8 @@ export default class CartModel {
         this.storageService.setItem(CartModel.PATH, this.cart);
     }
 
-    deleteItem(itemId: number) {
-        this.cart = this.cart.filter((el) => el.product.id !== itemId);
+    deleteItem(itemId: string) {
+        this.cart = this.cart.filter((el) => String(el.product.id) !== itemId);
         this.storageService.setItem(CartModel.PATH, this.cart);
     }
 }

@@ -1,21 +1,25 @@
 import appConstants from 'common/constants';
 import { CartInfo, CartProduct, params, PromoCode } from 'common/types';
 import CartModel from 'model/CartModel';
+import CatalogModel from 'model/CatalogModel';
 import PromoCodesModel from 'model/PromoCodesModel';
 import CalculationService from './CalculationService';
 import MappingService from './MappingService';
 import PaginationService from './PaginationService';
 
 export default class CartService {
+    private page = 1;
+    private limit: number = appConstants.cartParams.itemPerPage;
     private cartModel: CartModel = CartModel.getInstance();
     private mapper: MappingService = MappingService.getInstance();
     private codesModel: PromoCodesModel = PromoCodesModel.getInstance();
     private calculationService: CalculationService = new CalculationService();
+    private catalogModel: CatalogModel = CatalogModel.getInstance();
 
-    getCartInfo(params: params): CartInfo {
-        const { limit, page } = this.getPageParams(params);
+    getCartInfo(params?: params): CartInfo {
+        if (params) this.setPageParams(params);
         const cartProducts = this.getCartItems();
-        const { productsPage, cartParams } = this.getCartPageAndParams(cartProducts, page, limit);
+        const { productsPage, cartParams } = this.getCartPageAndParams(this.page, this.limit, cartProducts);
         const codes = this.getPromoCodes();
         const summary = this.getCartSummary(cartProducts, codes);
         return {
@@ -26,24 +30,27 @@ export default class CartService {
         };
     }
 
-    getPageParams(params: params) {
-        let limit = appConstants.cartParams.itemPerPage;
+    setPageParams(params: params) {
+        this.limit = 3;
         if (params.limit) {
-            limit = isNaN(parseInt(params.limit, 10)) ? limit : parseInt(params.limit, 10);
+            this.limit = isNaN(parseInt(params.limit, 10)) ? this.limit : parseInt(params.limit, 10);
         }
-        let page = 1;
+        this.page = 1;
         if (params.page) {
-            page = isNaN(parseInt(params.page, 10)) ? page : parseInt(params.page, 10);
+            this.page = isNaN(parseInt(params.page, 10)) ? this.page : parseInt(params.page, 10);
         }
-        return { limit: limit, page: page };
     }
 
     getCartItems() {
         return this.cartModel.getCart().map((el, index) => this.mapper.mapFromCartResponseToCartProduct(el, index + 1));
     }
 
-    getCartPageAndParams(cartProducts: CartProduct[], page: number, limit: number) {
+    getCartPageAndParams(page: number, limit: number, cartProducts?: CartProduct[]) {
+        if (!cartProducts) {
+            cartProducts = this.getCartItems();
+        }
         const pageItemsAndParams = PaginationService.getPage<CartProduct>(cartProducts, page, limit);
+        this.page = pageItemsAndParams.page;
         return {
             productsPage: pageItemsAndParams.items,
             cartParams: {
@@ -68,5 +75,20 @@ export default class CartService {
             prevPrice: price,
             totalPrice: priceWithDiscount,
         };
+    }
+
+    addItemToCart(id: string) {
+        const products = this.catalogModel.getProducts();
+        const potentialProduct = products.find((el) => String(el.id) === id);
+        if (!potentialProduct) return null;
+        this.cartModel.increaseItem(this.mapper.mapFromProductResponseToProduct(potentialProduct));
+    }
+
+    reduceItemInCart(id: string) {
+        this.cartModel.reduceItem(id);
+    }
+
+    deleteItemFromCart(id: string) {
+        this.cartModel.deleteItem(id);
     }
 }
