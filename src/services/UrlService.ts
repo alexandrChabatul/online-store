@@ -4,12 +4,12 @@ export default class UrlService {
     addQueryParam(name: string, value: string) {
         const url = new URL(window.location.href);
         const params = url.searchParams;
-        if (!params.has('name')) {
+        if (!params.has(name)) {
             params.set(name, value);
             return url;
         }
-        const currentValue = params.get('name');
-        params.set('name', currentValue + appConstants.paramsDelimeter + value);
+        const currentValue = params.get(name);
+        params.set(name, currentValue + appConstants.paramsDelimeter + value);
         return url;
     }
 
@@ -23,7 +23,7 @@ export default class UrlService {
     deleteQueryParamValue(name: string, value: string) {
         const url = new URL(window.location.href);
         const params = url.searchParams;
-        const currentValue = params.get('name');
+        const currentValue = params.get(name);
         if (!currentValue) return url;
         const newValues = currentValue.split(appConstants.paramsDelimeter).filter((el) => el !== value);
         if (newValues.length === 0) return this.deleteQueryParam(name);
