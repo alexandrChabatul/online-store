@@ -79,7 +79,7 @@ const appConstants = {
     cartParams: {
         itemPerPage: 3,
     },
-    ParamsDelimeter: ',',
+    paramsDelimeter: ',',
 };
 
 export default appConstants;

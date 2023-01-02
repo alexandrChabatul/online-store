@@ -96,7 +96,7 @@ export class FilterService {
 
     private activateCheckboxFilters(type: 'categories' | 'brands', params: string) {
         if (params) {
-            const paramsArray = params.split(appConstants.ParamsDelimeter);
+            const paramsArray = params.split(appConstants.paramsDelimeter);
             paramsArray.forEach((el) => {
                 if (this[type][el.toLowerCase()]) {
                     this[type][el.toLowerCase()].checked = true;
@@ -111,7 +111,7 @@ export class FilterService {
 
     private activateRangeFilters(type: 'stock' | 'currentPrice', params: string) {
         if (params) {
-            const paramsArray = params.split(appConstants.ParamsDelimeter);
+            const paramsArray = params.split(appConstants.paramsDelimeter);
             this[type].minValue = Number(paramsArray[0]);
             if (paramsArray[1]) {
                 this[type].maxValue = Number(paramsArray[1]);

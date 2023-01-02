@@ -8,7 +8,7 @@ import MappingService from './MappingService';
 import PaginationService from './PaginationService';
 
 export default class CartService {
-    private page: number = 1;
+    private page = 1;
     private limit: number = appConstants.cartParams.itemPerPage;
     private cartModel: CartModel = CartModel.getInstance();
     private mapper: MappingService = MappingService.getInstance();
@@ -46,7 +46,7 @@ export default class CartService {
     }
 
     getCartPageAndParams(page: number, limit: number, cartProducts?: CartProduct[]) {
-        if (!cartProducts){
+        if (!cartProducts) {
             cartProducts = this.getCartItems();
         }
         const pageItemsAndParams = PaginationService.getPage<CartProduct>(cartProducts, page, limit);
@@ -77,9 +77,9 @@ export default class CartService {
         };
     }
 
-    addItemToCart(id: string){
+    addItemToCart(id: string) {
         const products = this.catalogModel.getProducts();
-        const potentialProduct = products.find(el => String(el.id) === id);
+        const potentialProduct = products.find((el) => String(el.id) === id);
         if (!potentialProduct) return null;
         this.cartModel.increaseItem(this.mapper.mapFromProductResponseToProduct(potentialProduct));
     }
@@ -88,8 +88,7 @@ export default class CartService {
         this.cartModel.reduceItem(id);
     }
 
-    deleteItemFromCart(id: string){
+    deleteItemFromCart(id: string) {
         this.cartModel.deleteItem(id);
     }
-
 }
