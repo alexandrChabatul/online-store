@@ -12,6 +12,7 @@ export class Catalog {
     }
 
     public createProductsCatalog(data: ProductIsInCart[], filters: ICatalogSettings): HTMLElement {
+        this.products.innerHTML = '';
         this.setView(filters.view);
         if (data.length === 0) {
             const noProductsMessage = ElementsFactory.createBaseElementWithText(

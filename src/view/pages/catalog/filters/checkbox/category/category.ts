@@ -9,6 +9,7 @@ export class CategoryBlock {
     }
 
     public createCategoryBlock(catalogSettings: ICatalogSettings): HTMLDivElement {
+        this.categories.innerHTML = '';
         const categoryBlock = ElementsFactory.createDivElement('category-block');
         const categoryTitle = ElementsFactory.createBaseElementWithText('h3', 'category-title', 'Category');
 

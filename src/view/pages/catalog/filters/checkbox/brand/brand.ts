@@ -12,6 +12,7 @@ export class BrandBlock {
     public createBrandBlock(catalogSettings: ICatalogSettings): HTMLDivElement {
         const brandBlock = ElementsFactory.createDivElement('brand-block');
         const brandTitle = ElementsFactory.createBaseElementWithText('h3', 'brand-title', 'Brand');
+        this.brands.innerHTML = '';
 
         catalogSettings.filters.brand.forEach((el, i) => {
             const brandItem = ElementsFactory.createBaseElement('li', 'filters-element');
