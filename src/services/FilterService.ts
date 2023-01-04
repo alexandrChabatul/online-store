@@ -116,22 +116,40 @@ export class FilterService {
             if (paramsArray[1]) {
                 this[type].maxValue = Number(paramsArray[1]);
             }
-        } else {
-            this[type].minValue = this[type].min;
-            this[type].maxValue = this[type].max;
         }
     }
 
-    public countActiveFilters(filteredProducts: ProductIsInCart[]) {
-        filteredProducts.forEach((el) => {
-            this.categories[el.category.toLowerCase()].active++;
-            this.brands[el.brand.toLowerCase()].active++;
-        });
+    public countActiveFilters(filteredProducts: ProductIsInCart[], params: params) {
+        if (filteredProducts.length > 0) {
+            let filteredProductsMinPrice = filteredProducts[0].currentPrice;
+            let filteredProductsMaxPrice = filteredProducts[0].currentPrice;
+            let filteredProductsMinStock = filteredProducts[0].stock;
+            let filteredProductsMaxStock = filteredProducts[0].stock;
+
+            filteredProducts.forEach((el) => {
+                this.categories[el.category.toLowerCase()].active++;
+                this.brands[el.brand.toLowerCase()].active++;
+
+                filteredProductsMinPrice = Math.min(filteredProductsMinPrice, Math.floor(el.currentPrice));
+                filteredProductsMaxPrice = Math.max(filteredProductsMaxPrice, Math.ceil(el.currentPrice));
+                filteredProductsMinStock = Math.min(filteredProductsMinStock, el.stock);
+                filteredProductsMaxStock = Math.max(filteredProductsMaxStock, el.stock);
+            });
+
+            if (!('price' in params)) {
+                this.currentPrice.minValue = filteredProductsMinPrice;
+                this.currentPrice.maxValue = filteredProductsMaxPrice;
+            }
+
+            if (!('stock' in params)) {
+                this.stock.minValue = filteredProductsMinStock;
+                this.stock.maxValue = filteredProductsMaxStock;
+            }
+        }
     }
 
     public changeFilter(type: 'brands' | 'categories', name: string) {
         this[type][name].checked = !this[type][name].checked;
-        console.log(this[type][name]);
     }
 
     public changeRange(type: 'stock' | 'currentPrice', border: 'minValue' | 'maxValue', value: number) {

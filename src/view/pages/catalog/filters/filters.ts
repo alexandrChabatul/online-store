@@ -13,6 +13,7 @@ export class Filters {
     brandBlock: BrandBlock;
     priceBlock: PriceBlock;
     stockBlock: StockBlock;
+    filters: HTMLDivElement;
 
     constructor() {
         this.resetBlock = new ResetBlock();
@@ -20,17 +21,18 @@ export class Filters {
         this.brandBlock = new BrandBlock();
         this.priceBlock = new PriceBlock();
         this.stockBlock = new StockBlock();
+        this.filters = ElementsFactory.createDivElement('filters');
     }
 
     public createFilters(catalogSettings: ICatalogSettings): HTMLDivElement {
-        const filters = ElementsFactory.createDivElement('filters');
+        this.filters.innerHTML = '';
         const resetBlock = this.resetBlock.createResetBlock();
         const categoryBlock = this.categoryBlock.createCategoryBlock(catalogSettings);
         const brandBlock = this.brandBlock.createBrandBlock(catalogSettings);
         const priceBlock = this.priceBlock.createPriceBlock(catalogSettings);
         const stockBlock = this.stockBlock.createStockBlock(catalogSettings);
 
-        filters.append(resetBlock, categoryBlock, brandBlock, priceBlock, stockBlock);
-        return filters;
+        this.filters.append(resetBlock, categoryBlock, brandBlock, priceBlock, stockBlock);
+        return this.filters;
     }
 }

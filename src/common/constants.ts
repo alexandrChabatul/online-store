@@ -48,11 +48,11 @@ const appConstants = {
             text: 'Rating (High-Low)',
         },
         {
-            value: 'discount ASC',
+            value: 'discountPercentage ASC',
             text: 'Discount (Low-High)',
         },
         {
-            value: 'discount DESC',
+            value: 'discountPercentage DESC',
             text: 'Discount (High-Low)',
         },
     ],

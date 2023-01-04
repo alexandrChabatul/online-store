@@ -30,6 +30,7 @@ export class Catalog {
 
     private createProductItem(product: ProductIsInCart) {
         const productContainer = ElementsFactory.createDivElement('product-item');
+        productContainer.id = `product-${product.id}`;
         const productImage = ElementsFactory.createAnchor('product-image router-link', '', `/product/${product.id}`);
         this.setImage(product.thumbnail, productImage);
         const productElements = ElementsFactory.createDivElement('product-elements');

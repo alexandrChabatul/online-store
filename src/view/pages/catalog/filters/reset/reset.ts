@@ -6,7 +6,9 @@ export class ResetBlock {
 
     constructor() {
         this.resetButton = ElementsFactory.createButton('reset-button', 'Reset filters');
+        this.resetButton.id = 'reset';
         this.copyButton = ElementsFactory.createButton('copy-button', 'Copy link');
+        this.copyButton.id = 'copy';
     }
 
     public createResetBlock(): HTMLDivElement {
