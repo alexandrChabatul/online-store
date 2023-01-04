@@ -85,7 +85,7 @@ export default class CartService {
     addItemToCart(id: string) {
         const products = this.catalogModel.getProducts();
         const potentialProduct = products.find((el) => String(el.id) === id);
-        if (!potentialProduct) return null;
+        if (!potentialProduct) return;
         this.cartModel.increaseItem(this.mapper.mapFromProductResponseToProduct(potentialProduct));
     }
 

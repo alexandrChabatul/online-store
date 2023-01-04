@@ -14,33 +14,33 @@ export default class PopupHandler {
 
     initEvents() {
         this.view.popupElement.addEventListener('focusout', this.popupFocusoutHandler.bind(this));
-        this.view.popupElement.oninput = this.popupInputHandler.bind(this, this.view);
-        this.view.popup.confirmButton.onclick = this.buyHandler.bind(this, this.view);
+        this.view.popupElement.oninput = this.popupInputHandler.bind(this);
+        this.view.popup.confirmButton.onclick = this.buyHandler.bind(this);
     }
 
-    popupFocusoutHandler(e: Event) {
+    popupFocusoutHandler(e: Event): void {
         const target = e.target;
-        if (!target || !(target instanceof HTMLInputElement)) return null;
+        if (!target || !(target instanceof HTMLInputElement)) return;
         this.markInvalidInput(target);
     }
 
-    popupInputHandler(view: CartView, e: Event) {
+    popupInputHandler(e: Event) {
         const target = e.target;
-        if (!target || !(target instanceof HTMLInputElement)) return null;
+        if (!target || !(target instanceof HTMLInputElement)) return;
         this.markValidInput(target);
         if (target.dataset.name === 'card-number' && target.value.length > 0) {
             const providers: { [key: string]: string } = appConstants.cardProviders;
-            view.popup.selectCardImage(providers[target.value[0]]);
+            this.view.popup.selectCardImage(providers[target.value[0]]);
         }
     }
 
-    buyHandler(view: CartView, e: Event) {
+    buyHandler(e: Event) {
         e.preventDefault();
         const target = e.target as HTMLElement;
         const form = target.parentElement as HTMLFormElement;
         if (form.checkValidity()) {
-            this.createAlert(view);
-            return null;
+            this.createAlert();
+            return;
         }
         const elements = this.getChildElements(form);
         for (const el of elements) {
@@ -79,14 +79,14 @@ export default class PopupHandler {
         );
     }
 
-    private createAlert(view: CartView) {
+    private createAlert() {
         const timer = 3;
         setTimeout(() => {
             const link = ElementsFactory.createAnchor('', 'router-link', '/');
             link.click();
         }, timer * 1000);
-        view.hidePopup();
-        view.showBuyMessage(timer);
+        this.view.hidePopup();
+        this.view.showBuyMessage(timer);
         const cartService = new CartService();
         cartService.cleanCart();
     }

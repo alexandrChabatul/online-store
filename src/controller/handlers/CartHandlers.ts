@@ -26,7 +26,7 @@ export default class CartHandler {
 
     clickHandler(e: Event) {
         const target = e.target;
-        if (!target || !(target instanceof HTMLElement)) return null;
+        if (!target || !(target instanceof HTMLElement)) return;
         switch (true) {
             case target.classList.contains('item-increase-button'): {
                 const parent = target.closest('.cart-item');
@@ -65,7 +65,7 @@ export default class CartHandler {
 
     inputHandler(e: Event) {
         const target = e.target;
-        if (!(target instanceof HTMLInputElement)) return null;
+        if (!(target instanceof HTMLInputElement)) return;
         switch (true) {
             case target.classList.contains('items-per-page__input'): {
                 const input = target.value;
@@ -96,7 +96,7 @@ export default class CartHandler {
     }
 
     private paginationHandler(page: string) {
-        if (!page) return null;
+        if (!page) return;
         const currentPage = this.cartService.getPage();
         let newPage: number = currentPage;
         if (page === '<') {
@@ -108,7 +108,7 @@ export default class CartHandler {
         }
         this.cartService.setPage(newPage);
         const cartInfo = this.cartService.getCartInfo();
-        if (newPage !== this.cartService.getPage()) return null;
+        if (newPage !== this.cartService.getPage()) return;
         this.view.updateCartBlock(cartInfo.products, cartInfo.params);
         const url = this.urlService.replaceQueryParam('page', String(newPage));
         this.urlService.addUrlInHistory(url);
@@ -128,7 +128,7 @@ export default class CartHandler {
 
     private limitChangeHandler(limit: string) {
         const newLimit = parseInt(limit, 10);
-        if (isNaN(newLimit) || newLimit === this.cartService.getLimit() || newLimit === 0) return null;
+        if (isNaN(newLimit) || newLimit === this.cartService.getLimit() || newLimit === 0) return;
         this.cartService.setLimit(newLimit);
         const cartInfo = this.cartService.getCartInfo();
         this.view.updateCartBlock(cartInfo.products, cartInfo.params);
