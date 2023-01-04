@@ -1,9 +1,9 @@
 import { CartResponse, Product, ProductResponse, ProductIsInCart } from 'common/types';
-import dataAnswer from 'assets/tempData/data.json';
+import CartModel from 'model/CartModel';
 
 export default class MappingService {
     private static instance: MappingService;
-    data = dataAnswer.products;
+    private cartModel: CartModel = CartModel.getInstance();
 
     public static getInstance(): MappingService {
         if (!MappingService.instance) {
@@ -22,12 +22,8 @@ export default class MappingService {
         return Object.assign(cartResponse, { subtotal: subtotal, index: index });
     }
 
-    mapFromProductToProductIsInCart(cartResponse: CartResponse[], product: ProductResponse): ProductIsInCart {
+    mapFromProductToProductIsInCart(product: ProductResponse): ProductIsInCart {
         const productWithPrice = this.mapFromProductResponseToProduct(product);
-        const target = cartResponse.find((el) => el.product.id === productWithPrice.id);
-        if (target) {
-            return Object.assign(productWithPrice, { isInCart: true });
-        }
-        return Object.assign(productWithPrice, { isInCart: false });
+        return Object.assign(productWithPrice, { isInCart: this.cartModel.checkItem(product.id) });
     }
 }
