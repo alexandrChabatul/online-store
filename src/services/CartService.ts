@@ -8,8 +8,6 @@ import MappingService from './MappingService';
 import PaginationService from './PaginationService';
 
 export default class CartService {
-    private page = 1;
-    private limit: number = appConstants.cartParams.itemPerPage;
     private cartModel: CartModel = CartModel.getInstance();
     private mapper: MappingService = MappingService.getInstance();
     private codesModel: PromoCodesModel = PromoCodesModel.getInstance();
@@ -19,9 +17,13 @@ export default class CartService {
     getCartInfo(params?: params): CartInfo {
         if (params) this.setPageParams(params);
         const cartProducts = this.getCartItems();
-        const { productsPage, cartParams } = this.getCartPageAndParams(this.page, this.limit, cartProducts);
+        const { productsPage, cartParams } = this.getCartPageAndParams(
+            this.cartModel.page,
+            this.cartModel.limit,
+            cartProducts
+        );
         const codes = this.getPromoCodes();
-        const summary = this.getCartSummary(cartProducts, codes);
+        const summary = this.getCartSummary(codes, cartProducts);
         return {
             products: productsPage,
             params: cartParams,
@@ -31,13 +33,13 @@ export default class CartService {
     }
 
     setPageParams(params: params) {
-        this.limit = 3;
+        this.setLimit(appConstants.cartParams.itemPerPage);
         if (params.limit) {
-            this.limit = isNaN(parseInt(params.limit, 10)) ? this.limit : parseInt(params.limit, 10);
+            this.setLimit(isNaN(parseInt(params.limit, 10)) ? this.cartModel.limit : parseInt(params.limit, 10));
         }
-        this.page = 1;
+        this.setPage(1);
         if (params.page) {
-            this.page = isNaN(parseInt(params.page, 10)) ? this.page : parseInt(params.page, 10);
+            this.setPage(isNaN(parseInt(params.page, 10)) ? this.cartModel.page : parseInt(params.page, 10));
         }
     }
 
@@ -50,7 +52,7 @@ export default class CartService {
             cartProducts = this.getCartItems();
         }
         const pageItemsAndParams = PaginationService.getPage<CartProduct>(cartProducts, page, limit);
-        this.page = pageItemsAndParams.page;
+        this.setPage(pageItemsAndParams.page);
         return {
             productsPage: pageItemsAndParams.items,
             cartParams: {
@@ -65,7 +67,10 @@ export default class CartService {
         return this.codesModel.getAppliedCodes();
     }
 
-    getCartSummary(cartProducts: CartProduct[], codes: PromoCode[]) {
+    getCartSummary(codes: PromoCode[], cartProducts?: CartProduct[]) {
+        if (!cartProducts) {
+            cartProducts = this.getCartItems();
+        }
         const discount = this.calculationService.getDiscount(codes);
         const quantity = this.calculationService.getTotalQuantity(cartProducts);
         const price = this.calculationService.getPrice(cartProducts);
@@ -90,5 +95,25 @@ export default class CartService {
 
     deleteItemFromCart(id: string) {
         this.cartModel.deleteItem(id);
+    }
+
+    cleanCart() {
+        this.cartModel.cleanCart();
+    }
+
+    getPage() {
+        return this.cartModel.page;
+    }
+
+    setPage(page: number) {
+        this.cartModel.page = page;
+    }
+
+    getLimit() {
+        return this.cartModel.limit;
+    }
+
+    setLimit(limit: number) {
+        this.cartModel.limit = limit === 0 ? this.cartModel.limit : Math.abs(limit);
     }
 }

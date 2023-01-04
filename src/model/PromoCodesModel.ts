@@ -24,7 +24,7 @@ export default class PromoCodesModel {
 
     setPromoCode(code: PromoCode) {
         const codes = this.getAppliedCodes();
-        const potentialCode = codes.find((el) => el.name === code.name);
+        const potentialCode = codes.find((el) => el.code === code.code);
         if (!potentialCode) {
             codes.push(code);
             this.storageService.setItem(PromoCodesModel.PATH, codes);
@@ -33,20 +33,20 @@ export default class PromoCodesModel {
 
     deleteItem(code: PromoCode) {
         let codes = this.getAppliedCodes();
-        codes = codes.filter((el) => el.name !== code.name);
+        codes = codes.filter((el) => el.code !== code.code);
         this.storageService.setItem(PromoCodesModel.PATH, codes);
     }
 
     private cleanPromoCodes(codes: PromoCode[]): PromoCode[] {
-        if (codes.length >= 2) {
-            const init: { [key: string]: number } = {};
+        if (codes.length > 1) {
+            const init: { [key: string]: { name: string; value: number } } = {};
             const codesObj = codes.reduce((acc, el) => {
-                acc[el.name] = el.value;
+                acc[el.code] = { name: el.name, value: el.value };
                 return acc;
             }, init);
             return Object.entries(codesObj).map(
                 (el): PromoCode => {
-                    return { name: el[0], value: el[1] };
+                    return Object.assign(el[1], { code: el[0] });
                 }
             );
         }

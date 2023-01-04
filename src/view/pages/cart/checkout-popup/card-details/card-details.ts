@@ -1,32 +1,13 @@
+import appConstants from 'common/constants';
+import { InputTemplate } from 'common/types';
 import { ElementsFactory } from 'utils/element-generator';
 
 export class CardDetails {
-    cardNumber: HTMLInputElement;
-    cardNumberError: HTMLElement;
-    cardImage: HTMLElement;
-    cardValidness: HTMLInputElement;
-    cardValidnessError: HTMLElement;
-    cardCVV: HTMLInputElement;
-    cardCVVError: HTMLElement;
+    private static INPUT_DATA: InputTemplate[] = appConstants.cardInputs;
+    cardImage: HTMLDivElement;
 
     constructor() {
-        this.cardNumber = ElementsFactory.createInputText('popup-field card-number-field', 'Card Number');
-        this.cardNumberError = ElementsFactory.createBaseElementWithText(
-            'div',
-            'error-message card-number-error',
-            'Invalid Card Number'
-        );
-        this.cardImage = ElementsFactory.createBaseElement('div', 'card-image');
-        this.cardValidness = ElementsFactory.createInputNumber('popup-field card-validness-field', '', 'MM/YY');
-        this.cardValidness.step = '10';
-        this.cardValidnessError = ElementsFactory.createBaseElementWithText(
-            'div',
-            'error-message card-invalid-error',
-            'Invalid date'
-        );
-        this.cardCVV = ElementsFactory.createInputNumber('popup-field card-cvv-field', '', 'CVV');
-        this.cardCVV.step = '10';
-        this.cardCVVError = ElementsFactory.createBaseElementWithText('div', 'error-message cvv-error', 'Invalid CVV');
+        this.cardImage = ElementsFactory.createDivElement('card-image');
     }
 
     public createCardDetailsBlock(): HTMLElement {
@@ -36,15 +17,52 @@ export class CardDetails {
             'popup-title credit-card-title',
             'Credit Card Details'
         );
-        const cardNumberBlock = ElementsFactory.createBaseElement('div', 'card-number-block');
-        const cardValidnessBlock = ElementsFactory.createBaseElement('div', 'card-validness-block');
-        const cardCVVBlock = ElementsFactory.createBaseElement('div', 'card-cvv-block');
-
-        creditCardContainer.append(creditCardTitle, cardNumberBlock, this.cardImage, cardValidnessBlock, cardCVVBlock);
-        cardNumberBlock.append(this.cardNumber, this.cardNumberError);
-        cardValidnessBlock.append(this.cardValidness, this.cardValidnessError);
-        cardCVVBlock.append(this.cardCVV, this.cardCVVError);
-
+        creditCardContainer.append(creditCardTitle);
+        CardDetails.INPUT_DATA.forEach((el) => {
+            const container = ElementsFactory.createBaseElement('div', `${el.name}-block`);
+            const field = ElementsFactory.createInputText(`popup-field ${el.name}-field`, el.placeholder);
+            field.name = el.name;
+            field.type = el.type;
+            field.pattern = el.pattern;
+            field.required = true;
+            if (el.maxLength) field.maxLength = el.maxLength;
+            const error = ElementsFactory.createBaseElementWithText(
+                'div',
+                `error-message ${el.name}-error`,
+                el.errorMessage
+            );
+            this.addListenerToInput(field);
+            field.setAttribute('data-name', el.name);
+            container.append(field, error);
+            creditCardContainer.append(container);
+            if (el.name === 'card-number') {
+                creditCardContainer.append(this.cardImage);
+            }
+        });
         return creditCardContainer;
+    }
+
+    addListenerToInput(target: HTMLInputElement) {
+        const events = ['input', 'change', 'blur', 'keyup'];
+        for (const i in events) {
+            target.addEventListener(events[i], this.replaceChars, false);
+        }
+    }
+
+    replaceChars(e: Event) {
+        const target = e.target as HTMLInputElement;
+        const value = target.value;
+        let cardCode: string | undefined = value.replace(/[^\d]/g, '').substring(0, target.maxLength);
+        switch (target.dataset.name) {
+            case 'card-number': {
+                cardCode = cardCode !== '' ? cardCode.match(/.{1,4}/g)?.join(' ') : '';
+                break;
+            }
+            case 'card-validness': {
+                cardCode = cardCode !== '' ? cardCode.match(/.{1,2}/g)?.join(' / ') : '';
+                break;
+            }
+        }
+        target.value = cardCode || '';
     }
 }

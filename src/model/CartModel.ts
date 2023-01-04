@@ -9,6 +9,8 @@ export default class CartModel {
     private static PATH: string = appConstants.localStorage.cart;
     private validationService: ValidationService = new ValidationService();
     private cart: CartResponse[];
+    page = 1;
+    limit: number = appConstants.cartParams.itemPerPage;
 
     private constructor() {
         this.cart = this.setCart();
@@ -58,6 +60,11 @@ export default class CartModel {
 
     deleteItem(itemId: string) {
         this.cart = this.cart.filter((el) => String(el.product.id) !== itemId);
+        this.storageService.setItem(CartModel.PATH, this.cart);
+    }
+
+    cleanCart() {
+        this.cart = [];
         this.storageService.setItem(CartModel.PATH, this.cart);
     }
 }
