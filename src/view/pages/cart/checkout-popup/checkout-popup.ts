@@ -8,26 +8,29 @@ import amex from 'assets/icons/amex.svg';
 import defaultCard from 'assets/icons/card.svg';
 
 export default class CheckoutPopup {
+    wrapper: HTMLDivElement;
+    popup: HTMLElement;
     personalDetails: PersonalDetails;
     cardDetails: CardDetails;
     confirmButton: HTMLButtonElement;
 
     constructor() {
+        this.wrapper = ElementsFactory.createDivElement('popup-wrapper');
+        this.popup = ElementsFactory.createBaseElement('form', 'checkout-popup');
         this.personalDetails = new PersonalDetails();
         this.cardDetails = new CardDetails();
         this.confirmButton = ElementsFactory.createButton('confirm-button', 'Confirm');
         this.confirmButton.type = 'submit';
+        this.wrapper.append(this.popup);
+        this.wrapper.addEventListener('click', this.deleteBlock.bind(this, this.wrapper, this.popup));
     }
 
     public createCheckoutPopup(): HTMLDivElement {
-        const wrapper = ElementsFactory.createDivElement('popup-wrapper');
-        const popup = ElementsFactory.createBaseElement('form', 'checkout-popup');
-        wrapper.addEventListener('click', this.deleteBlock.bind(this, wrapper, popup));
-        wrapper.append(popup);
+        this.popup.innerHTML = '';
         const personalDetailsBlock = this.personalDetails.createPersonalDetailsBlock();
         const cardDetailsBlock = this.cardDetails.createCardDetailsBlock();
-        popup.append(personalDetailsBlock, cardDetailsBlock, this.confirmButton);
-        return wrapper;
+        this.popup.append(personalDetailsBlock, cardDetailsBlock, this.confirmButton);
+        return this.wrapper;
     }
 
     public selectCardImage(card: string): void {

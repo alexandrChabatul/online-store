@@ -42,7 +42,10 @@ export default class CartModel {
     increaseItem(product: Product) {
         const potentialItem = this.cart.find((el) => el.product.id === product.id);
         if (potentialItem) {
-            potentialItem.quantity += 1;
+            potentialItem.quantity =
+                potentialItem.product.stock > potentialItem.quantity
+                    ? (potentialItem.quantity += 1)
+                    : potentialItem.quantity;
         } else {
             this.cart.push({ product: product, quantity: 1 });
         }

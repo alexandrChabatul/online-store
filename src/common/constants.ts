@@ -61,7 +61,7 @@ const appConstants = {
             name: 'name',
             placeholder: 'Name Surname',
             type: 'text',
-            pattern: '^[A-ZА-Я][a-zа-я]{2,}(\\s[A-ZА-Я][a-zа-я]{2,})+',
+            pattern: '^[A-ZА-Яa-zа-я][a-zа-я]{2,}(\\s[A-ZА-Яa-zа-я][a-zа-я]{2,})+',
             errorMessage: 'Invalid name',
         },
         {
@@ -75,7 +75,7 @@ const appConstants = {
             name: 'address',
             placeholder: 'Address',
             type: 'tel',
-            pattern: '^[A-Za-zА-Яа-я0-9]{5,}(\\s[A-Za-zА-Яа-я0-9]{5,}){2,}',
+            pattern: '^[A-Za-zА-Яа-я0-9-]{5,}(\\s[A-Za-zА-Яа-я0-9\\-]{5,}){2,}',
             errorMessage: 'Invalid address',
         },
         {

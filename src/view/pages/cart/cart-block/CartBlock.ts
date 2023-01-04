@@ -4,12 +4,22 @@ import CartItem from './cart-item/CartItem';
 import './cart-block.scss';
 
 export default class CartBlock {
+    cartBlock: HTMLDivElement;
+
+    constructor() {
+        this.cartBlock = ElementsFactory.createDivElement('cart-block');
+    }
+
     getCartPage(cart: CartProduct[], params: CartParams) {
-        const cartBlock = ElementsFactory.createDivElement('cart-block');
+        this.updateCartBlock(cart, params);
+        return this.cartBlock;
+    }
+
+    updateCartBlock(cart: CartProduct[], params: CartParams) {
+        this.cartBlock.innerHTML = '';
         const items = this.renderItems(cart);
         const pagination = this.renderPagination(params.page, params.numOfPages);
-        cartBlock.append(items, pagination);
-        return cartBlock;
+        this.cartBlock.append(items, pagination);
     }
 
     renderItems(cart: CartProduct[]) {

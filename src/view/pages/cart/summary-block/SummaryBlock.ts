@@ -4,21 +4,32 @@ import { ElementsFactory } from 'utils/element-generator';
 import './summary-block.scss';
 
 export default class SummaryBlock {
-    potentialCodes: HTMLDivElement = ElementsFactory.createDivElement('potential-codes');
-    summaryDescription: HTMLDivElement = ElementsFactory.createDivElement('summary-description');
+    summary: HTMLDivElement;
+    potentialCodes: HTMLDivElement;
+    summaryDescription: HTMLDivElement;
+
+    constructor() {
+        this.summary = ElementsFactory.createDivElement('summary');
+        this.potentialCodes = ElementsFactory.createDivElement('potential-codes');
+        this.summaryDescription = ElementsFactory.createDivElement('summary-description');
+    }
 
     getSummary(summary: CartSummary, codes: PromoCode[]) {
+        this.updateSummary(summary, codes);
+        return this.summary;
+    }
+
+    updateSummary(summary: CartSummary, codes: PromoCode[]) {
+        this.summary.innerHTML = '';
         const heading = ElementsFactory.createBaseElementWithText('h3', 'cart-summary__heading', 'Summary');
         const buyButton = ElementsFactory.createButton('cart-summary__button', 'BUY');
-        const summaryBlock = ElementsFactory.createDivElement('summary');
         this.summaryDescription = this.getDescription(summary);
         const codeInput = this.renderCodeInput();
-        summaryBlock.append(heading, this.summaryDescription, codeInput, buyButton);
+        this.summary.append(heading, this.summaryDescription, codeInput, buyButton);
         if (codes.length > 0) {
             const appliedCodes = this.renderAppliedCodes(codes);
             codeInput.insertAdjacentElement('beforebegin', appliedCodes);
         }
-        return summaryBlock;
     }
 
     getDescription(summary: CartSummary) {
