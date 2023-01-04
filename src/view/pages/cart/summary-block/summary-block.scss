@@ -32,6 +32,9 @@
 .applied-codes__list {
     margin: 5px 0px 0px;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .applied-code {
@@ -95,4 +98,22 @@
 .cart-summary__button {
     @extend %button;
     width: 100%;
+}
+
+.potential-code {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: $summary-block-color;
+    font-size: 85%;
+}
+
+.potential-code__button {
+    @extend %button;
+    height: 100%;
+    width: 50px;
+    border-radius: 5px;
 }

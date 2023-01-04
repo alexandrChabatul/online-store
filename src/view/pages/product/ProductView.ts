@@ -1,4 +1,4 @@
-import { BadResponse, Product } from 'common/types';
+import { BadResponse, Product, ProductIsInCart } from 'common/types';
 import { ElementsFactory } from 'utils/element-generator';
 import Breadcrumbs from './breadcrumbs/Breadcrumbs';
 import ImageSlider from './image-slider/ImageSlider';
@@ -17,13 +17,12 @@ class ProductView {
     productButtons: ProductButtons = new ProductButtons();
     breadcrumbs: Breadcrumbs = new Breadcrumbs();
 
-    renderProduct(product: Product) {
+    renderProduct(product: ProductIsInCart) {
         const productWrapper = ElementsFactory.createDivElement('wrapper product-wrapper');
         const breadcrumbsUl = this.breadcrumbs.getBreadcrumbs(product);
         const productBlock = ElementsFactory.createDivElement('product');
         const titleImageContainer = this.getTitleAndImageBlock(product);
         const priceDescContainer = this.getPriceAndDescBlock(product);
-
         productBlock.append(titleImageContainer, priceDescContainer);
         productWrapper.append(breadcrumbsUl, productBlock);
         return productWrapper;
@@ -48,14 +47,14 @@ class ProductView {
         return titleImageContainer;
     }
 
-    getPriceAndDescBlock(product: Product) {
+    getPriceAndDescBlock(product: ProductIsInCart) {
         const productDescription = ElementsFactory.createDivElement('product-description');
         const productPriceBlock = this.productPrice.getProductPriceBlock(
             product.price,
             product.currentPrice,
             product.discountPercentage
         );
-        const productButtonsBlock = this.productButtons.getButtonsBlock(product.id);
+        const productButtonsBlock = this.productButtons.getButtonsBlock(product.id, product.isInCart);
         const productDescBlock = this.productDesc.getDescription(product);
         productDescription.append(productPriceBlock, productButtonsBlock, productDescBlock);
         return productDescription;

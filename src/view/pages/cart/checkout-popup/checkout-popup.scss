@@ -1,5 +1,16 @@
+.popup-wrapper {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: $popup-bg-color;
+    z-index: 99;
+
+}
+
 .checkout-popup {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -14,6 +25,7 @@
     gap: 10px;
     font-family: $font-primary;
     background-color: $color-elements;
+    z-index: 100;
 }
 
 .personal-details-container,
@@ -83,6 +95,7 @@
     &-invalid {
         border: 1px solid red;
     }
+
 }
 
 input[type="number"]::-webkit-outer-spin-button,

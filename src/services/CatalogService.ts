@@ -38,9 +38,7 @@ export class CatalogService {
 
     public getAllProducts(): ProductIsInCart[] {
         const products: ProductResponse[] = this.model.getProducts();
-        const mappedProducts: ProductIsInCart[] = products.map((el) =>
-            this.mapper.mapFromProductToProductIsInCart(this.cart.getCart(), el)
-        );
+        const mappedProducts: ProductIsInCart[] = products.map((el) => this.mapper.mapFromProductToProductIsInCart(el));
         return mappedProducts;
     }
 

@@ -16,25 +16,18 @@ export default class CheckoutPopup {
         this.personalDetails = new PersonalDetails();
         this.cardDetails = new CardDetails();
         this.confirmButton = ElementsFactory.createButton('confirm-button', 'Confirm');
+        this.confirmButton.type = 'submit';
     }
 
-    public createCheckoutPopup(): HTMLElement {
-        const popup = ElementsFactory.createBaseElement('div', 'checkout-popup');
+    public createCheckoutPopup(): HTMLDivElement {
+        const wrapper = ElementsFactory.createDivElement('popup-wrapper');
+        const popup = ElementsFactory.createBaseElement('form', 'checkout-popup');
+        wrapper.addEventListener('click', this.deleteBlock.bind(this, wrapper, popup));
+        wrapper.append(popup);
         const personalDetailsBlock = this.personalDetails.createPersonalDetailsBlock();
         const cardDetailsBlock = this.cardDetails.createCardDetailsBlock();
         popup.append(personalDetailsBlock, cardDetailsBlock, this.confirmButton);
-
-        return popup;
-    }
-
-    public markInvalid(field: HTMLElement, error: HTMLElement): void {
-        field.classList.add('popup-field-invalid');
-        error.classList.add('error-message-visible');
-    }
-
-    public markValid(field: HTMLElement, error: HTMLElement): void {
-        field.classList.remove('popup-field-invalid');
-        error.classList.remove('error-message-visible');
+        return wrapper;
     }
 
     public selectCardImage(card: string): void {
@@ -51,6 +44,14 @@ export default class CheckoutPopup {
             default:
                 this.cardDetails.cardImage.style.backgroundImage = `url(${defaultCard})`;
                 break;
+        }
+    }
+
+    private deleteBlock(wrapper: HTMLElement, popup: HTMLElement, e: Event) {
+        const target = e.target;
+        if (!target) return null;
+        if (!popup.contains(target as Node)) {
+            wrapper.remove();
         }
     }
 }

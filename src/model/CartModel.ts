@@ -9,6 +9,9 @@ export default class CartModel {
     private static PATH: string = appConstants.localStorage.cart;
     private validationService: ValidationService = new ValidationService();
     private cart: CartResponse[];
+    page = 1;
+    limit: number = appConstants.cartParams.itemPerPage;
+    popupState = false;
 
     private constructor() {
         this.cart = this.setCart();
@@ -31,8 +34,9 @@ export default class CartModel {
         return this.cart;
     }
 
-    getItemsIdList(): number[] {
-        return this.cart.map((el) => el.product.id);
+    checkItem(id: number) {
+        const potentialItem = this.cart.find((el) => el.product.id === id);
+        return Boolean(potentialItem);
     }
 
     increaseItem(product: Product) {
@@ -58,6 +62,11 @@ export default class CartModel {
 
     deleteItem(itemId: string) {
         this.cart = this.cart.filter((el) => String(el.product.id) !== itemId);
+        this.storageService.setItem(CartModel.PATH, this.cart);
+    }
+
+    cleanCart() {
+        this.cart = [];
         this.storageService.setItem(CartModel.PATH, this.cart);
     }
 }
