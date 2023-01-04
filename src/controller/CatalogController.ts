@@ -14,7 +14,6 @@ export default class CatalogController implements IController {
     view: CatalogView;
     catalogService: CatalogService;
     catalogHandlers: CatalogHandler;
-    cartService: CartService;
 
     constructor() {
         this.header = new Header(String(4), String(1000));
@@ -22,8 +21,7 @@ export default class CatalogController implements IController {
         this.footer = new Footer();
         this.view = new CatalogView();
         this.catalogService = new CatalogService();
-        this.cartService = new CartService();
-        this.catalogHandlers = new CatalogHandler(this.view, this.catalogService, this.cartService);
+        this.catalogHandlers = new CatalogHandler(this.view, this.catalogService);
     }
 
     async render(params: params): Promise<void> {

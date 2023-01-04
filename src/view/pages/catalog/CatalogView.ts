@@ -41,8 +41,8 @@ class CatalogView {
     }
 
     public renderTargetedFilters(catalogSettings: ICatalogSettings, target: string) {
-        const newCategloryBlock = this.filters.categoryBlock.createCategoryBlock(catalogSettings);
-        this.filters.categoryBlock.categories.replaceWith(newCategloryBlock);
+        const newCategoryBlock = this.filters.categoryBlock.createCategoryBlock(catalogSettings);
+        this.filters.categoryBlock.categories.replaceWith(newCategoryBlock);
         const newBrandBlock = this.filters.brandBlock.createBrandBlock(catalogSettings);
         this.filters.brandBlock.brands.replaceWith(newBrandBlock);
         if (target !== 'stock') {

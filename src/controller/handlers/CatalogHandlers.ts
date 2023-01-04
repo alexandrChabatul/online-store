@@ -10,11 +10,11 @@ export default class CatalogHandler {
     urlService: UrlService;
     cartService: CartService;
 
-    constructor(view: CatalogView, catalogService: CatalogService, cartService: CartService) {
+    constructor(view: CatalogView, catalogService: CatalogService) {
         this.view = view;
         this.catalogService = catalogService;
         this.urlService = new UrlService();
-        this.cartService = cartService;
+        this.cartService = new CartService();
     }
 
     initEvents() {
@@ -48,8 +48,7 @@ export default class CatalogHandler {
         const target: EventTarget | null = e.target;
         if (!(target instanceof HTMLSelectElement) || !target.value) return;
 
-        let url = new URL(window.location.href);
-        url = this.urlService.replaceQueryParam('sort', target.value);
+        const url = this.urlService.replaceQueryParam('sort', target.value);
         this.urlService.addUrlInHistory(url);
 
         const params: params | false = this.urlService.getQueryParams();
