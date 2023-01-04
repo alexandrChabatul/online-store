@@ -1,4 +1,4 @@
-import { BadResponse, Product } from 'common/types';
+import { BadResponse, Product, ProductIsInCart } from 'common/types';
 import ApiService from './ApiService';
 import MappingService from './MappingService';
 
@@ -11,12 +11,12 @@ export default class ProductService {
         this.mapper = new MappingService();
     }
 
-    async getProduct(id: string): Promise<Product | BadResponse> {
+    async getProduct(id: string): Promise<ProductIsInCart | BadResponse> {
         const response = await this.apiService.getProduct(id);
         if ('errorMessage' in response) {
             return response as BadResponse;
         }
-        const product = this.mapper.mapFromProductResponseToProduct(response);
+        const product = this.mapper.mapFromProductToProductIsInCart(response);
         return product;
     }
 }

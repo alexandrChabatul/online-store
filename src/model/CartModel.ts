@@ -34,8 +34,9 @@ export default class CartModel {
         return this.cart;
     }
 
-    getItemsIdList(): number[] {
-        return this.cart.map((el) => el.product.id);
+    checkItem(id: number) {
+        const potentialItem = this.cart.find((el) => el.product.id === id);
+        return Boolean(potentialItem);
     }
 
     increaseItem(product: Product) {
