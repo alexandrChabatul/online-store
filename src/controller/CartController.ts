@@ -6,6 +6,7 @@ import CartView from 'view/pages/cart/CartView';
 import CartService from 'services/CartService';
 import { CatalogService } from 'services/CatalogService';
 import CartHandler from './handlers/CartHandlers';
+import PopupHandler from './handlers/PopupHandler';
 
 export default class CartController implements IController {
     header: Header;
@@ -15,6 +16,7 @@ export default class CartController implements IController {
     cartService: CartService;
     catalogService: CatalogService;
     cartHandler: CartHandler;
+    popupHandler: PopupHandler;
 
     constructor() {
         this.header = new Header(String(4), String(1000));
@@ -24,6 +26,7 @@ export default class CartController implements IController {
         this.cartService = new CartService();
         this.catalogService = new CatalogService();
         this.cartHandler = new CartHandler(this.view, this.cartService);
+        this.popupHandler = new PopupHandler(this.view, this.cartService);
     }
 
     async render(params: params) {
@@ -32,10 +35,17 @@ export default class CartController implements IController {
         app.innerHTML = '';
         app.append(this.header.createHeader(), this.main, this.footer.createFooter());
         this.view.renderCart(this.cartService.getCartInfo(params));
-        this.initPopupEvents();
+        this.initCartEvents();
+        if (this.cartService.getPopupState()) this.openPopup();
     }
 
-    initPopupEvents() {
+    initCartEvents() {
         this.cartHandler.initEvents();
+    }
+
+    private openPopup() {
+        this.view.showPopup();
+        this.popupHandler.initEvents();
+        this.cartService.setPopupState(false);
     }
 }

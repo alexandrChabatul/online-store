@@ -11,6 +11,7 @@ export default class CartModel {
     private cart: CartResponse[];
     page = 1;
     limit: number = appConstants.cartParams.itemPerPage;
+    popupState = false;
 
     private constructor() {
         this.cart = this.setCart();

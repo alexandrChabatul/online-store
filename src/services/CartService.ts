@@ -116,4 +116,12 @@ export default class CartService {
     setLimit(limit: number) {
         this.cartModel.limit = limit === 0 ? this.cartModel.limit : Math.abs(limit);
     }
+
+    getPopupState() {
+        return this.cartModel.popupState;
+    }
+
+    setPopupState(state: boolean) {
+        this.cartModel.popupState = state;
+    }
 }
