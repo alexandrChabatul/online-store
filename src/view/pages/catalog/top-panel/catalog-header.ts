@@ -9,21 +9,23 @@ export class CatalogHeader {
     sortMethod: Sort;
     search: Search;
     viewBlockElement: ViewBlock;
+    catalogHeader: HTMLDivElement;
 
     constructor() {
+        this.catalogHeader = ElementsFactory.createDivElement('top-panel');
         this.sortMethod = new Sort();
         this.search = new Search();
         this.viewBlockElement = new ViewBlock();
     }
 
     createCatalogHeader(data: Product[], filters: ICatalogSettings): HTMLElement {
-        const catalogHeader = ElementsFactory.createDivElement('top-panel');
+        this.catalogHeader.innerHTML = '';
         const sortMethod = this.sortMethod.createSortBlock(filters.sort);
         const searchResults = this.search.createSearchResultsBlock(data);
         const searchField = this.search.createSearch(filters.search);
         const viewBlock = this.viewBlockElement.createViewBlock(filters.view);
-        catalogHeader.append(sortMethod, searchResults, searchField, viewBlock);
+        this.catalogHeader.append(sortMethod, searchResults, searchField, viewBlock);
 
-        return catalogHeader;
+        return this.catalogHeader;
     }
 }

@@ -3,15 +3,17 @@ import { ElementsFactory } from 'utils/element-generator';
 import '../checkbox.scss';
 
 export class BrandBlock {
-    brands: HTMLElement;
+    brands: HTMLDivElement;
 
     constructor() {
-        this.brands = ElementsFactory.createBaseElement('ul', 'filters-list');
+        this.brands = ElementsFactory.createDivElement('brand-block');
     }
 
     public createBrandBlock(catalogSettings: ICatalogSettings): HTMLDivElement {
-        const brandBlock = ElementsFactory.createDivElement('brand-block');
+        this.brands.innerHTML = '';
         const brandTitle = ElementsFactory.createBaseElementWithText('h3', 'brand-title', 'Brand');
+        const brandList = ElementsFactory.createBaseElement('ul', 'filters-list');
+        brandList.id = 'brand';
 
         catalogSettings.filters.brand.forEach((el, i) => {
             const brandItem = ElementsFactory.createBaseElement('li', 'filters-element');
@@ -25,11 +27,11 @@ export class BrandBlock {
             brandName.checked = catalogSettings.filters.brand[i].checked;
             brandLabel.append(categoryCount);
             brandItem.append(brandName, brandLabel);
-            this.brands.append(brandItem);
+            brandList.append(brandItem);
         });
 
-        brandBlock.append(brandTitle, this.brands);
+        this.brands.append(brandTitle, brandList);
 
-        return brandBlock;
+        return this.brands;
     }
 }

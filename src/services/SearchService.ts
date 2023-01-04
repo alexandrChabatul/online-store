@@ -21,7 +21,6 @@ export class SearchService {
     }
 
     getSearchResults(products: ProductIsInCart[]): ProductIsInCart[] {
-        console.log('search', products);
         const productsWithSearchAplied = products.filter((el: ProductIsInCart): ProductIsInCart | undefined => {
             const objCopy: { [key: string]: boolean | string | number | string[] } = { ...el };
             ['id', 'thumbnail', 'images'].forEach((element) => {

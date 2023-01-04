@@ -49,7 +49,7 @@ export class CatalogService {
         const filteredProducts = this.filterService.getFilteredProducts(products, filters.filters);
         const searchedProducts = this.searchService.getSearchResults(filteredProducts);
         const sortedProducts = this.sortService.getSortedResults(searchedProducts);
-        this.filterService.countActiveFilters(sortedProducts);
+        this.filterService.countActiveFilters(sortedProducts, params);
         return sortedProducts;
     }
 }
