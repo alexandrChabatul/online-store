@@ -13,7 +13,7 @@ export default class ProductHandler {
 
     private productClickHandler(e: Event) {
         const target = e.target;
-        if (!target || !(target instanceof HTMLButtonElement)) return;
+        if (!(target instanceof HTMLButtonElement)) return;
         switch (true) {
             case target.classList.contains('product-buttons__cart'): {
                 this.handleToCartClick(target);
