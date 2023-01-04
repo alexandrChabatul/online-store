@@ -26,7 +26,7 @@ export default class CartHandler {
 
     clickHandler(e: Event) {
         const target = e.target;
-        if (!target || !(target instanceof HTMLElement)) return;
+        if (!(target instanceof HTMLElement)) return;
         switch (true) {
             case target.classList.contains('item-increase-button'): {
                 const parent = target.closest('.cart-item');
