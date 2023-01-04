@@ -12,6 +12,7 @@ export class Catalog {
     }
 
     public createProductsCatalog(data: ProductIsInCart[], filters: ICatalogSettings): HTMLElement {
+        this.products.innerHTML = '';
         this.setView(filters.view);
         if (data.length === 0) {
             const noProductsMessage = ElementsFactory.createBaseElementWithText(
@@ -29,6 +30,7 @@ export class Catalog {
 
     private createProductItem(product: ProductIsInCart) {
         const productContainer = ElementsFactory.createDivElement('product-item');
+        productContainer.id = `product-${product.id}`;
         const productImage = ElementsFactory.createAnchor('product-image router-link', '', `/product/${product.id}`);
         this.setImage(product.thumbnail, productImage);
         const productElements = ElementsFactory.createDivElement('product-elements');
@@ -72,10 +74,6 @@ export class Catalog {
         productDescription.append(productDescriptionTitle, productDescriptionContent);
         productPrice.append(productPriceOriginal, productPriceFinal);
         this.products.append(productContainer);
-
-        addToCartButton.addEventListener('click', (e) => {
-            this.addToCart(e);
-        });
     }
 
     private setImage(link: string, element: HTMLElement) {
@@ -92,16 +90,5 @@ export class Catalog {
 
     public setView(view: string) {
         view === 'row' ? this.products.classList.add('row-view') : this.products.classList.remove('row-view');
-    }
-
-    public addToCart(e: Event) {
-        if (e.target instanceof HTMLButtonElement) {
-            if (e.target.classList.contains('in-cart')) {
-                e.target.textContent = 'Add to Cart';
-            } else {
-                e.target.textContent = 'Remove';
-            }
-            e.target.classList.toggle('in-cart');
-        }
     }
 }

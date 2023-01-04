@@ -2,15 +2,17 @@ import { ICatalogSettings } from 'common/types';
 import { ElementsFactory } from 'utils/element-generator';
 
 export class CategoryBlock {
-    categories: HTMLElement;
+    categories: HTMLDivElement;
 
     constructor() {
-        this.categories = ElementsFactory.createBaseElement('ul', 'filters-list');
+        this.categories = ElementsFactory.createDivElement('category-block');
     }
 
     public createCategoryBlock(catalogSettings: ICatalogSettings): HTMLDivElement {
-        const categoryBlock = ElementsFactory.createDivElement('category-block');
+        this.categories.innerHTML = '';
         const categoryTitle = ElementsFactory.createBaseElementWithText('h3', 'category-title', 'Category');
+        const categoryList = ElementsFactory.createBaseElement('ul', 'filters-list');
+        categoryList.id = 'category';
 
         catalogSettings.filters.category.forEach((el, i) => {
             const categoryItem = ElementsFactory.createBaseElement('li', 'filters-element');
@@ -24,11 +26,11 @@ export class CategoryBlock {
             );
             categoryLabel.append(categoryCount);
             categoryItem.append(categoryName, categoryLabel);
-            this.categories.append(categoryItem);
+            categoryList.append(categoryItem);
         });
 
-        categoryBlock.append(categoryTitle, this.categories);
+        this.categories.append(categoryTitle, categoryList);
 
-        return categoryBlock;
+        return this.categories;
     }
 }

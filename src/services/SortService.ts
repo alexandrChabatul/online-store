@@ -13,7 +13,7 @@ export class SortService {
 
     getSortMethod(sortParams: string) {
         if (sortParams) {
-            this.setSortMethod(sortParams.split('-').join(' '));
+            this.setSortMethod(sortParams.split('+').join(' '));
         } else {
             this.setSortMethod('sort');
         }

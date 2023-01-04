@@ -4,6 +4,8 @@ import { Footer } from 'view/common-components/footer/footer';
 import { Header } from 'view/common-components/header/header';
 import CatalogView from 'view/pages/catalog/CatalogView';
 import { CatalogService } from 'services/CatalogService';
+import CatalogHandler from './handlers/CatalogHandlers';
+import CartService from 'services/CartService';
 
 export default class CatalogController implements IController {
     header: Header;
@@ -11,6 +13,7 @@ export default class CatalogController implements IController {
     footer: Footer;
     view: CatalogView;
     catalogService: CatalogService;
+    catalogHandlers: CatalogHandler;
 
     constructor() {
         this.header = new Header(String(4), String(1000));
@@ -18,6 +21,7 @@ export default class CatalogController implements IController {
         this.footer = new Footer();
         this.view = new CatalogView();
         this.catalogService = new CatalogService();
+        this.catalogHandlers = new CatalogHandler(this.view, this.catalogService);
     }
 
     async render(params: params): Promise<void> {
@@ -34,22 +38,10 @@ export default class CatalogController implements IController {
 
         const catalog = this.view.render(products, catalogSettings);
         this.main.append(catalog);
+        this.initCatalogEvents();
+    }
 
-        this.view.catalogHeader.viewBlockElement.viewBlock.addEventListener('click', (e) => {
-            const target: EventTarget | null = e.target;
-            if (target instanceof HTMLDivElement) {
-                if (target.className.includes('row')) {
-                    catalogSettings.view = 'row';
-                } else if (target.className.includes('table')) {
-                    catalogSettings.view = 'table';
-                }
-                this.view.products.setView(catalogSettings.view);
-                this.view.catalogHeader.viewBlockElement.setView(catalogSettings.view);
-            }
-        });
-        this.view.filters.resetBlock.copyButton.addEventListener(
-            'click',
-            this.view.filters.resetBlock.applyCopiedState.bind(this.view.filters.resetBlock)
-        );
+    initCatalogEvents() {
+        this.catalogHandlers.initEvents();
     }
 }

@@ -9,6 +9,7 @@ export class Sort {
     }
 
     createSortBlock(sort: string): HTMLSelectElement {
+        this.sort = ElementsFactory.createSelect('sort-method');
         const defaultOption = ElementsFactory.createOPtion('sort-option', 'Sort', 'Sort');
         defaultOption.disabled = true;
         defaultOption.selected = true;

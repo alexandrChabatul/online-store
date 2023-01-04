@@ -40,7 +40,7 @@ class RouteParser {
     private filterParams(params: params, paramsScheme: params): params {
         return Object.keys(params).reduce((acc: params, el: string): params => {
             if (paramsScheme[el]) {
-                acc[el] = params[el];
+                acc[el] = decodeURIComponent(params[el]);
             }
             return acc;
         }, {});

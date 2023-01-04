@@ -1,7 +1,8 @@
 import appConstants from 'common/constants';
+import { params } from 'common/types';
 
 export default class UrlService {
-    addQueryParam(name: string, value: string) {
+    setMultipleValueParam(name: string, value: string) {
         const url = new URL(window.location.href);
         const params = url.searchParams;
         if (!params.has(name)) {
@@ -9,7 +10,18 @@ export default class UrlService {
             return url;
         }
         const currentValue = params.get(name);
+        if (currentValue?.includes(value)) {
+            return this.deleteQueryParamValue(name, value);
+        }
+
         params.set(name, currentValue + appConstants.paramsDelimeter + value);
+        return url;
+    }
+
+    setDoubledValueParam(name: string, min: string, max: string) {
+        const url = new URL(window.location.href);
+        const params = url.searchParams;
+        params.set(name, min + appConstants.paramsDelimeter + max);
         return url;
     }
 
@@ -36,6 +48,20 @@ export default class UrlService {
         const params = url.searchParams;
         params.delete(name);
         return url;
+    }
+
+    deleteAllQueryParams() {
+        const url = new URL(window.location.origin);
+        return url;
+    }
+
+    getQueryParams() {
+        const url = new URL(window.location.href);
+        const params: params = {};
+        for (const [name, value] of url.searchParams) {
+            params[name] = decodeURIComponent(value);
+        }
+        return params;
     }
 
     addUrlInHistory(url: URL) {
