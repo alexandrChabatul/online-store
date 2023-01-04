@@ -19,6 +19,7 @@ export default class CartItem {
         const subtotalBlock = this.getSubtotalBlock(item.subtotal);
         const deleteBlock = this.getDeleteBlock();
         const cartItem = ElementsFactory.createDivElement('cart-item');
+        cartItem.id = String(item.product.id);
         cartItem.append(
             counterBlock,
             imageBlock,
@@ -74,8 +75,8 @@ export default class CartItem {
         const quantityButtonsContainer = ElementsFactory.createDivElement('quantity-buttons-container');
         const quantity = ElementsFactory.createBaseElementWithText('p', 'item-quantity', String(count));
         // const buttons = ElementsFactory.createDivElement('quantity-buttons');
-        const increaseButton = ElementsFactory.createDivElement('increase-button');
-        const reduceButton = ElementsFactory.createDivElement('reduce-button');
+        const increaseButton = ElementsFactory.createDivElement('item-increase-button');
+        const reduceButton = ElementsFactory.createDivElement('item-reduce-button');
         const stockBlock = ElementsFactory.createBaseElementWithText('p', 'item-stock', `Stock: ${String(stock)}`);
         // buttons.append(increaseButton, reduceButton);
         quantityButtonsContainer.append(reduceButton, quantity, increaseButton);
@@ -92,6 +93,6 @@ export default class CartItem {
     }
 
     private static getDeleteBlock() {
-        return ElementsFactory.createDivElement('cart-item-cross');
+        return ElementsFactory.createDivElement('item-delete-button');
     }
 }

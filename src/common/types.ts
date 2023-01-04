@@ -82,7 +82,7 @@ export type CartProduct = CartResponse & { subtotal: number; index: number };
 
 export type CartSummary = { productQty: number; prevPrice: number; totalPrice: number };
 
-export type PromoCode = { name: string; value: number };
+export type PromoCode = { code: string; name: string; value: number };
 
 export type CartParams = { itemsPerPage: number; page: number; numOfPages: number };
 
@@ -103,3 +103,12 @@ export interface IPaginationResponse<T> {
 export type APIResponse = { products: ProductResponse[] };
 
 export type BadResponse = { errorMessage: string };
+
+export type InputTemplate = {
+    name: string;
+    placeholder: string;
+    type: string;
+    pattern: string;
+    maxLength?: number;
+    errorMessage: string;
+};
