@@ -31,8 +31,9 @@ export class Catalog {
     private createProductItem(product: ProductIsInCart) {
         const productContainer = ElementsFactory.createDivElement('product-item');
         productContainer.id = `product-${product.id}`;
-        const productImage = ElementsFactory.createAnchor('product-image router-link', '', `/product/${product.id}`);
-        this.setImage(product.thumbnail, productImage);
+        const productLink = ElementsFactory.createAnchor('product-link router-link', '', `/product/${product.id}`);
+        const productImage = ElementsFactory.createImgElement('product-image', product.thumbnail, product.title);
+
         const productElements = ElementsFactory.createDivElement('product-elements');
         const productName = ElementsFactory.createAnchor(
             'product-name router-link',
@@ -68,24 +69,13 @@ export class Catalog {
             addToCartButton.textContent = 'Remove';
         }
 
-        productContainer.append(productImage, productElements);
+        productLink.append(productImage);
+        productContainer.append(productLink, productElements);
         productElements.append(productName, productInfo, addToCartButton);
         productInfo.append(productPrice, productDescription);
         productDescription.append(productDescriptionTitle, productDescriptionContent);
         productPrice.append(productPriceOriginal, productPriceFinal);
         this.products.append(productContainer);
-    }
-
-    private setImage(link: string, element: HTMLElement) {
-        try {
-            const img = new Image();
-            img.src = link;
-            img.onload = () => {
-                element.style.backgroundImage = `url('${img.src}')`;
-            };
-        } catch (e) {
-            console.log(e);
-        }
     }
 
     public setView(view: string) {

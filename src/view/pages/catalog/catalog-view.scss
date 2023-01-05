@@ -22,13 +22,12 @@
     flex: 1 0 23%;
     width: 22%;
     height: fit-content;
-    // max-height: calc(100vh - 90px);
     position: sticky;
-    top: 90px;
+    top: -60px;
     background-color: $color-elements;
     border-radius: 10px;
     display: flex;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 
  .main-left::-webkit-scrollbar {
