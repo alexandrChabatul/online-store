@@ -47,6 +47,15 @@
 .cart-description__title {
     font-size: medium;
     margin: 0px;
+    text-decoration: none;
+    color: $color-text-main;
+    display: inline;
+    font-weight: 800;
+
+    &:hover {
+        text-decoration: underline;
+        opacity: 0.9;
+    }
 }
 
 .cart-description__name {
