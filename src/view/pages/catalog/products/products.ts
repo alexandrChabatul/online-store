@@ -34,7 +34,6 @@ export class Catalog {
         const productLink = ElementsFactory.createAnchor('product-link router-link', '', `/product/${product.id}`);
         const productImage = ElementsFactory.createImgElement('product-image', product.thumbnail, product.title);
 
-        // this.setImage(product.thumbnail, productLink);
         const productElements = ElementsFactory.createDivElement('product-elements');
         const productName = ElementsFactory.createAnchor(
             'product-name router-link',
@@ -77,12 +76,6 @@ export class Catalog {
         productDescription.append(productDescriptionTitle, productDescriptionContent);
         productPrice.append(productPriceOriginal, productPriceFinal);
         this.products.append(productContainer);
-    }
-
-    private async setImage(link: string, element: HTMLElement) {
-        const img = new Image();
-        img.src = link;
-        element.append(img);
     }
 
     public setView(view: string) {

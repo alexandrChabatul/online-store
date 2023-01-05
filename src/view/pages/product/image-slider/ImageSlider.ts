@@ -23,7 +23,7 @@ class ImageSlider {
                     ? 'product-images__slide product-images__slide_active'
                     : 'product-images__slide';
             const container = ElementsFactory.createDivElement(className);
-            container.append(ElementsFactory.createImgElement('', el, name));
+            container.append(ElementsFactory.createImgElement('', el, ''));
 
             container.addEventListener('click', this.sliderClickHandler.bind(this, thumbnailImg, slider));
 
