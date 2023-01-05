@@ -7,8 +7,9 @@ export default class CartItem {
     static getCartItem(item: CartProduct) {
         const product = item.product;
         const counterBlock = this.getCounterBlock(item.index);
-        const imageBlock = this.getImageBlock(product.thumbnail, product.title);
+        const imageBlock = this.getImageBlock(product.thumbnail, product.title, product.id);
         const descriptionBlock = this.getDescriptionBlock(
+            product.id,
             product.title,
             product.category,
             product.brand,
@@ -36,18 +37,24 @@ export default class CartItem {
         return ElementsFactory.createBaseElementWithText('div', 'cart-item__counter', String(index));
     }
 
-    private static getImageBlock(imageSrc: string, title: string) {
-        const itemImgContainer = ElementsFactory.createDivElement('cart-item__img-container');
+    private static getImageBlock(imageSrc: string, title: string, id: number) {
+        const anchor = ElementsFactory.createAnchor('router-link cart-item__img-container', '', `/product/${id}`);
         const image = ElementsFactory.createImgElement('', imageSrc, title);
-        itemImgContainer.append(image);
-        return itemImgContainer;
+        anchor.append(image);
+        return anchor;
     }
 
-    private static getDescriptionBlock(title: string, category: string, brand: string, description: string) {
+    private static getDescriptionBlock(
+        id: number,
+        title: string,
+        category: string,
+        brand: string,
+        description: string
+    ) {
         const descriptionBlock = ElementsFactory.createDivElement('cart-description');
         let html = '';
         if (title) {
-            html += `<h3 class="cart-description__title">${title}</h3>`;
+            html += `<a class="router-link cart-description__title" href="/product/${id}">${title}</a>`;
         }
         if (category) {
             html += `<p class="cart-description__name">Category: <span class="cart-description__value">${category.toLowerCase()}</span></p>`;
@@ -74,11 +81,9 @@ export default class CartItem {
         const quantityBlock = ElementsFactory.createDivElement('cart-quantity');
         const quantityButtonsContainer = ElementsFactory.createDivElement('quantity-buttons-container');
         const quantity = ElementsFactory.createBaseElementWithText('p', 'item-quantity', String(count));
-        // const buttons = ElementsFactory.createDivElement('quantity-buttons');
         const increaseButton = ElementsFactory.createDivElement('item-increase-button');
         const reduceButton = ElementsFactory.createDivElement('item-reduce-button');
         const stockBlock = ElementsFactory.createBaseElementWithText('p', 'item-stock', `Stock: ${String(stock)}`);
-        // buttons.append(increaseButton, reduceButton);
         quantityButtonsContainer.append(reduceButton, quantity, increaseButton);
         quantityBlock.append(quantityButtonsContainer, stockBlock);
         return quantityBlock;

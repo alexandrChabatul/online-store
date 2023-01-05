@@ -22,7 +22,7 @@ export default class CartController implements IController {
         this.header = new Header(String(4), String(1000));
         this.main = ElementsFactory.createBaseElement('main', 'main');
         this.footer = new Footer();
-        this.view = new CartView(this.main);
+        this.view = new CartView();
         this.cartService = new CartService();
         this.catalogService = new CatalogService();
         this.cartHandler = new CartHandler(this.view, this.cartService);
@@ -34,7 +34,7 @@ export default class CartController implements IController {
         const app = <HTMLDivElement>document.getElementById('app');
         app.innerHTML = '';
         app.append(this.header.createHeader(), this.main, this.footer.createFooter());
-        this.view.renderCart(this.cartService.getCartInfo(params));
+        this.main.append(this.view.renderCart(this.cartService.getCartInfo(params)));
         this.initCartEvents();
         if (this.cartService.getPopupState()) this.openPopup();
     }

@@ -7,49 +7,33 @@ import SummaryBlock from './summary-block/SummaryBlock';
 import CartHeader from './cart-header/CartHeader';
 
 class CartView {
-    parent: HTMLElement;
     wrapper: HTMLDivElement;
-    cartHeaderElement: HTMLDivElement;
-    cartBlockElement: HTMLDivElement;
-    summaryBlockElement: HTMLDivElement;
-    popupElement: HTMLDivElement;
     popup: CheckoutPopup;
     cartHeader: CartHeader;
     cartBlock: CartBlock;
     summary: SummaryBlock;
 
-    constructor(parent: HTMLElement) {
-        this.parent = parent;
+    constructor() {
         this.wrapper = ElementsFactory.createDivElement('wrapper cart-wrapper');
-        this.parent.append(this.wrapper);
         this.popup = new CheckoutPopup();
         this.cartHeader = new CartHeader();
         this.cartBlock = new CartBlock();
         this.summary = new SummaryBlock();
-        this.cartBlockElement = ElementsFactory.createDivElement('');
-        this.summaryBlockElement = ElementsFactory.createDivElement('');
-        this.cartHeaderElement = ElementsFactory.createDivElement('');
-        this.popupElement = this.popup.createCheckoutPopup();
-    }
-
-    setStructure() {
-        const cartBlockContainer = ElementsFactory.createDivElement('cart-block-container');
-        cartBlockContainer.append(this.cartHeaderElement, this.cartBlockElement);
-        this.wrapper.append(cartBlockContainer, this.summaryBlockElement);
     }
 
     renderCart(cartInfo: CartInfo) {
         this.wrapper.innerHTML = '';
-        if (cartInfo.products.length > 0) {
-            this.setStructure();
-            const header = this.cartHeader.getCartHeader(cartInfo.params.itemsPerPage);
-            this.cartHeaderElement.replaceWith(header);
-            this.cartHeaderElement = header;
-            this.updateCartBlock(cartInfo.products, cartInfo.params);
-            this.updateSummary(cartInfo.summary, cartInfo.promoCodes);
-        } else {
+        if (cartInfo.products.length === 0) {
             this.wrapper.append(this.getEmptyCartMessage());
+            return this.wrapper;
         }
+        const cartBlockContainer = ElementsFactory.createDivElement('cart-block-container');
+        const cartHeader = this.cartHeader.getCartHeader(cartInfo.params.itemsPerPage);
+        const cartBlock = this.cartBlock.getCartPage(cartInfo.products, cartInfo.params);
+        const summary = this.summary.getSummary(cartInfo.summary, cartInfo.promoCodes);
+        cartBlockContainer.append(cartHeader, cartBlock);
+        this.wrapper.append(cartBlockContainer, summary);
+        return this.wrapper;
     }
 
     updateCartAndSummary(cartInfo: CartInfo) {
@@ -57,22 +41,16 @@ class CartView {
             this.wrapper.innerHTML = '';
             this.wrapper.append(this.getEmptyCartMessage());
         }
-        const cartBlock = this.cartBlock.getCartPage(cartInfo.products, cartInfo.params);
-        this.cartBlockElement.replaceWith(cartBlock);
-        this.cartBlockElement = cartBlock;
+        this.cartBlock.updateCartBlock(cartInfo.products, cartInfo.params);
         this.summary.updateSummaryDescription(cartInfo.summary);
     }
 
     updateCartBlock(products: CartProduct[], params: CartParams) {
-        const cartBlock = this.cartBlock.getCartPage(products, params);
-        this.cartBlockElement.replaceWith(cartBlock);
-        this.cartBlockElement = cartBlock;
+        this.cartBlock.updateCartBlock(products, params);
     }
 
     updateSummary(summary: CartSummary, promoCodes: PromoCode[]) {
-        const summaryBlock = this.summary.getSummary(summary, promoCodes);
-        this.summaryBlockElement.replaceWith(summaryBlock);
-        this.summaryBlockElement = summaryBlock;
+        this.summary.updateSummary(summary, promoCodes);
     }
 
     getEmptyCartMessage() {
@@ -102,12 +80,12 @@ class CartView {
     }
 
     showPopup() {
-        this.popupElement = this.popup.createCheckoutPopup();
-        this.parent.append(this.popupElement);
+        const popupElement = this.popup.createCheckoutPopup();
+        this.wrapper.append(popupElement);
     }
 
     hidePopup() {
-        this.popupElement.remove();
+        this.popup.wrapper.remove();
     }
 }
 

@@ -13,8 +13,8 @@ export default class PopupHandler {
     }
 
     initEvents() {
-        this.view.popupElement.addEventListener('focusout', this.popupFocusoutHandler.bind(this));
-        this.view.popupElement.oninput = this.popupInputHandler.bind(this);
+        this.view.popup.popup.addEventListener('focusout', this.popupFocusoutHandler.bind(this));
+        this.view.popup.popup.oninput = this.popupInputHandler.bind(this);
         this.view.popup.confirmButton.onclick = this.buyHandler.bind(this);
     }
 

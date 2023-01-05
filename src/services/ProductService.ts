@@ -1,4 +1,4 @@
-import { BadResponse, Product, ProductIsInCart } from 'common/types';
+import { BadResponse, ProductIsInCart } from 'common/types';
 import ApiService from './ApiService';
 import MappingService from './MappingService';
 
