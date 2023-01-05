@@ -82,6 +82,10 @@ export default class CartService {
         };
     }
 
+    checkItemInCart(id: string) {
+        return this.cartModel.checkItem(id);
+    }
+
     addItemToCart(id: string) {
         const products = this.catalogModel.getProducts();
         const potentialProduct = products.find((el) => String(el.id) === id);

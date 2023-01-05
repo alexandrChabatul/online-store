@@ -3,14 +3,17 @@ import CatalogView from 'view/pages/catalog/CatalogView';
 import { CatalogService } from 'services/CatalogService';
 import UrlService from 'services/UrlService';
 import CartService from 'services/CartService';
+import BasePage from 'view/common-components/BasePage';
 
 export default class CatalogHandler {
+    basePage: BasePage;
     view: CatalogView;
     catalogService: CatalogService;
     urlService: UrlService;
     cartService: CartService;
 
     constructor(view: CatalogView, catalogService: CatalogService) {
+        this.basePage = BasePage.getInstance();
         this.view = view;
         this.catalogService = catalogService;
         this.urlService = new UrlService();
@@ -42,6 +45,8 @@ export default class CatalogHandler {
             target.textContent = 'Add to Cart';
         }
         target.classList.toggle('in-cart');
+        const cartInfo = this.cartService.getCartInfo();
+        this.basePage.updateHeader(String(cartInfo.summary.productQty), String(cartInfo.summary.prevPrice));
     }
 
     sortTypeChangeHandler(e: Event) {

@@ -1,13 +1,16 @@
 import appConstants from 'common/constants';
 import CartService from 'services/CartService';
 import { ElementsFactory } from 'utils/element-generator';
+import BasePage from 'view/common-components/BasePage';
 import CartView from 'view/pages/cart/CartView';
 
 export default class PopupHandler {
+    basePage: BasePage;
     view: CartView;
     cartService: CartService;
 
     constructor(view: CartView, cartService: CartService) {
+        this.basePage = BasePage.getInstance();
         this.view = view;
         this.cartService = cartService;
     }
@@ -89,5 +92,7 @@ export default class PopupHandler {
         this.view.showBuyMessage(timer);
         const cartService = new CartService();
         cartService.cleanCart();
+        const cartInfo = this.cartService.getCartInfo();
+        this.basePage.updateHeader(String(cartInfo.summary.productQty), String(cartInfo.summary.prevPrice));
     }
 }

@@ -1,9 +1,12 @@
 import CartService from 'services/CartService';
+import BasePage from 'view/common-components/BasePage';
 
 export default class ProductHandler {
+    basePage: BasePage;
     cartService: CartService;
 
     constructor() {
+        this.basePage = BasePage.getInstance();
         this.cartService = new CartService();
     }
 
@@ -29,23 +32,28 @@ export default class ProductHandler {
     private handleToCartClick(target: HTMLButtonElement) {
         const id = target.dataset.id;
         if (!id) return;
-        const isInCart = target.dataset.cart === 'true';
+        const isInCart = this.cartService.checkItemInCart(id);
         if (isInCart) {
             this.cartService.deleteItemFromCart(id);
             target.textContent = 'Add to cart';
         } else {
-            console.log('add');
             this.cartService.addItemToCart(id);
             target.textContent = 'Remove from cart';
         }
         target.setAttribute('data-cart', String(!isInCart));
+        const cartInfo = this.cartService.getCartInfo();
+        this.basePage.updateHeader(String(cartInfo.summary.productQty), String(cartInfo.summary.prevPrice));
     }
 
     private handleBuyClick(target: HTMLButtonElement) {
         this.cartService.setPopupState(true);
         const id = target.dataset.id;
         if (!id) return;
-        const isInCart = target.dataset.cart === 'true';
-        if (!isInCart) this.cartService.addItemToCart(id);
+        const isInCart = this.cartService.checkItemInCart(id);
+        if (!isInCart) {
+            this.cartService.addItemToCart(id);
+            const cartInfo = this.cartService.getCartInfo();
+            this.basePage.updateHeader(String(cartInfo.summary.productQty), String(cartInfo.summary.prevPrice));
+        }
     }
 }
