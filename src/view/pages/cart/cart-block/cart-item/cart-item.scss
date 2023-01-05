@@ -19,11 +19,16 @@
 }
 
 .cart-item__img-container img {
-    max-height: 100%;
-    max-width: 100%;
+    height: 100%;
+    width: 100%;
     border-radius: 10px;
     display: block;
-    object-fit: contain;
+    object-fit: cover;
+    position: relative;
+}
+
+.cart-item__img-container img::after {
+    @extend %img-placeholder;
 }
 
 .cart-description {

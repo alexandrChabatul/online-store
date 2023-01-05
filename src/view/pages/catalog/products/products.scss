@@ -17,11 +17,14 @@
     display: inline-block;
     width: 100%;
     aspect-ratio: 1/0.75;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    object-fit: cover;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    position: relative;
+}
+
+.product-image::after {
+    @extend %img-placeholder;
 }
 
 .product-elements {
