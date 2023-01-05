@@ -1,5 +1,5 @@
 import { ElementsFactory } from 'utils/element-generator';
-import Rating from '../../../common-components/rating/Rating';
+import Rating from '../product-description/rating/Rating';
 import './product-title.scss';
 
 class ProductTitle {

@@ -1,6 +1,7 @@
 import CartService from 'services/CartService';
 import PromoCodeService from 'services/PromoCodeService';
 import UrlService from 'services/UrlService';
+import BasePage from 'view/common-components/BasePage';
 import CartView from 'view/pages/cart/CartView';
 import PopupHandler from './PopupHandler';
 
@@ -10,8 +11,10 @@ export default class CartHandler {
     urlService: UrlService;
     codesService: PromoCodeService;
     popupHandler: PopupHandler;
+    basePage: BasePage;
 
     constructor(view: CartView, cartService: CartService) {
+        this.basePage = BasePage.getInstance();
         this.view = view;
         this.cartService = cartService;
         this.urlService = new UrlService();
@@ -74,17 +77,23 @@ export default class CartHandler {
 
     private increaseItemHandler(id: string) {
         this.cartService.addItemToCart(id);
-        this.view.updateCartAndSummary(this.cartService.getCartInfo());
+        const cartInfo = this.cartService.getCartInfo();
+        this.view.updateCartAndSummary(cartInfo);
+        this.basePage.updateHeader(String(cartInfo.summary.productQty), String(cartInfo.summary.prevPrice));
     }
 
     private reduceItemHandler(id: string) {
         this.cartService.reduceItemInCart(id);
-        this.view.updateCartAndSummary(this.cartService.getCartInfo());
+        const cartInfo = this.cartService.getCartInfo();
+        this.view.updateCartAndSummary(cartInfo);
+        this.basePage.updateHeader(String(cartInfo.summary.productQty), String(cartInfo.summary.prevPrice));
     }
 
     private deleteItemHandler(id: string) {
         this.cartService.deleteItemFromCart(id);
-        this.view.updateCartAndSummary(this.cartService.getCartInfo());
+        const cartInfo = this.cartService.getCartInfo();
+        this.view.updateCartAndSummary(cartInfo);
+        this.basePage.updateHeader(String(cartInfo.summary.productQty), String(cartInfo.summary.prevPrice));
     }
 
     private paginationHandler(page: string) {

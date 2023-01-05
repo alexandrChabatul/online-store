@@ -10,7 +10,7 @@ export class Footer {
         const githubBlock = ElementsFactory.createBaseElement('div', 'links-block');
         const githubAccount1 = ElementsFactory.createAnchor(
             'github-link',
-            'sashkill94',
+            'Ch.Alexandr',
             'https://github.com/sashkill94'
         );
         const githubAccount2 = ElementsFactory.createAnchor(

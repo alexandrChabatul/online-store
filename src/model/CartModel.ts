@@ -34,8 +34,8 @@ export default class CartModel {
         return this.cart;
     }
 
-    checkItem(id: number) {
-        const potentialItem = this.cart.find((el) => el.product.id === id);
+    checkItem(id: string) {
+        const potentialItem = this.cart.find((el) => String(el.product.id) === id);
         return Boolean(potentialItem);
     }
 

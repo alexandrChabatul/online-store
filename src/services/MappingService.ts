@@ -24,6 +24,6 @@ export default class MappingService {
 
     mapFromProductToProductIsInCart(product: ProductResponse): ProductIsInCart {
         const productWithPrice = this.mapFromProductResponseToProduct(product);
-        return Object.assign(productWithPrice, { isInCart: this.cartModel.checkItem(product.id) });
+        return Object.assign(productWithPrice, { isInCart: this.cartModel.checkItem(String(product.id)) });
     }
 }
