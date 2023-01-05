@@ -3,6 +3,8 @@ import { ICatalogSettings, ProductIsInCart } from 'common/types';
 import { ElementsFactory } from 'utils/element-generator';
 import './products.scss';
 import './products-row-view.scss';
+import { ImageLoader } from 'utils/Image-loader';
+import placeholder from 'assets/images/product-placeholder.png';
 
 export class Catalog {
     products: HTMLElement;
@@ -76,16 +78,30 @@ export class Catalog {
         this.products.append(productContainer);
     }
 
-    private setImage(link: string, element: HTMLElement) {
-        try {
-            const img = new Image();
-            img.src = link;
-            img.onload = () => {
-                element.style.backgroundImage = `url('${img.src}')`;
-            };
-        } catch (e) {
-            console.log(e);
-        }
+    private async setImage(link: string, element: HTMLElement) {
+        const src = await ImageLoader.loadImage(link);
+        element.style.backgroundImage = `url('${src || placeholder}')`;
+        // try {
+        //     const img = new Image();
+        //     img.src = link;
+        //     img.onload = () => {
+        //         element.style.backgroundImage = `url('${img.src}')`;
+        //     };
+        // } catch (e) {
+        //     console.log(e);
+        // }
+        // try {
+        //     const response = await fetch(link);
+        //     if (response.ok) {
+        //         const blob = await response.blob();
+        //         const src = URL.createObjectURL(blob);
+        //         element.style.backgroundImage = `url('${src}')`;
+        //     } else {
+        //         element.style.backgroundImage = `url('${placeholder}')`;
+        //     }
+        // } catch (e) {
+        //     console.log(e);
+        // }
     }
 
     public setView(view: string) {

@@ -1,6 +1,7 @@
 import appConstants from 'common/constants';
 import { CartProduct } from 'common/types';
 import { ElementsFactory } from 'utils/element-generator';
+import { ImageLoader } from 'utils/Image-loader';
 import './cart-item.scss';
 
 export default class CartItem {
@@ -40,8 +41,16 @@ export default class CartItem {
     private static getImageBlock(imageSrc: string, title: string, id: number) {
         const anchor = ElementsFactory.createAnchor('router-link cart-item__img-container', '', `/product/${id}`);
         const image = ElementsFactory.createImgElement('', imageSrc, title);
+        this.loadImage(imageSrc, image);
         anchor.append(image);
         return anchor;
+    }
+
+    private static async loadImage(imageSrc: string, element: HTMLImageElement) {
+        const src = await ImageLoader.loadImage(imageSrc);
+        if (src) {
+            element.src = src;
+        }
     }
 
     private static getDescriptionBlock(
