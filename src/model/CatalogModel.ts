@@ -1,11 +1,14 @@
 import { ProductResponse, APIResponse } from 'common/types';
+import ApiService from 'services/ApiService';
 
 export default class CatalogModel {
     private static instance: CatalogModel;
     private products: ProductResponse[];
+    private apiService: ApiService;
 
     private constructor() {
         this.products = [];
+        this.apiService = new ApiService();
     }
 
     public static getInstance(): CatalogModel {
@@ -17,9 +20,8 @@ export default class CatalogModel {
 
     public async setProducts(): Promise<void> {
         if (this.products.length === 0) {
-            const response = await fetch('https://dummyjson.com/products?limit=100');
-            const data: APIResponse = await response.json();
-            this.products = data.products;
+            const data: APIResponse = await this.apiService.setProducts();
+            this.products = data;
         }
     }
 
