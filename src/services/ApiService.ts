@@ -12,6 +12,9 @@ export default class ApiService {
                 return { errorMessage: `Incorrect response from the server` };
             }
             const data: ProductResponse = await response.json();
+            if (data === null) {
+                return { errorMessage: `Product with id '${id}' not found` };
+            }
             return data;
         } catch {
             return { errorMessage: 'Something went wrong. The server is temporarily unavailable.' };
