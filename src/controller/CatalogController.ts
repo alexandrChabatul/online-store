@@ -20,7 +20,7 @@ export default class CatalogController implements IController {
     async render(params: params): Promise<void> {
         await this.catalogService.model.setProducts();
         const products = this.catalogService.getFilteredProducts(params);
-        const catalogSettings = this.catalogService.getCatalogSettings(params);
+        const catalogSettings = this.catalogService.getCatalogSettings();
         const catalog = this.view.render(products, catalogSettings);
         this.basePage.updateMain(catalog);
         this.initCatalogEvents();

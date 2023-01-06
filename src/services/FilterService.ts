@@ -25,8 +25,7 @@ export class FilterService {
         };
     }
 
-    public getFilters(categories: string, brands: string, stock: string, price: string) {
-        this.activateAllFilters(categories, brands, price, stock);
+    public getFilters() {
         return {
             category: Object.values(this.categories),
             brand: Object.values(this.brands),
@@ -88,6 +87,7 @@ export class FilterService {
     }
 
     public activateAllFilters(category: string, brand: string, price: string, stock: string) {
+        console.log('check', stock, price);
         this.activateCheckboxFilters('categories', category);
         this.activateCheckboxFilters('brands', brand);
         this.activateRangeFilters('stock', stock);

@@ -5,16 +5,15 @@ export class ViewService {
         this.viewType = 'table';
     }
 
-    public setViewType(value: string) {
-        this.viewType = value;
-    }
-
-    public getViewType(view: string) {
+    public setViewType(view: string) {
         if (view) {
             this.viewType = view;
         } else {
             this.viewType = 'table';
         }
+    }
+
+    public getViewType() {
         return this.viewType;
     }
 }
