@@ -4,7 +4,7 @@ import { BadResponse, ProductResponse, APIResponse } from 'common/types';
 export default class ApiService {
     public async getProduct(id: string): Promise<ProductResponse | BadResponse> {
         try {
-            const response = await fetch(`${appConstants.productsApi}/${id}.json`);
+            const response = await fetch(`${appConstants.productsApi}/${Number(id) - 1}.json`);
             if (!response.ok) {
                 return { errorMessage: `Product with id '${id}' not found` };
             }
@@ -18,17 +18,17 @@ export default class ApiService {
         }
     }
 
-    public async setProducts(): Promise<APIResponse> {
+    public async setProducts(): Promise<APIResponse | undefined> {
         try {
             const response = await fetch(`${appConstants.productsApi}.json`);
             if (!response.ok || !response.headers.get('content-type')?.includes('application/json')) {
-                throw new Error('Server unavailable');
+                console.log('Server unavailable');
             } else {
                 const data: APIResponse = await response.json();
                 return data;
             }
         } catch {
-            throw new Error('Something went wrong');
+            console.log('Something went wrong');
         }
     }
 }
