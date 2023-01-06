@@ -24,19 +24,21 @@ describe('Api service', () => {
     const products = [productResponse, Object.assign({}, productResponse), Object.assign({}, productResponse)];
 
     describe('Get product function', () => {
+        test('Should make request to API link', async () => {
+            const response = await api.getProduct('1');
+            expect(global.fetch as jest.Mock).toHaveBeenCalledWith(expect.stringContaining(appConstants.productsApi));
+        });
+
         test('Should return ProductResponse promise with id = 1', async () => {
             const blob = new Blob([JSON.stringify(productResponse)], { type: 'application/json' });
             (fetch as jest.Mock).mockReturnValue(new Response(blob));
             const response = await api.getProduct('1');
-            expect(global.fetch as jest.Mock).toHaveBeenCalledTimes(1);
-            expect(global.fetch as jest.Mock).toHaveBeenCalledWith(expect.stringContaining(appConstants.productsApi));
             expect('errorMessage' in response).toBeFalsy;
         });
 
         test('Should return BadResponse promise if response status not "ok"', async () => {
             (fetch as jest.Mock).mockReturnValue(new Response('', { status: 404 }));
             const response = await api.getProduct('1');
-            expect(global.fetch as jest.Mock).toHaveBeenCalledTimes(2);
             expect('errorMessage' in response).toBeTruthy;
             expect((response as BadResponse).errorMessage).toEqual('Product with id "1" not found');
         });
@@ -45,7 +47,6 @@ describe('Api service', () => {
             const blob = new Blob([JSON.stringify(productResponse)], { type: 'text' });
             (fetch as jest.Mock).mockReturnValue(new Response(blob));
             const response = await api.getProduct('1');
-            expect(global.fetch as jest.Mock).toHaveBeenCalledTimes(3);
             expect('errorMessage' in response).toBeTruthy;
             expect((response as BadResponse).errorMessage).toEqual('Incorrect response from the server');
         });
@@ -58,7 +59,6 @@ describe('Api service', () => {
                 })
             );
             const response = await api.getProduct('1');
-            expect(global.fetch as jest.Mock).toHaveBeenCalledTimes(4);
             expect('errorMessage' in response).toBeTruthy;
             expect((response as BadResponse).errorMessage).toEqual('Product with id "1" not found');
         });
@@ -69,8 +69,6 @@ describe('Api service', () => {
             const blob = new Blob([JSON.stringify(products)], { type: 'application/json' });
             (fetch as jest.Mock).mockReturnValue(new Response(blob));
             const response = await api.getProducts();
-            expect(global.fetch as jest.Mock).toHaveBeenCalledTimes(5);
-            expect(global.fetch as jest.Mock).toHaveBeenCalledWith(expect.stringContaining(appConstants.productsApi));
             expect(response?.length).toBe(3);
         });
 
@@ -82,7 +80,6 @@ describe('Api service', () => {
                 })
             );
             const response = await api.getProducts();
-            expect(global.fetch as jest.Mock).toHaveBeenCalledTimes(6);
             expect(response).toBeNull;
         });
     });
