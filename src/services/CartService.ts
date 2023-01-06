@@ -9,7 +9,7 @@ import PaginationService from './PaginationService';
 
 export default class CartService {
     private cartModel: CartModel = CartModel.getInstance();
-    private mapper: MappingService = MappingService.getInstance();
+    private mapper: MappingService = new MappingService();
     private codesModel: PromoCodesModel = PromoCodesModel.getInstance();
     private calculationService: CalculationService = new CalculationService();
     private catalogModel: CatalogModel = CatalogModel.getInstance();
