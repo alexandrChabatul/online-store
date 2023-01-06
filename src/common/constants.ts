@@ -138,6 +138,7 @@ const appConstants = {
             value: 10,
         },
     ],
+    productsApi: 'https://online-store-770d4-default-rtdb.europe-west1.firebasedatabase.app/products',
 };
 
 export default appConstants;

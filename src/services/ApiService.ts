@@ -1,9 +1,10 @@
-import { BadResponse, ProductResponse } from 'common/types';
+import appConstants from 'common/constants';
+import { BadResponse, ProductResponse, APIResponse } from 'common/types';
 
 export default class ApiService {
     public async getProduct(id: string): Promise<ProductResponse | BadResponse> {
         try {
-            const response = await fetch(`https://dummyjson.com/products/${id}`);
+            const response = await fetch(`${appConstants.productsApi}/${Number(id) - 1}.json`);
             if (!response.ok) {
                 return { errorMessage: `Product with id '${id}' not found` };
             }
@@ -14,6 +15,20 @@ export default class ApiService {
             return data;
         } catch {
             return { errorMessage: 'Something went wrong. The server is temporarily unavailable.' };
+        }
+    }
+
+    public async setProducts(): Promise<APIResponse | undefined> {
+        try {
+            const response = await fetch(`${appConstants.productsApi}.json`);
+            if (!response.ok || !response.headers.get('content-type')?.includes('application/json')) {
+                console.log('Server unavailable');
+            } else {
+                const data: APIResponse = await response.json();
+                return data;
+            }
+        } catch {
+            console.log('Something went wrong');
         }
     }
 }

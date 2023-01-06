@@ -100,7 +100,7 @@ export interface IPaginationResponse<T> {
     itemsPerPage: number;
 }
 
-export type APIResponse = { products: ProductResponse[] };
+export type APIResponse = ProductResponse[];
 
 export type BadResponse = { errorMessage: string };
 
