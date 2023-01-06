@@ -7,16 +7,15 @@ export class SearchService {
         this.searchTerm = '';
     }
 
-    setSearchTerm(value: string) {
-        this.searchTerm = value;
-    }
-
-    getSearchTerm(search: string) {
+    setSearchTerm(search: string) {
         if (search) {
             this.searchTerm = search;
         } else {
             this.searchTerm = '';
         }
+    }
+
+    getSearchTerm() {
         return this.searchTerm;
     }
 

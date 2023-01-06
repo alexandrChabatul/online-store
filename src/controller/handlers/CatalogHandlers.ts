@@ -59,7 +59,7 @@ export default class CatalogHandler {
         const params: params | false = this.urlService.getQueryParams();
         if (params) {
             const products = this.catalogService.getFilteredProducts(params);
-            const catalogSettings = this.catalogService.getCatalogSettings(params);
+            const catalogSettings = this.catalogService.getCatalogSettings();
             this.view.renderProducts(products, catalogSettings);
         }
     }
@@ -92,7 +92,8 @@ export default class CatalogHandler {
 
         const params: params | false = this.urlService.getQueryParams();
         if (params) {
-            const catalogSettings = this.catalogService.getCatalogSettings(params);
+            this.catalogService.setCatalogSettings(params);
+            const catalogSettings = this.catalogService.getCatalogSettings();
             this.view.products.setView(catalogSettings.view);
             this.view.catalogHeader.viewBlockElement.setView(catalogSettings.view);
         }
@@ -159,7 +160,7 @@ export default class CatalogHandler {
         const params: params | false = this.urlService.getQueryParams();
         if (params) {
             const products = this.catalogService.getFilteredProducts(params);
-            const catalogSettings = this.catalogService.getCatalogSettings(params);
+            const catalogSettings = this.catalogService.getCatalogSettings();
             this.view.renderTargetedFilters(catalogSettings, targetFilter);
             this.view.catalogHeader.search.updateSearchResults(products.length);
             this.view.renderProducts(products, catalogSettings);

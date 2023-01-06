@@ -7,16 +7,15 @@ export class SortService {
         this.sortMethod = 'sort';
     }
 
-    setSortMethod(value: string) {
-        this.sortMethod = value;
+    setSortMethod(sortParams: string) {
+        if (sortParams) {
+            this.sortMethod = sortParams.split('+').join(' ');
+        } else {
+            this.sortMethod = 'sort';
+        }
     }
 
-    getSortMethod(sortParams: string) {
-        if (sortParams) {
-            this.setSortMethod(sortParams.split('+').join(' '));
-        } else {
-            this.setSortMethod('sort');
-        }
+    getSortMethod() {
         return this.sortMethod;
     }
 
@@ -27,29 +26,15 @@ export class SortService {
                 return products.sort((a, b) => {
                     const aPseudo: { [key: string]: boolean | string | number | string[] } = { ...a };
                     const bPseudo: { [key: string]: boolean | string | number | string[] } = { ...b };
-                    if (aPseudo[type] > bPseudo[type]) {
-                        return 1;
-                    }
-
-                    if (aPseudo[type] < bPseudo[type]) {
-                        return -1;
-                    }
-
-                    return 0;
+                    if (typeof aPseudo[type] !== 'number' || typeof bPseudo[type] !== 'number') return 0;
+                    return Number(aPseudo[type]) - Number(bPseudo[type]);
                 });
             case 'DESC':
                 return products.sort((a, b) => {
                     const aPseudo: { [key: string]: boolean | string | number | string[] } = { ...a };
                     const bPseudo: { [key: string]: boolean | string | number | string[] } = { ...b };
-                    if (aPseudo[type] > bPseudo[type]) {
-                        return -1;
-                    }
-
-                    if (aPseudo[type] < bPseudo[type]) {
-                        return 1;
-                    }
-
-                    return 0;
+                    if (typeof aPseudo[type] !== 'number' || typeof bPseudo[type] !== 'number') return 0;
+                    return Number(bPseudo[type]) - Number(aPseudo[type]);
                 });
         }
         return products;
