@@ -13,7 +13,7 @@ export default class CartHeader {
         const title = ElementsFactory.createBaseElementWithText('p', 'cart-header__title', 'Products in cart:');
         const itemsPerPageContainer = ElementsFactory.createDivElement('items-per-page');
         const itemsPerPageText = ElementsFactory.createBaseElementWithText('p', 'items-per-page', 'Items:');
-        const itemsPerPageInput = ElementsFactory.createInputNumber('items-per-page__input', String(itemsPerPage), '');
+        const itemsPerPageInput = ElementsFactory.createInputNumber('items-per-page__input', itemsPerPage, '');
         itemsPerPageContainer.append(itemsPerPageText, itemsPerPageInput);
         this.header.append(title, itemsPerPageContainer);
         return this.header;
