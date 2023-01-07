@@ -20,7 +20,7 @@ export default class CatalogModel {
 
     public async setProducts(): Promise<void> {
         if (this.products.length === 0) {
-            const data: APIResponse | undefined = await this.apiService.setProducts();
+            const data: APIResponse | undefined = await this.apiService.getProducts();
             if (data) {
                 this.products = data;
             }

@@ -17,5 +17,8 @@
             "common": ["common/"],
             "utils": ["utils/"]
         } /* Skip type checking all .d.ts files. */
+    },
+    "buildOptions": {
+        "exclude": ["node_modules", "dist", "**/*.test.*", "**/tests/*"]
     }
 }

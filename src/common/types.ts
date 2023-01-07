@@ -26,7 +26,7 @@ export interface IRouteWithCallback {
     cb: renderCallback;
 }
 
-interface IProductResponse {
+export interface IProductResponse {
     id: number;
     title: string;
     description: string;

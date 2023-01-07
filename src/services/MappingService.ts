@@ -1,19 +1,12 @@
 import { CartResponse, Product, ProductResponse, ProductIsInCart } from 'common/types';
-import CartModel from 'model/CartModel';
+import CartModel from '../model/CartModel';
 
 export default class MappingService {
-    private static instance: MappingService;
-    private cartModel: CartModel = CartModel.getInstance();
-
-    public static getInstance(): MappingService {
-        if (!MappingService.instance) {
-            MappingService.instance = new MappingService();
-        }
-        return MappingService.instance;
-    }
+    cartModel: CartModel = CartModel.getInstance();
 
     mapFromProductResponseToProduct(productResponse: ProductResponse): Product {
-        const currentPrice = Math.ceil(productResponse.price * (100 - productResponse.discountPercentage)) / 100;
+        const discount = productResponse.discountPercentage > 0 ? productResponse.discountPercentage : 0;
+        const currentPrice = Math.ceil(productResponse.price * (100 - discount)) / 100;
         return Object.assign(productResponse, { currentPrice: currentPrice });
     }
 

@@ -57,10 +57,10 @@ export class ElementsFactory {
         return element;
     }
 
-    static createInputNumber(className: string, value: string, placeholder: string): HTMLInputElement {
+    static createInputNumber(className: string, value: number, placeholder: string): HTMLInputElement {
         const element = document.createElement('input');
         element.type = 'number';
-        element.value = value;
+        element.value = String(value);
         element.placeholder = placeholder;
         element.className = className;
         return element;
@@ -90,7 +90,7 @@ export class ElementsFactory {
         return element;
     }
 
-    static createOPtion(className: string, value: string, text: string): HTMLOptionElement {
+    static createOption(className: string, value: string, text: string): HTMLOptionElement {
         const element = document.createElement('option');
         element.className = className;
         element.value = value;
