@@ -10,13 +10,13 @@ export class Sort {
 
     createSortBlock(sort: string): HTMLSelectElement {
         this.sort = ElementsFactory.createSelect('sort-method');
-        const defaultOption = ElementsFactory.createOPtion('sort-option', 'Sort', 'Sort');
+        const defaultOption = ElementsFactory.createOption('sort-option', 'Sort', 'Sort');
         defaultOption.disabled = true;
         defaultOption.selected = true;
         this.sort.append(defaultOption);
 
         appConstants.sortParams.forEach((el) => {
-            const sortOption = ElementsFactory.createOPtion('sort-option', `${el.value}`, `${el.text}`);
+            const sortOption = ElementsFactory.createOption('sort-option', `${el.value}`, `${el.text}`);
             if (sort === el.value) {
                 sortOption.selected = true;
             }
