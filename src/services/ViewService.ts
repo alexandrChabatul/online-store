@@ -6,8 +6,8 @@ export class ViewService {
     }
 
     public setViewType(view: string) {
-        if (view) {
-            this.viewType = view;
+        if (view && view.toLowerCase() === 'row') {
+            this.viewType = 'row';
         } else {
             this.viewType = 'table';
         }

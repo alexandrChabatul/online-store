@@ -22,7 +22,7 @@ export class SearchService {
     getSearchResults(products: ProductIsInCart[]): ProductIsInCart[] {
         const productsWithSearchAplied = products.filter((el: ProductIsInCart): ProductIsInCart | undefined => {
             const objCopy: { [key: string]: boolean | string | number | string[] } = { ...el };
-            ['id', 'thumbnail', 'images'].forEach((element) => {
+            ['id', 'thumbnail', 'images', 'isInCart'].forEach((element) => {
                 delete objCopy[element];
             });
             for (const key in objCopy) {

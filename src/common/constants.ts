@@ -32,11 +32,11 @@ const appConstants = {
     currency: '€',
     sortParams: [
         {
-            value: 'price ASC',
+            value: 'currentPrice ASC',
             text: 'Price (Low-High)',
         },
         {
-            value: 'price DESC',
+            value: 'currentPrice DESC',
             text: 'Price (High-Low)',
         },
         {
