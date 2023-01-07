@@ -1,4 +1,4 @@
-import { ProductIsInCart } from "common/types";
+import { ProductIsInCart } from 'common/types';
 
 export const initialArray: ProductIsInCart[] = [
     {

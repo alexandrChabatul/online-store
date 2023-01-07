@@ -1,10 +1,7 @@
-import { ViewService } from "services/ViewService";
+import { ViewService } from 'services/ViewService';
 
 describe('getSearchTerm and setSearchTerm methods', () => {
     const viewService = new ViewService();
-
-    beforeEach(() => {
-    });
 
     it('should be defined', () => {
         expect(viewService.getViewType).toBeDefined();
@@ -23,6 +20,5 @@ describe('getSearchTerm and setSearchTerm methods', () => {
     it('should return default value if set other than row', () => {
         viewService.setViewType('new value');
         expect(viewService.getViewType()).toBe('table');
-    })
+    });
 });
-

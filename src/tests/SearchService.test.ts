@@ -9,7 +9,7 @@ import {
     expectedRatingArray,
     expectedStockArray,
     expectedTitleArray,
-    expectedCurrentPriceArray
+    expectedCurrentPriceArray,
 } from './testData/expected-search';
 import { initialArray } from './testData/initialData';
 
@@ -33,7 +33,7 @@ describe('getSearchTerm and setSearchTerm methods', () => {
         searchService.setSearchTerm('new search');
         expect(searchService.getSearchTerm()).toBe('new search');
     });
-})
+});
 
 describe('getSearchResults method', () => {
     const searchService = new SearchService();
@@ -77,20 +77,20 @@ describe('getSearchResults method', () => {
         expect(filteredPoducts).toStrictEqual(expectedDiscountArray);
     });
 
-    it('shouldn\'t return products with term included in id', () => {
+    it("shouldn't return products with term included in id", () => {
         const searchTerm = String(initialArray[3].id);
         searchService.setSearchTerm(searchTerm);
         const filteredPoducts = searchService.getSearchResults(startValue);
         expect(filteredPoducts).toStrictEqual([]);
     });
 
-    it('shouldn\'t return products with term included in images', () => {
+    it("shouldn't return products with term included in images", () => {
         searchService.setSearchTerm('firebasestorage');
         const filteredPoducts = searchService.getSearchResults(startValue);
         expect(filteredPoducts).toStrictEqual([]);
     });
 
-    it('shouldn\'t return products with term included in thumbnail', () => {
+    it("shouldn't return products with term included in thumbnail", () => {
         searchService.setSearchTerm('dummyjson');
         const filteredPoducts = searchService.getSearchResults(startValue);
         expect(filteredPoducts).toStrictEqual([]);
@@ -126,7 +126,7 @@ describe('getSearchResults method', () => {
         expect(filteredPoducts).toStrictEqual(expectedCurrentPriceArray);
     });
 
-    it('shouldn\'t return products with term included in isInCart', () => {
+    it("shouldn't return products with term included in isInCart", () => {
         searchService.setSearchTerm('false');
         const filteredPoducts = searchService.getSearchResults(startValue);
         expect(filteredPoducts).toStrictEqual([]);

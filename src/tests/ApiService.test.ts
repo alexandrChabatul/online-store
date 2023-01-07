@@ -25,7 +25,7 @@ describe('Api service', () => {
 
     describe('Get product function', () => {
         test('Should make request to API link', async () => {
-            const response = await api.getProduct('1');
+            await api.getProduct('1');
             expect(global.fetch as jest.Mock).toHaveBeenCalledWith(expect.stringContaining(appConstants.productsApi));
         });
 
@@ -48,7 +48,7 @@ describe('Api service', () => {
             const blob = new Blob([JSON.stringify(productResponse)], { type: 'text' });
             (fetch as jest.Mock).mockReturnValue(new Response(blob));
             const response = await api.getProduct('1');
-            expect(response).toHaveProperty('errorMessage')
+            expect(response).toHaveProperty('errorMessage');
             expect((response as BadResponse).errorMessage).toEqual('Incorrect response from the server');
         });
 
@@ -60,7 +60,7 @@ describe('Api service', () => {
                 })
             );
             const response = await api.getProduct('1');
-            expect(response).toHaveProperty('errorMessage')
+            expect(response).toHaveProperty('errorMessage');
             expect((response as BadResponse).errorMessage).toEqual('Product with id "1" not found');
         });
     });

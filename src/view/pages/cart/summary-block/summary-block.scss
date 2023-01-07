@@ -23,6 +23,10 @@
 
 .subtotal-summary {
     color: $cart-description-color;
+    
+    .summary-description__value {
+        text-decoration: line-through;
+    }
 }
 
 .applied-codes {
