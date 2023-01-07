@@ -22,7 +22,7 @@ export class CatalogService {
         this.sortService = new SortService();
         this.searchService = new SearchService();
         this.viewService = new ViewService();
-        this.mapper = MappingService.getInstance();
+        this.mapper = new MappingService();
         this.cart = CartModel.getInstance();
     }
 
