@@ -2,7 +2,7 @@ import appConstants from 'common/constants';
 import { BadResponse } from 'common/types';
 import ApiService from 'services/ApiService';
 
-global.fetch = jest.fn(() => Promise.resolve(new Response(''))) as jest.Mock;
+global.fetch = jest.fn() as jest.Mock;
 
 describe('Api service', () => {
     const api = new ApiService();
@@ -33,13 +33,14 @@ describe('Api service', () => {
             const blob = new Blob([JSON.stringify(productResponse)], { type: 'application/json' });
             (fetch as jest.Mock).mockReturnValue(new Response(blob));
             const response = await api.getProduct('1');
-            expect('errorMessage' in response).toBeFalsy;
+            expect(response).not.toHaveProperty('errorMessage');
+            expect(response).toEqual(productResponse);
         });
 
         test('Should return BadResponse promise if response status not "ok"', async () => {
             (fetch as jest.Mock).mockReturnValue(new Response('', { status: 404 }));
             const response = await api.getProduct('1');
-            expect('errorMessage' in response).toBeTruthy;
+            expect(response).toHaveProperty('errorMessage');
             expect((response as BadResponse).errorMessage).toEqual('Product with id "1" not found');
         });
 
@@ -47,7 +48,7 @@ describe('Api service', () => {
             const blob = new Blob([JSON.stringify(productResponse)], { type: 'text' });
             (fetch as jest.Mock).mockReturnValue(new Response(blob));
             const response = await api.getProduct('1');
-            expect('errorMessage' in response).toBeTruthy;
+            expect(response).toHaveProperty('errorMessage')
             expect((response as BadResponse).errorMessage).toEqual('Incorrect response from the server');
         });
 
@@ -59,7 +60,7 @@ describe('Api service', () => {
                 })
             );
             const response = await api.getProduct('1');
-            expect('errorMessage' in response).toBeTruthy;
+            expect(response).toHaveProperty('errorMessage')
             expect((response as BadResponse).errorMessage).toEqual('Product with id "1" not found');
         });
     });
