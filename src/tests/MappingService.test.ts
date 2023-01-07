@@ -51,7 +51,7 @@ describe('Mapping service', () => {
         });
         test('Should map from product response to product (positive discount)', () => {
             const result = mapper.mapFromProductResponseToProduct(testResponse as ProductResponse);
-            expect(result.currentPrice).toBe(900);
+            expect(result).toStrictEqual(product);
         });
         test('Should map from product response to product (negative discount)', () => {
             testResponse.discountPercentage = -10;
