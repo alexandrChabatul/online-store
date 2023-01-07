@@ -1,6 +1,6 @@
 import { ElementsFactory } from 'utils/element-generator';
-import { Footer } from './footer/footer';
-import { Header } from './header/header';
+import { Footer } from './footer/Footer';
+import { Header } from './header/Header';
 import './base-page.scss';
 
 export default class BasePage {
