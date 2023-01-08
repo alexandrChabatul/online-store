@@ -1,4 +1,3 @@
-import appConstants from 'common/constants';
 import { ProductIsInCart } from 'common/types';
 
 export class SortService {
@@ -9,7 +8,6 @@ export class SortService {
     }
 
     setSortMethod(sortParams: string) {
-        console.log(sortParams);
         if (sortParams) {
             this.sortMethod = sortParams.split('+').join(' ');
         } else {

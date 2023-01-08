@@ -12,7 +12,7 @@ class Breadcrumbs {
             ElementsFactory.createAnchor(
                 'router-link',
                 `${product.category[0].toUpperCase() + product.category.slice(1)}`,
-                `/?category=${product.category}`
+                `/?category=${encodeURIComponent(product.category.toLowerCase())}`
             )
         );
         const brandItem = ElementsFactory.createBaseElement('li', 'breadcrumbs__item');
@@ -20,7 +20,9 @@ class Breadcrumbs {
             ElementsFactory.createAnchor(
                 'router-link',
                 `${product.brand[0].toUpperCase() + product.brand.slice(1)}`,
-                `/?category=${product.category}&brand=${product.brand}`
+                `/?category=${encodeURIComponent(product.category.toLowerCase())}&brand=${encodeURIComponent(
+                    product.brand.toLowerCase()
+                )}`
             )
         );
         const productItem = ElementsFactory.createBaseElement('li', 'breadcrumbs__item');

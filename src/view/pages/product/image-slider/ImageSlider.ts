@@ -9,13 +9,13 @@ class ImageSlider {
         const thumbnailImg = ElementsFactory.createImgElement('', thumbnail, name);
         thumbnailContainer.append(thumbnailImg);
 
-        const slider = this.createSlider(thumbnailImg, images, name);
+        const slider = this.createSlider(thumbnailImg, images);
         productImages.append(thumbnailContainer);
         productImages.append(slider);
         return productImages;
     }
 
-    private createSlider(thumbnailImg: HTMLImageElement, images: string[], name: string) {
+    private createSlider(thumbnailImg: HTMLImageElement, images: string[]) {
         const slider = ElementsFactory.createDivElement('product-images__slider');
         images.forEach((el) => {
             const className =
