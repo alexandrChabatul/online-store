@@ -1,7 +1,23 @@
 .filters {
     width: 100%;
     padding: 15px 10px;
-    position: sticky;
+    position: static;
+    overflow-y: scroll;
+}
+
+.filters::-webkit-scrollbar {
+    width: 5px;
+}
+
+.filters::-webkit-scrollbar-track {
+    margin-right: 5px;
+    box-shadow: inset 0 0 5px $color-bg-main;
+    border-radius: 10px;
+}
+
+.filters::-webkit-scrollbar-thumb {
+    background: rgb(154, 153, 153);
+    border-radius: 10px;
 }
 
 .reset-block {
