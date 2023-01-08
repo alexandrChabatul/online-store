@@ -7,9 +7,10 @@
 
 .footer-wrapper {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-end;
-    padding: 10px;
+    padding: 10px 0;
 }
 
 .course-icon {
@@ -21,6 +22,11 @@
 
     &:hover {
         opacity: 0.7;
+    }
+
+    @media screen and (max-width: 576px) {
+        width: 80px;
+        height: 35px;
     }
 }
 
@@ -35,6 +41,14 @@
     color: $color-text-main;
     font-size: small;
     padding-bottom: 10px;
+
+    @media screen and (max-width: 576px) {
+        padding-bottom: 0px;
+    }
+
+    @media screen and (max-width: 425px) {
+        display: none;
+    }
 }
 
 .github-link {
@@ -45,4 +59,9 @@
     &:hover {
         opacity: 0.7;
     }
+
+    @media screen and (max-width: 576px) {
+        font-size: small;
+    }
+
 }

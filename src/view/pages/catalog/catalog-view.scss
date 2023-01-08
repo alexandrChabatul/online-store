@@ -21,15 +21,12 @@
 .main-left {
     flex: 1 0 23%;
     width: 22%;
-    height: fit-content;
+    height: calc(100vh - 150px);
     position: sticky;
-    top: -60px;
+    top: 120px;
+    bottom: 100px;
     background-color: $color-elements;
     border-radius: 10px;
     display: flex;
-    overflow-y: hidden;
-}
-
- .main-left::-webkit-scrollbar {
-    display: none;
+    -webkit-transform: translateZ(0);
 }
