@@ -1,4 +1,3 @@
-import appConstants from 'common/constants';
 import { ProductIsInCart } from 'common/types';
 
 export class SortService {

@@ -1,5 +1,5 @@
-import { ProductIsInCart } from "common/types";
-import { SortService } from "services/SortService";
+import { ProductIsInCart } from 'common/types';
+import { SortService } from 'services/SortService';
 import {
     unsortedArray,
     sortedByPriceAscArray,
@@ -7,9 +7,9 @@ import {
     sortedByDiscountAscArray,
     sortedByDiscountDescArray,
     sortedByRatingAscArray,
-    sortedByRatingDescArray
+    sortedByRatingDescArray,
 } from './testData/expected-sort';
-import { initialArray } from "./testData/initialData";
+import { initialArray } from './testData/initialData';
 
 describe('getSearchTerm and setSearchTerm methods', () => {
     const sortService = new SortService();
@@ -94,19 +94,19 @@ describe('getSortedResults method', () => {
         expect(sortService.getSortedResults(startValue)).toStrictEqual(result);
     });
 
-    it('should return unsorted products if parameter couldn\'t be splitted', () => {
+    it("should return unsorted products if parameter couldn't be splitted", () => {
         const result = unsortedArray;
         sortService.setSortMethod('ratingDESC');
         expect(sortService.getSortedResults(startValue)).toStrictEqual(result);
     });
 
-    it('should return unsorted products if parameter doesn\'t match product parameters', () => {
+    it("should return unsorted products if parameter doesn't match product parameters", () => {
         const result = unsortedArray;
         sortService.setSortMethod('value DESC');
         expect(sortService.getSortedResults(startValue)).toStrictEqual(result);
     });
 
-    it('should return unsorted products if sorting order doesn\'t match predefined variants', () => {
+    it("should return unsorted products if sorting order doesn't match predefined variants", () => {
         const result = unsortedArray;
         sortService.setSortMethod('rating+DES');
         expect(sortService.getSortedResults(startValue)).toStrictEqual(result);

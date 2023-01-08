@@ -1,5 +1,6 @@
 import appConstants from 'common/constants';
 import CartService from 'services/CartService';
+import PromoCodeService from 'services/PromoCodeService';
 import { ElementsFactory } from 'utils/element-generator';
 import BasePage from 'view/common-components/BasePage';
 import CartView from 'view/pages/cart/CartView';
@@ -8,8 +9,10 @@ export default class PopupHandler {
     basePage: BasePage;
     view: CartView;
     cartService: CartService;
+    codeService: PromoCodeService;
 
     constructor(view: CartView, cartService: CartService) {
+        this.codeService = new PromoCodeService();
         this.basePage = BasePage.getInstance();
         this.view = view;
         this.cartService = cartService;
@@ -90,8 +93,8 @@ export default class PopupHandler {
         }, timer * 1000);
         this.view.hidePopup();
         this.view.showBuyMessage(timer);
-        const cartService = new CartService();
-        cartService.cleanCart();
+        this.cartService.cleanCart();
+        this.codeService.deleteAllCodes();
         const cartInfo = this.cartService.getCartInfo();
         this.basePage.updateHeader(String(cartInfo.summary.productQty), String(cartInfo.summary.prevPrice));
     }

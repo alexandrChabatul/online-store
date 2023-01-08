@@ -27,4 +27,8 @@ export default class PromoCodeService {
         const potentialCode = this.codes.find((el) => el.code.toLowerCase() === code.toLowerCase());
         if (potentialCode) this.codesModel.deleteItem(potentialCode);
     }
+
+    deleteAllCodes() {
+        this.codesModel.deleteAllCodes();
+    }
 }
