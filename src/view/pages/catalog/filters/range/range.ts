@@ -38,12 +38,12 @@ export class Range {
     public controlFromSlider(fromSlider: HTMLInputElement, toSlider: HTMLInputElement, fromInput: HTMLElement): void {
         const [from, to] = this.getParsed(fromSlider, toSlider);
         this.fillSlider(fromSlider, toSlider, '#d8d7db', 'red', toSlider);
-            if (from > to) {
-                fromSlider.value = String(to);
-                fromInput.textContent = String(to);
-            } else {
-                fromInput.textContent = String(from);
-            }
+        if (from > to) {
+            fromSlider.value = String(to);
+            fromInput.textContent = String(to);
+        } else {
+            fromInput.textContent = String(from);
+        }
     }
 
     public controlToSlider(fromSlider: HTMLInputElement, toSlider: HTMLInputElement, toInput: HTMLElement): void {
