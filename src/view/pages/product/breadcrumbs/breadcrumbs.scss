@@ -25,13 +25,18 @@
 }
 
 @media (max-width: 992px) {
+
     .breadcrumbs {
         padding: 0px;
     }
+
 }
 
 @media (max-width: 576px) {
+
     .breadcrumbs {
         padding: 0px;
+        font-size: smaller;
     }
+    
 }
