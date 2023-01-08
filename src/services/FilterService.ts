@@ -87,7 +87,6 @@ export class FilterService {
     }
 
     public activateAllFilters(category: string, brand: string, price: string, stock: string) {
-        console.log('check', stock, price);
         this.activateCheckboxFilters('categories', category);
         this.activateCheckboxFilters('brands', brand);
         this.activateRangeFilters('stock', stock);
@@ -98,8 +97,9 @@ export class FilterService {
         if (params) {
             const paramsArray = params.split(appConstants.paramsDelimeter);
             paramsArray.forEach((el) => {
-                if (this[type][el.toLowerCase()]) {
-                    this[type][el.toLowerCase()].checked = true;
+                const decodedEl = decodeURIComponent(el.toLowerCase()).replace(/\+/gi, ' ');
+                if (this[type][decodedEl]) {
+                    this[type][decodedEl].checked = true;
                 }
             });
         } else {
@@ -146,14 +146,6 @@ export class FilterService {
                 this.stock.maxValue = filteredProductsMaxStock;
             }
         }
-    }
-
-    public changeFilter(type: 'brands' | 'categories', name: string) {
-        this[type][name].checked = !this[type][name].checked;
-    }
-
-    public changeRange(type: 'stock' | 'currentPrice', border: 'minValue' | 'maxValue', value: number) {
-        this[type][border] = value;
     }
 
     public getFilteredProducts(products: ProductIsInCart[], filters: IFilters): ProductIsInCart[] {

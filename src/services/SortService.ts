@@ -8,7 +8,6 @@ export class SortService {
     }
 
     setSortMethod(sortParams: string) {
-        console.log(sortParams);
         if (sortParams) {
             this.sortMethod = sortParams.split('+').join(' ');
         } else {
