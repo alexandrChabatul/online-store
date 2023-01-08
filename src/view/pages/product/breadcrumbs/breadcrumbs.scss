@@ -1,5 +1,6 @@
 .breadcrumbs {
     display: flex;
+    flex-wrap: wrap;
     list-style: none;
     gap: 10px;
     margin: 0px;
@@ -8,9 +9,29 @@
     a {
         color: #000;
     }
-    
-    :not(:first-child)::before{
-      content: '/';
-      margin-right: 10px;
+
+    :not(:first-child)::before {
+        content: '/';
+        margin-right: 10px;
+    }
+
+    :not(:last-child):hover {
+      
+      :hover {
+          cursor: pointer;
+          opacity: 0.7;
+      }
+  }
+}
+
+@media (max-width: 992px) {
+    .breadcrumbs {
+        padding: 0px;
+    }
+}
+
+@media (max-width: 576px) {
+    .breadcrumbs {
+        padding: 0px;
     }
 }

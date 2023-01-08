@@ -11,14 +11,8 @@
 }
 
 .product-button {
-    margin-top: 20px;
-    border: none;
-    border-radius: 10px;
+    @extend %button;
     width: calc((100% - 10px) / 2);
-    height: 50px;
-    box-shadow: $small-shadow;
-    background: $button-bg-color;
-    color: $button-text-color;
 }
 
 .product-buttons__buy {
