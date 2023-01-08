@@ -37,6 +37,10 @@ export default class PromoCodesModel {
         this.storageService.setItem(PromoCodesModel.PATH, codes);
     }
 
+    deleteAllCodes() {
+        this.storageService.setItem(PromoCodesModel.PATH, []);
+    }
+
     private cleanPromoCodes(codes: PromoCode[]): PromoCode[] {
         if (codes.length > 1) {
             const init: { [key: string]: { name: string; value: number } } = {};

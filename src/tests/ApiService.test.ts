@@ -25,7 +25,7 @@ describe('Api service', () => {
 
     describe('Get product function', () => {
         test('Should make request to API link', async () => {
-            const response = await api.getProduct('1');
+            await api.getProduct('1');
             expect(global.fetch as jest.Mock).toHaveBeenCalledWith(expect.stringContaining(appConstants.productsApi));
         });
 
