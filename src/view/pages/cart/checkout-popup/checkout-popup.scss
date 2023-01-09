@@ -6,7 +6,6 @@
     left: 0;
     background-color: $popup-bg-color;
     z-index: 99;
-
 }
 
 .checkout-popup {
@@ -95,11 +94,10 @@
     &-invalid {
         border: 1px solid red;
     }
-
 }
 
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
     appearance: none;
     -webkit-appearance: none;
 }
@@ -123,4 +121,50 @@ input[type="number"]::-webkit-inner-spin-button {
 .confirm-button {
     @extend %button;
     margin: 10px;
+}
+
+@media (max-width: 576px) {
+    .checkout-popup {
+        width: 90%;
+
+        h3 {
+            margin: 0 0 5px;
+        }
+    }
+
+    .personal-details-container {
+        width: 95%;
+        .popup-field {
+            width: 100%;
+        }
+    }
+
+    .credit-card-container {
+        width: 95%;
+    
+        .card-number-block {
+            box-sizing: border-box;
+            flex-basis: calc(100% - 50px);
+    
+            .card-number-field {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+    
+        .card-image {
+            width: 40px;
+            height: 35px;
+        }
+    
+        .card-validness-block,
+        .card-cvv-block {
+            flex-basis: calc(50% - 5px);
+    
+            .card-validness-field,
+            .card-cvv-field {
+                width: 100%;
+            }
+        }
+    }
 }

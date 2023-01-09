@@ -3,16 +3,18 @@
     justify-content: center;
     width: 100%;
     font-family: $font-primary;
-    gap: 30px;
+    gap: 20px;
 }
 
 .cart-block-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 75%;
 }
 
 .summary {
+    min-width: 23%;
     position: sticky;
     margin-top: 85px;
     top: 120px;
@@ -23,6 +25,7 @@
     background-color: $color-elements;
     padding: 30px 20px;
     height: min-content;
+    box-sizing: border-box;
 }
 
 .buy-block,
@@ -57,4 +60,36 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
+}
+
+@media (max-width: 1200px) {
+    .summary {
+        padding: 20px 15px;
+    }
+}
+
+@media (max-width: 992px) {
+    .cart-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .cart-block-container {
+        width: 100%;
+    }
+
+    .summary {
+        padding: 30px 35px;
+        position: static;
+        margin-top: 0px;
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .summary {
+        padding: 20px 15px;
+    }
 }

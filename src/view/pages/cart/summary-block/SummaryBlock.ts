@@ -58,11 +58,8 @@ export default class SummaryBlock {
     }
 
     renderAppliedCodes(codes: PromoCode[]) {
-        const appliedCodes = ElementsFactory.createBaseElementWithText(
-            'div',
-            'applied-codes',
-            'Applied codes:'
-        ) as HTMLDivElement;
+        const appliedCodes = ElementsFactory.createDivElement('applied-codes');
+        const text = ElementsFactory.createBaseElementWithText('p', '', 'Applied codes:');
         appliedCodes.classList.add('applied-codes__active');
         const ul = ElementsFactory.createBaseElement('ul', 'applied-codes__list');
         codes.forEach((el) => {
@@ -77,7 +74,7 @@ export default class SummaryBlock {
             code.append(codeValue, imageContainer);
             ul.append(code);
         });
-        appliedCodes.append(ul);
+        appliedCodes.append(text, ul);
         return appliedCodes;
     }
 
