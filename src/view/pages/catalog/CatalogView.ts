@@ -3,7 +3,7 @@ import { ElementsFactory } from 'utils/element-generator';
 import { Catalog } from './products/products';
 import { CatalogHeader } from './catalog-header/catalog-header';
 import './catalog-view.scss';
-import { Filters } from './filters/filters';
+import { Filters } from './filters/Filters';
 
 class CatalogView {
     filters: Filters;

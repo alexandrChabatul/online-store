@@ -64,7 +64,6 @@
     }
 
     @media screen and (max-width: 900px) {
-        padding-bottom: 50px;
         position: fixed;
         width: 100%;
         z-index: 3;
@@ -72,7 +71,6 @@
         left: 0;
         transform: translate(-100%, 0);
         transition: transform 0.5s ease-in;
-        height: calc(100vh - 100px);
     }
 
     &-open {

@@ -4,8 +4,8 @@ import { ResetBlock } from './reset/reset';
 import { ICatalogSettings } from 'common/types';
 import { CategoryBlock } from './checkbox/category/category';
 import { BrandBlock } from './checkbox/brand/brand';
-import { PriceBlock } from './range/price/price';
-import { StockBlock } from './range/stock/stock';
+import { PriceBlock } from './range/price/Price';
+import { StockBlock } from './range/stock/Stock';
 
 export class Filters {
     resetBlock: ResetBlock;
