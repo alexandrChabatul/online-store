@@ -6,7 +6,7 @@ export default class PromoCodeService {
     private codesModel: PromoCodesModel = PromoCodesModel.getInstance();
     private codes: PromoCode[] = appConstants.promoCodes;
 
-    getPromoCodes() {
+    getPromoCodes(): PromoCode[] {
         return this.codesModel.getAppliedCodes();
     }
 
@@ -18,17 +18,17 @@ export default class PromoCodeService {
         return Object.assign(potentialCode, { isActive: isInApplies });
     }
 
-    addPromoCode(code: string) {
+    addPromoCode(code: string): void {
         const potentialCode = this.codes.find((el) => el.code.toLowerCase() === code.toLowerCase());
         if (potentialCode) this.codesModel.setPromoCode(potentialCode);
     }
 
-    deletePromoCode(code: string) {
+    deletePromoCode(code: string): void {
         const potentialCode = this.codes.find((el) => el.code.toLowerCase() === code.toLowerCase());
         if (potentialCode) this.codesModel.deleteItem(potentialCode);
     }
 
-    deleteAllCodes() {
+    deleteAllCodes(): void {
         this.codesModel.deleteAllCodes();
     }
 }

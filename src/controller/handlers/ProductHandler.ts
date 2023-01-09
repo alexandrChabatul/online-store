@@ -10,11 +10,11 @@ export default class ProductHandler {
         this.cartService = new CartService();
     }
 
-    initProductHandlers(target: HTMLElement) {
+    initProductHandlers(target: HTMLElement): void {
         target.onclick = this.productClickHandler.bind(this);
     }
 
-    private productClickHandler(e: Event) {
+    private productClickHandler(e: Event): void {
         const target = e.target;
         if (!(target instanceof HTMLButtonElement)) return;
         switch (true) {
@@ -29,7 +29,7 @@ export default class ProductHandler {
         }
     }
 
-    private handleToCartClick(target: HTMLButtonElement) {
+    private handleToCartClick(target: HTMLButtonElement): void {
         const id = target.dataset.id;
         if (!id) return;
         const isInCart = this.cartService.checkItemInCart(id);
@@ -45,7 +45,7 @@ export default class ProductHandler {
         this.basePage.updateHeader(String(cartInfo.summary.productQty), String(cartInfo.summary.prevPrice));
     }
 
-    private handleBuyClick(target: HTMLButtonElement) {
+    private handleBuyClick(target: HTMLButtonElement): void {
         this.cartService.setPopupState(true);
         const id = target.dataset.id;
         if (!id) return;

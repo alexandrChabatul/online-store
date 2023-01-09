@@ -2,7 +2,7 @@ import { ElementsFactory } from 'utils/ElementGenerator';
 import './rating.scss';
 
 class Rating {
-    static getRatingBlock(rating: number) {
+    static getRatingBlock(rating: number): HTMLDivElement {
         const ratingBlock = ElementsFactory.createDivElement('rating');
         const ratingBody = ElementsFactory.createDivElement('rating__body');
         ratingBody.textContent = '★★★★★';

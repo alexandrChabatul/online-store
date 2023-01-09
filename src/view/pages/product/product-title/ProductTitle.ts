@@ -3,7 +3,7 @@ import Rating from '../product-description/rating/Rating';
 import './product-title.scss';
 
 class ProductTitle {
-    getProductTitle(title: string, rating: number) {
+    getProductTitle(title: string, rating: number): HTMLDivElement {
         const titleAndRating = ElementsFactory.createDivElement('title-rating');
         const titleBlock = ElementsFactory.createBaseElementWithText(
             'p',

@@ -23,18 +23,18 @@ export default class CartController implements IController {
         this.popupHandler = new PopupHandler(this.view, this.cartService);
     }
 
-    async render(params: params) {
+    async render(params: params): Promise<void> {
         await this.catalogService.model.setProducts();
         this.basePage.updateMain(this.view.renderCart(this.cartService.getCartInfo(params)));
         this.initCartEvents();
         if (this.cartService.getPopupState()) this.openPopup();
     }
 
-    initCartEvents() {
+    initCartEvents(): void {
         this.cartHandler.initEvents();
     }
 
-    private openPopup() {
+    private openPopup(): void {
         this.view.showPopup();
         this.popupHandler.initEvents();
         this.cartService.setPopupState(false);

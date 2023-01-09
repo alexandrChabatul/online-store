@@ -51,7 +51,7 @@ export class StockBlock extends Range {
         return this.stockBlock;
     }
 
-    setNotFoundValue() {
+    setNotFoundValue(): void {
         this.MinValue.textContent = 'Not Found';
         this.MaxValue.textContent = '';
     }

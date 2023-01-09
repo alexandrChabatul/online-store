@@ -2,7 +2,7 @@ import appConstants from 'common/constants';
 import { params } from 'common/types';
 
 export default class UrlService {
-    setMultipleValueParam(name: string, value: string) {
+    setMultipleValueParam(name: string, value: string): URL {
         const url = new URL(window.location.href);
         const params = url.searchParams;
         if (!params.has(name)) {
@@ -18,21 +18,21 @@ export default class UrlService {
         return url;
     }
 
-    setDoubledValueParam(name: string, min: string, max: string) {
+    setDoubledValueParam(name: string, min: string, max: string): URL {
         const url = new URL(window.location.href);
         const params = url.searchParams;
         params.set(name, min + appConstants.paramsDelimeter + max);
         return url;
     }
 
-    replaceQueryParam(name: string, value: string) {
+    replaceQueryParam(name: string, value: string): URL {
         const url = new URL(window.location.href);
         const params = url.searchParams;
         params.set(name, value);
         return url;
     }
 
-    deleteQueryParamValue(name: string, value: string) {
+    deleteQueryParamValue(name: string, value: string): URL {
         const url = new URL(window.location.href);
         const params = url.searchParams;
         const currentValue = params.get(name);
@@ -43,19 +43,19 @@ export default class UrlService {
         return url;
     }
 
-    deleteQueryParam(name: string) {
+    deleteQueryParam(name: string): URL {
         const url = new URL(window.location.href);
         const params = url.searchParams;
         params.delete(name);
         return url;
     }
 
-    deleteAllQueryParams() {
+    deleteAllQueryParams(): URL {
         const url = new URL(window.location.origin);
         return url;
     }
 
-    getQueryParams() {
+    getQueryParams(): params {
         const url = new URL(window.location.href);
         const params: params = {};
         for (const [name, value] of url.searchParams) {
@@ -64,7 +64,7 @@ export default class UrlService {
         return params;
     }
 
-    addUrlInHistory(url: URL) {
+    addUrlInHistory(url: URL): void {
         const path = url.pathname + url.search;
         window.history.pushState({ path }, path, path);
     }

@@ -25,7 +25,7 @@ export class FilterService {
         };
     }
 
-    public getFilters() {
+    public getFilters(): IFilters {
         return {
             category: Object.values(this.categories),
             brand: Object.values(this.brands),
@@ -34,7 +34,7 @@ export class FilterService {
         };
     }
 
-    createFilters(products: ProductIsInCart[], params: params) {
+    createFilters(products: ProductIsInCart[], params: params): void {
         this.currentPrice.min = products[0].price;
         this.currentPrice.max = products[0].price;
         this.stock.min = products[0].stock;
@@ -86,14 +86,14 @@ export class FilterService {
         this.activateAllFilters(category, brand, price, stock);
     }
 
-    public activateAllFilters(category: string, brand: string, price: string, stock: string) {
+    public activateAllFilters(category: string, brand: string, price: string, stock: string): void {
         this.activateCheckboxFilters('categories', category);
         this.activateCheckboxFilters('brands', brand);
         this.activateRangeFilters('stock', stock);
         this.activateRangeFilters('currentPrice', price);
     }
 
-    private activateCheckboxFilters(type: 'categories' | 'brands', params: string) {
+    private activateCheckboxFilters(type: 'categories' | 'brands', params: string): void {
         if (params) {
             const paramsArray = params.split(appConstants.paramsDelimeter);
             paramsArray.forEach((el) => {
@@ -109,7 +109,7 @@ export class FilterService {
         }
     }
 
-    private activateRangeFilters(type: 'stock' | 'currentPrice', params: string) {
+    private activateRangeFilters(type: 'stock' | 'currentPrice', params: string): void {
         if (params) {
             const paramsArray = params.split(appConstants.paramsDelimeter);
             this[type].minValue = Number(paramsArray[0]);
@@ -119,7 +119,7 @@ export class FilterService {
         }
     }
 
-    public countActiveFilters(filteredProducts: ProductIsInCart[], params: params) {
+    public countActiveFilters(filteredProducts: ProductIsInCart[], params: params): void {
         if (filteredProducts.length > 0) {
             let filteredProductsMinPrice = filteredProducts[0].currentPrice;
             let filteredProductsMaxPrice = filteredProducts[0].currentPrice;
@@ -173,7 +173,11 @@ export class FilterService {
         return products;
     }
 
-    private getRanged(products: ProductIsInCart[], type: 'stock' | 'currentPrice', filters: IFilters) {
+    private getRanged(
+        products: ProductIsInCart[],
+        type: 'stock' | 'currentPrice',
+        filters: IFilters
+    ): ProductIsInCart[] {
         const minRange = filters[type].minValue;
         const maxRange = filters[type].maxValue;
         return products.filter((el) => el[type] >= minRange && el[type] <= maxRange);

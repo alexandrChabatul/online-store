@@ -10,19 +10,19 @@ export default class CartBlock {
         this.cartBlock = ElementsFactory.createDivElement('cart-block');
     }
 
-    getCartPage(cart: CartProduct[], params: CartParams) {
+    getCartPage(cart: CartProduct[], params: CartParams): HTMLDivElement {
         this.updateCartBlock(cart, params);
         return this.cartBlock;
     }
 
-    updateCartBlock(cart: CartProduct[], params: CartParams) {
+    updateCartBlock(cart: CartProduct[], params: CartParams): void {
         this.cartBlock.innerHTML = '';
         const items = this.renderItems(cart);
         const pagination = this.renderPagination(params.page, params.numOfPages);
         this.cartBlock.append(items, pagination);
     }
 
-    renderItems(cart: CartProduct[]) {
+    renderItems(cart: CartProduct[]): HTMLDivElement {
         const items = ElementsFactory.createDivElement('cart-items');
         const itemsHeader = ElementsFactory.createDivElement('items-header');
         const itemsMark = ElementsFactory.createBaseElementWithText('p', 'items-header__item', 'Item');
@@ -41,7 +41,7 @@ export default class CartBlock {
         return items;
     }
 
-    renderPagination(page: number, numOfPages: number) {
+    renderPagination(page: number, numOfPages: number): HTMLUListElement {
         const pagination = ElementsFactory.createBaseElement('ul', 'cart-pagination') as HTMLUListElement;
         pagination.append(ElementsFactory.createBaseElementWithText('li', 'pagination__number', '<'));
         for (let i = 1; i <= numOfPages; i++) {

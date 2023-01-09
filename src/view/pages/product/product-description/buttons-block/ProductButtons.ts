@@ -2,7 +2,7 @@ import { ElementsFactory } from 'utils/ElementGenerator';
 import './product-buttons.scss';
 
 export default class ProductButtons {
-    getButtonsBlock(id: number, inCart: boolean) {
+    getButtonsBlock(id: number, inCart: boolean): HTMLDivElement {
         const container = ElementsFactory.createDivElement('product-buttons');
         const cartButton = ElementsFactory.createButton(
             'product-buttons__cart product-button',

@@ -3,7 +3,7 @@ import { ElementsFactory } from 'utils/ElementGenerator';
 import './product-price.scss';
 
 class ProductPrice {
-    getProductPriceBlock(price: number, currentPrice: number, discount: number) {
+    getProductPriceBlock(price: number, currentPrice: number, discount: number): HTMLDivElement {
         const container = ElementsFactory.createDivElement('price-info');
         const priceBlock = ElementsFactory.createDivElement('price-info__price');
         priceBlock.innerHTML = `<p class="price-info__title">Price: <span class="price-info__prev">${price} ${appConstants.currency}</span></p> <p class="price-info__real">${currentPrice} ${appConstants.currency}</p>`;

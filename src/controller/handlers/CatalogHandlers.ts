@@ -29,7 +29,7 @@ export default class CatalogHandler {
         this.view.products.products.onclick = this.addToCartClickHandler.bind(this);
     }
 
-    catalogHeaderClickHandler(e: Event) {
+    catalogHeaderClickHandler(e: Event): void {
         const target: EventTarget | null = e.target;
         if (!(target instanceof HTMLDivElement)) return;
 
@@ -41,15 +41,15 @@ export default class CatalogHandler {
         }
     }
 
-    filtersButtonHandler() {
+    filtersButtonHandler(): void {
         this.view.openFilters();
     }
 
-    closeButtonHandler() {
+    closeButtonHandler(): void {
         this.view.closeFilters();
     }
 
-    addToCartClickHandler(e: Event) {
+    addToCartClickHandler(e: Event): void {
         const target: EventTarget | null = e.target;
         if (!(target instanceof HTMLButtonElement)) return;
 
@@ -69,7 +69,7 @@ export default class CatalogHandler {
         this.basePage.updateHeader(String(cartInfo.summary.productQty), String(cartInfo.summary.prevPrice));
     }
 
-    sortTypeChangeHandler(e: Event) {
+    sortTypeChangeHandler(e: Event): void {
         const target: EventTarget | null = e.target;
         if (!(target instanceof HTMLSelectElement) || !target.value) return;
 
@@ -84,7 +84,7 @@ export default class CatalogHandler {
         }
     }
 
-    searchInputHandler(e: Event) {
+    searchInputHandler(e: Event): void {
         const target: EventTarget | null = e.target;
         if (!(target instanceof HTMLInputElement)) return;
 
@@ -98,7 +98,7 @@ export default class CatalogHandler {
         this.updateContent(url, '');
     }
 
-    viewChangeHandler(target: HTMLDivElement) {
+    viewChangeHandler(target: HTMLDivElement): void {
         let url = new URL(window.location.href);
         if (target.className.includes('row')) {
             url = this.urlService.replaceQueryParam('view', 'row');
@@ -116,7 +116,7 @@ export default class CatalogHandler {
         }
     }
 
-    filterClickHandler(e: Event) {
+    filterClickHandler(e: Event): void {
         const target: EventTarget | null = e.target;
         if (target instanceof HTMLButtonElement) {
             if (target.id === 'reset') {
@@ -133,17 +133,17 @@ export default class CatalogHandler {
         }
     }
 
-    resetButtonClickHandler() {
+    resetButtonClickHandler(): void {
         const url = this.urlService.deleteAllQueryParams();
         this.updateContent(url, '');
     }
 
-    copyLinkButtonClickHandler() {
+    copyLinkButtonClickHandler(): void {
         navigator.clipboard.writeText(window.location.href);
         this.view.filters.resetBlock.applyCopiedState();
     }
 
-    filterInputHandler(e: Event) {
+    filterInputHandler(e: Event): void {
         const target: EventTarget | null = e.target;
         if (!(target instanceof HTMLInputElement)) return;
 
@@ -155,7 +155,7 @@ export default class CatalogHandler {
         }
     }
 
-    checkboxInputHandler(target: HTMLInputElement) {
+    checkboxInputHandler(target: HTMLInputElement): void {
         const filterType = target.closest('ul')?.id;
         const filterValue = target.value;
         if (!filterType) return;
@@ -164,7 +164,7 @@ export default class CatalogHandler {
         this.updateContent(url, filterType);
     }
 
-    rangeInputHandler(target: HTMLInputElement) {
+    rangeInputHandler(target: HTMLInputElement): void {
         const filterType = target.closest('div')?.id;
 
         if (filterType === 'price' || filterType === 'stock') {
@@ -177,7 +177,7 @@ export default class CatalogHandler {
         }
     }
 
-    updateContent(url: URL, targetFilter: string) {
+    updateContent(url: URL, targetFilter: string): void {
         this.urlService.addUrlInHistory(url);
         const params: params | false = this.urlService.getQueryParams();
         if (params) {
