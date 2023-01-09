@@ -1,5 +1,5 @@
 import appConstants from 'common/constants';
-import { PromoCode } from 'common/types';
+import { PotentialPromoCode, PromoCode } from 'common/types';
 import PromoCodesModel from 'model/PromoCodesModel';
 
 export default class PromoCodeService {
@@ -10,12 +10,12 @@ export default class PromoCodeService {
         return this.codesModel.getAppliedCodes();
     }
 
-    checkPromoCode(code: string): PromoCode | null {
+    checkPromoCode(code: string): PotentialPromoCode | null {
         const potentialCode = this.codes.find((el) => el.code.toLowerCase() === code.toLowerCase());
         if (!potentialCode) return null;
         const appliedCodes = this.getPromoCodes();
         const isInApplies = Boolean(appliedCodes.find((el) => el.code.toLowerCase() === code.toLowerCase()));
-        return isInApplies ? null : potentialCode;
+        return Object.assign(potentialCode, { isActive: isInApplies });
     }
 
     addPromoCode(code: string) {

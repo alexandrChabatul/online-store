@@ -1,5 +1,5 @@
 import appConstants from 'common/constants';
-import { CartSummary, PromoCode } from 'common/types';
+import { CartSummary, PotentialPromoCode, PromoCode } from 'common/types';
 import { ElementsFactory } from 'utils/element-generator';
 import './summary-block.scss';
 
@@ -92,7 +92,7 @@ export default class SummaryBlock {
         return codeInputBlock;
     }
 
-    updatePotentialCode(potentialCode: PromoCode | null) {
+    updatePotentialCode(potentialCode: PotentialPromoCode | null) {
         this.potentialCodes.innerHTML = '';
         if (!potentialCode) return null;
         const potentialCodeBlock = ElementsFactory.createDivElement('potential-code');
@@ -101,9 +101,12 @@ export default class SummaryBlock {
             'potential-code__text',
             `${potentialCode.name} - ${potentialCode.value}%`
         );
-        const button = ElementsFactory.createButton('potential-code__button', 'ADD');
-        button.id = potentialCode.code;
-        potentialCodeBlock.append(codeBlock, button);
+        potentialCodeBlock.append(codeBlock);
+        if (!potentialCode.isActive) {
+            const button = ElementsFactory.createButton('potential-code__button', 'ADD');
+            button.id = potentialCode.code;
+            potentialCodeBlock.append(button);
+        }
         this.potentialCodes.append(potentialCodeBlock);
     }
 

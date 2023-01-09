@@ -84,6 +84,8 @@ export type CartSummary = { productQty: number; prevPrice: number; totalPrice: n
 
 export type PromoCode = { code: string; name: string; value: number };
 
+export type PotentialPromoCode = PromoCode & { isActive: boolean };
+
 export type CartParams = { itemsPerPage: number; page: number; numOfPages: number };
 
 export type CartInfo = {
