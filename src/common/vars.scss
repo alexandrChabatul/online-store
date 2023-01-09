@@ -1,0 +1,115 @@
+$color-bg-main: #d8d7db;
+$color-elements: white;
+$color-text-main: #414751;
+$color-text-secondary: #5e5c5b;
+$color-stars-default: rgb(107, 101, 101);
+$color-stars-active: #ffd300;
+$product-cart-color: #fff;
+$button-bg-color: #000;
+$button-text-color: #fff;
+$cart-description-color: rgb(153, 152, 152);
+$current-price-color: rgb(241, 71, 71);
+$summary-block-color: #cacdd8;
+$popup-bg-color: rgba(0, 0, 0, 0.5);
+
+$font-header: 'Righteous', cursive;
+$font-primary: 'sora', sans-serif;
+
+//Shadows
+$main-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 2px 14px 6px -2px;
+$small-shadow: rgba(0, 0, 0, 0.1) 0px 5px 5px -3px, rgba(0, 0, 0, 0.05) 2px 4px 6px -2px;
+
+//Borders
+$product-slider-border: 1px solid #e8e8e8;
+$product-slider-border-active: 1px solid #ff5300;
+
+//Font-size
+$cart-item-title: 20px;
+$cart-item-description: 14px;
+
+%button {
+    border: none;
+    border-radius: 10px;
+    width: 150px;
+    height: 50px;
+    box-shadow: $small-shadow;
+    background: $button-bg-color;
+    color: $button-text-color;
+    font-family: $font-primary;
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+%cart-grid {
+    display: grid;
+    column-gap: 15px;
+    grid-template: auto / 20px 160px 1fr 80px 90px 90px 30px;
+    align-items: center;
+}
+
+@media (max-width: 1200px) {
+
+    %cart-grid {
+        column-gap: 10px;
+        grid-template: auto / 15px 120px 1fr 80px 90px 90px 30px;
+    }
+    
+}
+
+@media (max-width: 670px) {
+    
+    %cart-grid {
+        gap: 10px;
+        grid-template: min-content 1fr / 15px repeat(4, 1fr);
+        grid-template-areas: 
+        "desc desc desc desc cross"
+        "index image price quantity subtotal";
+    }
+    
+}
+
+@media (max-width: 576px) {
+    
+    %cart-grid {
+        gap: 10px;
+        grid-template: min-content 1fr / 15px repeat(3, 1fr);
+        grid-template-areas: 
+        "desc desc desc cross"
+        "index image price quantity";
+        justify-items: center;
+    }
+    
+}
+
+@media (max-width: 420px) {
+    
+    %cart-grid {
+        grid-template: min-content 1fr min-content / 15px 1fr 1fr;
+        grid-template-areas: 
+        "desc desc cross"
+        "index image quantity"
+        "index image price";
+    }
+    
+}
+
+%img-placeholder {
+    content: attr(alt);
+    box-sizing: border-box;
+    padding: 0 20px;
+    z-index: 1;
+    line-height: 3em;
+    color: rgb(100, 100, 100);
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('assets/images/product-placeholder.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}

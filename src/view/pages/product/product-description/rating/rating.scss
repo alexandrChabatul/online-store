@@ -1,0 +1,27 @@
+.rating {
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    line-height: .95;
+}
+
+.rating__body {
+    position: relative;
+    color: $color-stars-default;
+}
+
+.rating__active {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    color: $color-stars-active;
+}
+
+.rating__value {
+    font-size: 50%;
+    line-height: 1;
+    padding-left: 10px;
+}

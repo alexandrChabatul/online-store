@@ -1,0 +1,30 @@
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  p {
+      margin: 0;
+  }
+}
+
+.cart-header__title {
+  font-size: large;
+  font-weight: 600;
+}
+
+.items-per-page {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.items-per-page__input {
+  width: 40px;
+  box-sizing: border-box;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-size: medium;
+  height: 32px;
+  padding: 3px 10px;
+}

@@ -1,0 +1,20 @@
+.product-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+
+    a {
+        display: block;
+        width: calc((100% - 10px) / 2);
+    }
+}
+
+.product-button {
+    @extend %button;
+    width: calc((100% - 10px) / 2);
+}
+
+.product-buttons__buy {
+    width: 100%;
+}

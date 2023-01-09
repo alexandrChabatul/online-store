@@ -1,0 +1,123 @@
+.product-images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.product-images__slider {
+    box-sizing: border-box;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: 80px;
+    gap: 10px;
+    max-width: 100%;
+}
+
+.product-images__thumbnail {
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+.product-images__thumbnail img {
+    margin: auto 0;
+    border-radius: 5px;
+    min-width: 300px;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.product-images__thumbnail img::after {
+    @extend %img-placeholder;
+    padding: 20px;
+    background-size: cover;
+    object-fit: cover;
+    line-height: normal;
+}
+
+.product-images__slide {
+    border: $product-slider-border;
+    border-radius: 5px;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: block;
+
+    :hover{
+        cursor: pointer;
+        scale: 1.1;
+    }
+}
+
+.product-images__slide_active {
+    border: $product-slider-border-active;
+}
+
+.product-images__slide img {
+    transition: all ease .3s;
+    min-width: 80px;
+    height: 100%;
+    display: block;
+    position: relative;
+    object-fit: cover;
+}
+
+.product-images__slide img::after {
+    @extend %img-placeholder;
+    padding: 0 10px;
+}
+
+@media (max-width: 992px) {
+    .product-images__thumbnail {
+        height: 240px;
+    }
+    
+    .product-images__thumbnail img {
+        max-width: 350px;
+    }
+    .product-images__slide img {
+        min-width: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-images__thumbnail {
+        height: 250px;
+    }
+    .product-images__thumbnail img {
+        max-width: 450px;
+    }
+    .product-images__slide img {
+        min-width: 50px;
+    }
+    .product-images__thumbnail img {
+        min-width: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .product-images__thumbnail {
+        height: 200px;
+        width: 100%;
+    }
+    .product-images__slide img {
+        min-height: 100%;
+    }
+    .product-images__thumbnail img {
+        min-width: auto;
+    }
+}
+
+@media (max-width: 400px) {
+    .product-images__thumbnail {
+        height: 150px;
+    }
+    .product-images__slide img {
+        min-width: 50px;
+    }
+}

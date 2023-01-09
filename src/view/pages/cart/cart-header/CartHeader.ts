@@ -1,0 +1,21 @@
+import { ElementsFactory } from 'utils/ElementGenerator';
+import './cart-header.scss';
+
+export default class CartHeader {
+    header: HTMLDivElement;
+
+    constructor() {
+        this.header = ElementsFactory.createDivElement('cart-header');
+    }
+
+    getCartHeader(itemsPerPage: number): HTMLDivElement {
+        this.header.innerHTML = '';
+        const title = ElementsFactory.createBaseElementWithText('p', 'cart-header__title', 'Products in cart:');
+        const itemsPerPageContainer = ElementsFactory.createDivElement('items-per-page');
+        const itemsPerPageText = ElementsFactory.createBaseElementWithText('p', 'items-per-page', 'Items:');
+        const itemsPerPageInput = ElementsFactory.createInputNumber('items-per-page__input', itemsPerPage, '');
+        itemsPerPageContainer.append(itemsPerPageText, itemsPerPageInput);
+        this.header.append(title, itemsPerPageContainer);
+        return this.header;
+    }
+}
