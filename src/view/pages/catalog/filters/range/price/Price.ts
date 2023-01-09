@@ -53,7 +53,7 @@ export class PriceBlock extends Range {
         return this.priceBlock;
     }
 
-    setNotFoundValue() {
+    setNotFoundValue(): void {
         this.MinValue.textContent = 'Not Found';
         this.MaxValue.textContent = '';
     }
