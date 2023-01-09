@@ -1,4 +1,4 @@
-import { ElementsFactory } from 'utils/element-generator';
+import { ElementsFactory } from 'utils/ElementGenerator';
 
 export class ViewBlock {
     viewBlock: HTMLDivElement;
@@ -17,7 +17,7 @@ export class ViewBlock {
         return this.viewBlock;
     }
 
-    public setView(view: string) {
+    public setView(view: string): void {
         for (const elem of this.viewBlock.children) {
             elem.classList.remove('view-block-icon-active');
         }

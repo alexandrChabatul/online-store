@@ -1,5 +1,5 @@
 import { BadResponse, Product, ProductIsInCart } from 'common/types';
-import { ElementsFactory } from 'utils/element-generator';
+import { ElementsFactory } from 'utils/ElementGenerator';
 import Breadcrumbs from './breadcrumbs/Breadcrumbs';
 import ImageSlider from './image-slider/ImageSlider';
 import ProductButtons from './product-description/buttons-block/ProductButtons';
@@ -17,7 +17,7 @@ class ProductView {
     productButtons: ProductButtons = new ProductButtons();
     breadcrumbs: Breadcrumbs = new Breadcrumbs();
 
-    renderProduct(product: ProductIsInCart) {
+    renderProduct(product: ProductIsInCart): HTMLDivElement {
         const productWrapper = ElementsFactory.createDivElement('wrapper product-wrapper');
         const breadcrumbsUl = this.breadcrumbs.getBreadcrumbs(product);
         const productBlock = ElementsFactory.createDivElement('product');
@@ -28,7 +28,7 @@ class ProductView {
         return productWrapper;
     }
 
-    renderError(response: BadResponse) {
+    renderError(response: BadResponse): HTMLDivElement {
         const productWrapper = ElementsFactory.createDivElement('wrapper product-wrapper');
         const errorMessage = ElementsFactory.createBaseElementWithText('div', 'product-error', response.errorMessage);
         const errorImageContainer = ElementsFactory.createDivElement('error-image-container');
@@ -39,7 +39,7 @@ class ProductView {
         return productWrapper;
     }
 
-    getTitleAndImageBlock(product: Product) {
+    getTitleAndImageBlock(product: Product): HTMLDivElement {
         const titleImageContainer = ElementsFactory.createDivElement('title-image-container');
         const productTitleBlock = this.productTitle.getProductTitle(product.title, product.rating);
         const imageSliderBlock = this.imageSlider.getImageSlider(product.thumbnail, product.images, product.title);
@@ -47,7 +47,7 @@ class ProductView {
         return titleImageContainer;
     }
 
-    getPriceAndDescBlock(product: ProductIsInCart) {
+    getPriceAndDescBlock(product: ProductIsInCart): HTMLDivElement {
         const productDescription = ElementsFactory.createDivElement('product-description');
         const productPriceBlock = this.productPrice.getProductPriceBlock(
             product.price,

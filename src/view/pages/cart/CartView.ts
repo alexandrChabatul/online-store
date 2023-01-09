@@ -1,6 +1,6 @@
-import CheckoutPopup from './checkout-popup/checkout-popup';
+import CheckoutPopup from './checkout-popup/CheckoutPopup';
 import { CartInfo, CartParams, CartProduct, CartSummary, PromoCode } from 'common/types';
-import { ElementsFactory } from 'utils/element-generator';
+import { ElementsFactory } from 'utils/ElementGenerator';
 import CartBlock from './cart-block/CartBlock';
 import './cart-view.scss';
 import SummaryBlock from './summary-block/SummaryBlock';
@@ -21,7 +21,7 @@ class CartView {
         this.summary = new SummaryBlock();
     }
 
-    renderCart(cartInfo: CartInfo) {
+    renderCart(cartInfo: CartInfo): HTMLDivElement {
         this.wrapper.innerHTML = '';
         if (cartInfo.products.length === 0) {
             this.wrapper.append(this.getEmptyCartMessage());
@@ -36,7 +36,7 @@ class CartView {
         return this.wrapper;
     }
 
-    updateCartAndSummary(cartInfo: CartInfo) {
+    updateCartAndSummary(cartInfo: CartInfo): void {
         if (cartInfo.products.length === 0) {
             this.wrapper.innerHTML = '';
             this.wrapper.append(this.getEmptyCartMessage());
@@ -45,15 +45,15 @@ class CartView {
         this.summary.updateSummaryDescription(cartInfo.summary);
     }
 
-    updateCartBlock(products: CartProduct[], params: CartParams) {
+    updateCartBlock(products: CartProduct[], params: CartParams): void {
         this.cartBlock.updateCartBlock(products, params);
     }
 
-    updateSummary(summary: CartSummary, promoCodes: PromoCode[]) {
+    updateSummary(summary: CartSummary, promoCodes: PromoCode[]): void {
         this.summary.updateSummary(summary, promoCodes);
     }
 
-    getEmptyCartMessage() {
+    getEmptyCartMessage(): HTMLDivElement {
         const emptyBlock = ElementsFactory.createDivElement('empty-cart');
         const message = ElementsFactory.createBaseElementWithText('div', 'empty-cart__message', 'Cart is empty.');
         const image = ElementsFactory.createDivElement('empty-cart__image');
@@ -61,7 +61,7 @@ class CartView {
         return emptyBlock;
     }
 
-    showBuyMessage(timer: number) {
+    showBuyMessage(timer: number): void {
         this.wrapper.innerHTML = '';
         const buyBlock = ElementsFactory.createDivElement('buy-block');
         const message = ElementsFactory.createDivElement('buy-block__message');
@@ -79,12 +79,12 @@ class CartView {
         }, 1000);
     }
 
-    showPopup() {
+    showPopup(): void {
         const popupElement = this.popup.createCheckoutPopup();
         this.wrapper.append(popupElement);
     }
 
-    hidePopup() {
+    hidePopup(): void {
         this.popup.wrapper.remove();
     }
 }

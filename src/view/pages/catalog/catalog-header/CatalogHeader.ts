@@ -1,9 +1,9 @@
 import { ICatalogSettings, Product } from 'common/types';
-import { ElementsFactory } from 'utils/element-generator';
-import { Search } from './search/search';
-import { Sort } from './sorting/sorting';
+import { ElementsFactory } from 'utils/ElementGenerator';
+import { Search } from './search/Search';
+import { Sort } from './sorting/Sorting';
 import './catalog-header.scss';
-import { ViewBlock } from './view-block/view-block';
+import { ViewBlock } from './view-block/ViewBlock';
 
 export class CatalogHeader {
     sortMethod: Sort;

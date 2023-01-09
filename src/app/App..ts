@@ -15,12 +15,12 @@ class App {
         this.container = <HTMLDivElement>document.getElementById('app');
     }
 
-    start() {
+    start(): void {
         this.initBasePage();
         this.router.initRouter();
     }
 
-    initBasePage() {
+    initBasePage(): void {
         const codes = this.cartService.getPromoCodes();
         const summary = this.cartService.getCartSummary(codes);
         this.container.append(this.basePage.getHeader(), this.basePage.getMain(), this.basePage.getFooter());

@@ -22,7 +22,7 @@ export default class PromoCodesModel {
         return this.validationService.checkPromoCodeResponse(promoResponse) ? this.cleanPromoCodes(promoResponse) : [];
     }
 
-    setPromoCode(code: PromoCode) {
+    setPromoCode(code: PromoCode): void {
         const codes = this.getAppliedCodes();
         const potentialCode = codes.find((el) => el.code === code.code);
         if (!potentialCode) {
@@ -31,13 +31,13 @@ export default class PromoCodesModel {
         }
     }
 
-    deleteItem(code: PromoCode) {
+    deleteItem(code: PromoCode): void {
         let codes = this.getAppliedCodes();
         codes = codes.filter((el) => el.code !== code.code);
         this.storageService.setItem(PromoCodesModel.PATH, codes);
     }
 
-    deleteAllCodes() {
+    deleteAllCodes(): void {
         this.storageService.setItem(PromoCodesModel.PATH, []);
     }
 

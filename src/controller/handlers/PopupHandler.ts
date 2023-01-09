@@ -1,7 +1,7 @@
 import appConstants from 'common/constants';
 import CartService from 'services/CartService';
 import PromoCodeService from 'services/PromoCodeService';
-import { ElementsFactory } from 'utils/element-generator';
+import { ElementsFactory } from 'utils/ElementGenerator';
 import BasePage from 'view/common-components/BasePage';
 import CartView from 'view/pages/cart/CartView';
 
@@ -18,7 +18,7 @@ export default class PopupHandler {
         this.cartService = cartService;
     }
 
-    initEvents() {
+    initEvents(): void {
         this.view.popup.popup.addEventListener('focusout', this.popupFocusoutHandler.bind(this));
         this.view.popup.popup.oninput = this.popupInputHandler.bind(this);
         this.view.popup.confirmButton.onclick = this.buyHandler.bind(this);
@@ -30,7 +30,7 @@ export default class PopupHandler {
         this.markInvalidInput(target);
     }
 
-    popupInputHandler(e: Event) {
+    popupInputHandler(e: Event): void {
         const target = e.target;
         if (!target || !(target instanceof HTMLInputElement)) return;
         this.markValidInput(target);
@@ -40,7 +40,7 @@ export default class PopupHandler {
         }
     }
 
-    buyHandler(e: Event) {
+    buyHandler(e: Event): void {
         e.preventDefault();
         const target = e.target as HTMLElement;
         const form = target.parentElement as HTMLFormElement;
@@ -56,7 +56,7 @@ export default class PopupHandler {
         }
     }
 
-    private markInvalidInput(input: HTMLInputElement) {
+    private markInvalidInput(input: HTMLInputElement): void {
         const regex = new RegExp(input.pattern);
         if (!regex.test(input.value)) {
             input.classList.add('popup-field-invalid');
@@ -65,7 +65,7 @@ export default class PopupHandler {
         }
     }
 
-    private markValidInput(input: HTMLInputElement) {
+    private markValidInput(input: HTMLInputElement): void {
         const regex = new RegExp(input.pattern);
         if (regex.test(input.value)) {
             input.classList.remove('popup-field-invalid');
@@ -75,7 +75,7 @@ export default class PopupHandler {
         }
     }
 
-    private getChildElements(element: Element) {
+    private getChildElements(element: Element): { element: Element }[] {
         return [...element.children].reduce(
             (acc, el) => {
                 acc.push(...this.getChildElements(el));
@@ -85,7 +85,7 @@ export default class PopupHandler {
         );
     }
 
-    private createAlert() {
+    private createAlert(): void {
         const timer = 3;
         setTimeout(() => {
             const link = ElementsFactory.createAnchor('', 'router-link', '/');

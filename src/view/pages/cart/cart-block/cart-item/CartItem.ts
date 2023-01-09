@@ -1,10 +1,10 @@
 import appConstants from 'common/constants';
 import { CartProduct } from 'common/types';
-import { ElementsFactory } from 'utils/element-generator';
+import { ElementsFactory } from 'utils/ElementGenerator';
 import './cart-item.scss';
 
 export default class CartItem {
-    static getCartItem(item: CartProduct) {
+    static getCartItem(item: CartProduct): HTMLDivElement {
         const product = item.product;
         const counterBlock = this.getCounterBlock(item.index);
         const imageBlock = this.getImageBlock(product.thumbnail, product.title, product.id);
@@ -33,11 +33,11 @@ export default class CartItem {
         return cartItem;
     }
 
-    private static getCounterBlock(index: number) {
+    private static getCounterBlock(index: number): HTMLElement {
         return ElementsFactory.createBaseElementWithText('div', 'cart-item__counter', String(index));
     }
 
-    private static getImageBlock(imageSrc: string, title: string, id: number) {
+    private static getImageBlock(imageSrc: string, title: string, id: number): HTMLAnchorElement {
         const anchor = ElementsFactory.createAnchor('router-link cart-item__img-container', '', `/product/${id}`);
         const image = ElementsFactory.createImgElement('', imageSrc, title);
         anchor.append(image);
@@ -50,7 +50,7 @@ export default class CartItem {
         category: string,
         brand: string,
         description: string
-    ) {
+    ): HTMLDivElement {
         const descriptionBlock = ElementsFactory.createDivElement('cart-description');
         let html = '';
         if (title) {
@@ -71,7 +71,7 @@ export default class CartItem {
         return descriptionBlock;
     }
 
-    private static getPriceBlock(prevPrice: number, currentPrice: number) {
+    private static getPriceBlock(prevPrice: number, currentPrice: number): HTMLDivElement {
         const priceBlock = ElementsFactory.createDivElement('cart-price');
         priceBlock.innerHTML = `<div class="cart-price__prev">
             <p class="cart-price__prev-header">Price: </p>
@@ -81,7 +81,7 @@ export default class CartItem {
         return priceBlock;
     }
 
-    private static getQuantityBlock(count: number, stock: number, subtotal: number) {
+    private static getQuantityBlock(count: number, stock: number, subtotal: number): HTMLDivElement {
         const quantityBlock = ElementsFactory.createDivElement('cart-quantity');
         const subtotalBlock = ElementsFactory.createBaseElementWithText(
             'div',
@@ -98,7 +98,7 @@ export default class CartItem {
         return quantityBlock;
     }
 
-    private static getSubtotalBlock(subtotal: number) {
+    private static getSubtotalBlock(subtotal: number): HTMLElement {
         return ElementsFactory.createBaseElementWithText(
             'div',
             'cart-item-subtotal',
@@ -106,7 +106,7 @@ export default class CartItem {
         );
     }
 
-    private static getDeleteBlock() {
+    private static getDeleteBlock(): HTMLDivElement {
         return ElementsFactory.createDivElement('item-delete-button');
     }
 }

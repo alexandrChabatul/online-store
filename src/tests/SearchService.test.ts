@@ -10,8 +10,8 @@ import {
     expectedStockArray,
     expectedTitleArray,
     expectedCurrentPriceArray,
-} from './testData/expected-search';
-import { initialArray } from './testData/initialData';
+} from './test-data/expectedSearch';
+import { initialArray } from './test-data/initialData';
 
 describe('getSearchTerm and setSearchTerm methods', () => {
     const searchService = new SearchService();

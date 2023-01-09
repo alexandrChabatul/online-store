@@ -1,4 +1,4 @@
-import { CartResponse, Product, ProductResponse, ProductIsInCart } from 'common/types';
+import { CartResponse, Product, ProductResponse, ProductIsInCart, CartProduct } from 'common/types';
 import CartModel from '../model/CartModel';
 
 export default class MappingService {
@@ -10,7 +10,7 @@ export default class MappingService {
         return Object.assign(productResponse, { currentPrice: currentPrice });
     }
 
-    mapFromCartResponseToCartProduct(cartResponse: CartResponse, index: number) {
+    mapFromCartResponseToCartProduct(cartResponse: CartResponse, index: number): CartProduct {
         const subtotal = parseFloat((cartResponse.product.currentPrice * cartResponse.quantity).toFixed(2));
         return Object.assign(cartResponse, { subtotal: subtotal, index: index });
     }

@@ -22,14 +22,14 @@ export default class CartHandler {
         this.popupHandler = new PopupHandler(this.view, this.cartService);
     }
 
-    initEvents() {
+    initEvents(): void {
         this.view.cartHeader.header.oninput = this.limitChangeHandler.bind(this);
         this.view.summary.summary.oninput = this.promoCodeChangeHandler.bind(this);
         this.view.cartBlock.cartBlock.onclick = this.cartBlockClickHandler.bind(this);
         this.view.summary.summary.onclick = this.summaryClickHandler.bind(this);
     }
 
-    private cartBlockClickHandler(e: Event) {
+    private cartBlockClickHandler(e: Event): void {
         const target = e.target;
         if (!(target instanceof HTMLElement)) return;
         switch (true) {
@@ -55,7 +55,7 @@ export default class CartHandler {
         }
     }
 
-    private summaryClickHandler(e: Event) {
+    private summaryClickHandler(e: Event): void {
         const target = e.target;
         if (!(target instanceof HTMLElement)) return;
         switch (true) {
@@ -75,28 +75,28 @@ export default class CartHandler {
         }
     }
 
-    private increaseItemHandler(id: string) {
+    private increaseItemHandler(id: string): void {
         this.cartService.addItemToCart(id);
         const cartInfo = this.cartService.getCartInfo();
         this.view.updateCartAndSummary(cartInfo);
         this.basePage.updateHeader(String(cartInfo.summary.productQty), String(cartInfo.summary.prevPrice));
     }
 
-    private reduceItemHandler(id: string) {
+    private reduceItemHandler(id: string): void {
         this.cartService.reduceItemInCart(id);
         const cartInfo = this.cartService.getCartInfo();
         this.view.updateCartAndSummary(cartInfo);
         this.basePage.updateHeader(String(cartInfo.summary.productQty), String(cartInfo.summary.prevPrice));
     }
 
-    private deleteItemHandler(id: string) {
+    private deleteItemHandler(id: string): void {
         this.cartService.deleteItemFromCart(id);
         const cartInfo = this.cartService.getCartInfo();
         this.view.updateCartAndSummary(cartInfo);
         this.basePage.updateHeader(String(cartInfo.summary.productQty), String(cartInfo.summary.prevPrice));
     }
 
-    private paginationHandler(page: string) {
+    private paginationHandler(page: string): void {
         if (!page) return;
         const currentPage = this.cartService.getPage();
         let newPage: number = currentPage;
@@ -115,19 +115,19 @@ export default class CartHandler {
         this.urlService.addUrlInHistory(url);
     }
 
-    private addCodeHandler(code: string) {
+    private addCodeHandler(code: string): void {
         this.codesService.addPromoCode(code);
         const codes = this.codesService.getPromoCodes();
         this.view.updateSummary(this.cartService.getCartSummary(codes), codes);
     }
 
-    private deleteCodeHandler(code: string) {
+    private deleteCodeHandler(code: string): void {
         this.codesService.deletePromoCode(code);
         const codes = this.codesService.getPromoCodes();
         this.view.updateSummary(this.cartService.getCartSummary(codes), codes);
     }
 
-    private limitChangeHandler(e: Event) {
+    private limitChangeHandler(e: Event): void {
         const target = e.target;
         if (!(target instanceof HTMLInputElement) || !target.value) return;
         const limit = parseInt(target.value, 10);
@@ -139,7 +139,7 @@ export default class CartHandler {
         this.urlService.addUrlInHistory(url);
     }
 
-    private promoCodeChangeHandler(e: Event) {
+    private promoCodeChangeHandler(e: Event): void {
         const target = e.target;
         if (!(target instanceof HTMLInputElement)) return;
         const code = target.value;

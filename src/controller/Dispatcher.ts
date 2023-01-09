@@ -12,7 +12,7 @@ export default class Dispatcher {
         error: new ErrorController(),
     };
 
-    dispatch(pathWithParams: dispatchObject) {
+    dispatch(pathWithParams: dispatchObject): void {
         Dispatcher.PATH_MAP[pathWithParams.name]
             ? Dispatcher.PATH_MAP[pathWithParams.name].render(pathWithParams.params)
             : Dispatcher.PATH_MAP.error.render(pathWithParams.params);

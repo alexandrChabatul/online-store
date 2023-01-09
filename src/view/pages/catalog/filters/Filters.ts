@@ -1,9 +1,9 @@
 import './filters.scss';
-import { ElementsFactory } from 'utils/element-generator';
-import { ResetBlock } from './reset/reset';
+import { ElementsFactory } from 'utils/ElementGenerator';
+import { ResetBlock } from './reset/Reset';
 import { ICatalogSettings } from 'common/types';
-import { CategoryBlock } from './checkbox/category/category';
-import { BrandBlock } from './checkbox/brand/brand';
+import { CategoryBlock } from './checkbox/category/Category';
+import { BrandBlock } from './checkbox/brand/Brand';
 import { PriceBlock } from './range/price/Price';
 import { StockBlock } from './range/stock/Stock';
 

@@ -5,7 +5,7 @@ export class ViewService {
         this.viewType = 'table';
     }
 
-    public setViewType(view: string) {
+    public setViewType(view: string): void {
         if (view && view.toLowerCase() === 'row') {
             this.viewType = 'row';
         } else {
@@ -13,7 +13,7 @@ export class ViewService {
         }
     }
 
-    public getViewType() {
+    public getViewType(): string {
         return this.viewType;
     }
 }

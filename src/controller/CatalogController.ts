@@ -26,7 +26,7 @@ export default class CatalogController implements IController {
         this.initCatalogEvents();
     }
 
-    initCatalogEvents() {
+    initCatalogEvents(): void {
         this.catalogHandlers.initEvents();
     }
 }

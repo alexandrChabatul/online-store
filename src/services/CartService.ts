@@ -1,5 +1,5 @@
 import appConstants from 'common/constants';
-import { CartInfo, CartProduct, params, PromoCode } from 'common/types';
+import { CartInfo, CartParams, CartProduct, CartSummary, params, PromoCode } from 'common/types';
 import CartModel from 'model/CartModel';
 import CatalogModel from 'model/CatalogModel';
 import PromoCodesModel from 'model/PromoCodesModel';
@@ -32,7 +32,7 @@ export default class CartService {
         };
     }
 
-    setPageParams(params: params) {
+    setPageParams(params: params): void {
         this.setLimit(appConstants.cartParams.itemPerPage);
         if (params.limit) {
             this.setLimit(isNaN(parseInt(params.limit, 10)) ? this.cartModel.limit : parseInt(params.limit, 10));
@@ -43,11 +43,15 @@ export default class CartService {
         }
     }
 
-    getCartItems() {
+    getCartItems(): CartProduct[] {
         return this.cartModel.getCart().map((el, index) => this.mapper.mapFromCartResponseToCartProduct(el, index + 1));
     }
 
-    getCartPageAndParams(page: number, limit: number, cartProducts?: CartProduct[]) {
+    getCartPageAndParams(
+        page: number,
+        limit: number,
+        cartProducts?: CartProduct[]
+    ): { productsPage: CartProduct[]; cartParams: CartParams } {
         if (!cartProducts) {
             cartProducts = this.getCartItems();
         }
@@ -63,11 +67,11 @@ export default class CartService {
         };
     }
 
-    getPromoCodes() {
+    getPromoCodes(): PromoCode[] {
         return this.codesModel.getAppliedCodes();
     }
 
-    getCartSummary(codes: PromoCode[], cartProducts?: CartProduct[]) {
+    getCartSummary(codes: PromoCode[], cartProducts?: CartProduct[]): CartSummary {
         if (!cartProducts) {
             cartProducts = this.getCartItems();
         }
@@ -82,50 +86,50 @@ export default class CartService {
         };
     }
 
-    checkItemInCart(id: string) {
+    checkItemInCart(id: string): boolean {
         return this.cartModel.checkItem(id);
     }
 
-    addItemToCart(id: string) {
+    addItemToCart(id: string): void {
         const products = this.catalogModel.getProducts();
         const potentialProduct = products.find((el) => String(el.id) === id);
         if (!potentialProduct) return;
         this.cartModel.increaseItem(this.mapper.mapFromProductResponseToProduct(potentialProduct));
     }
 
-    reduceItemInCart(id: string) {
+    reduceItemInCart(id: string): void {
         this.cartModel.reduceItem(id);
     }
 
-    deleteItemFromCart(id: string) {
+    deleteItemFromCart(id: string): void {
         this.cartModel.deleteItem(id);
     }
 
-    cleanCart() {
+    cleanCart(): void {
         this.cartModel.cleanCart();
     }
 
-    getPage() {
+    getPage(): number {
         return this.cartModel.page;
     }
 
-    setPage(page: number) {
+    setPage(page: number): void {
         this.cartModel.page = page;
     }
 
-    getLimit() {
+    getLimit(): number {
         return this.cartModel.limit;
     }
 
-    setLimit(limit: number) {
+    setLimit(limit: number): void {
         this.cartModel.limit = limit === 0 ? this.cartModel.limit : Math.abs(limit);
     }
 
-    getPopupState() {
+    getPopupState(): boolean {
         return this.cartModel.popupState;
     }
 
-    setPopupState(state: boolean) {
+    setPopupState(state: boolean): void {
         this.cartModel.popupState = state;
     }
 }

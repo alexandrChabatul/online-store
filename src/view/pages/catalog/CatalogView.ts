@@ -1,7 +1,7 @@
 import { ICatalogSettings, ProductIsInCart } from 'common/types';
-import { ElementsFactory } from 'utils/element-generator';
-import { Catalog } from './products/products';
-import { CatalogHeader } from './catalog-header/catalog-header';
+import { ElementsFactory } from 'utils/ElementGenerator';
+import { Catalog } from './products/Products';
+import { CatalogHeader } from './catalog-header/CatalogHeader';
 import './catalog-view.scss';
 import { Filters } from './filters/Filters';
 
@@ -22,7 +22,7 @@ class CatalogView {
         this.filtersBackground = ElementsFactory.createDivElement('filters-background');
     }
 
-    public render(products: ProductIsInCart[], catalogSettings: ICatalogSettings) {
+    public render(products: ProductIsInCart[], catalogSettings: ICatalogSettings): HTMLDivElement {
         this.filtersArea.innerHTML = '';
         const mainWrapper = ElementsFactory.createDivElement('wrapper main-wrapper');
         const rightPart = ElementsFactory.createDivElement('main-right');
@@ -36,13 +36,13 @@ class CatalogView {
         return mainWrapper;
     }
 
-    public renderFilters(catalogSettings: ICatalogSettings) {
+    public renderFilters(catalogSettings: ICatalogSettings): void {
         const filtering = this.filters.createFilters(catalogSettings);
         this.filtersArea.innerHTML = '';
         this.filtersArea.append(filtering);
     }
 
-    public renderTargetedFilters(catalogSettings: ICatalogSettings, target: string) {
+    public renderTargetedFilters(catalogSettings: ICatalogSettings, target: string): void {
         const newCategoryBlock = this.filters.categoryBlock.createCategoryBlock(catalogSettings);
         this.filters.categoryBlock.categories.replaceWith(newCategoryBlock);
         const newBrandBlock = this.filters.brandBlock.createBrandBlock(catalogSettings);
@@ -55,21 +55,21 @@ class CatalogView {
         }
     }
 
-    public renderCatalogHeader(products: ProductIsInCart[], catalogSettings: ICatalogSettings) {
+    public renderCatalogHeader(products: ProductIsInCart[], catalogSettings: ICatalogSettings): void {
         this.catalogHeader.createCatalogHeader(products, catalogSettings);
     }
 
-    public renderProducts(products: ProductIsInCart[], catalogSettings: ICatalogSettings) {
+    public renderProducts(products: ProductIsInCart[], catalogSettings: ICatalogSettings): void {
         this.products.createProductsCatalog(products, catalogSettings);
     }
 
-    public openFilters() {
+    public openFilters(): void {
         this.filtersArea.classList.add('main-left-open');
         this.filtersBackground.classList.add('filters-background-visible');
         document.body.style.overflow = 'hidden';
     }
 
-    public closeFilters() {
+    public closeFilters(): void {
         this.filtersArea.classList.remove('main-left-open');
         this.filtersBackground.classList.remove('filters-background-visible');
         document.body.style.overflow = 'auto';
