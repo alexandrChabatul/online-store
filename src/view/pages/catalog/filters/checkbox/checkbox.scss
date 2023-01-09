@@ -6,6 +6,23 @@
 .filter-label {
     display: flex;
     justify-content: space-between;
+
+    @media screen and (max-width: 1220px) {
+        font-size: small;
+        max-height: 58px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.filter-count {
+    @media screen and (max-width: 992px) {
+        display: none;
+    }
+
+    @media screen and (max-width: 900px) {
+        display: block;
+    }
 }
 
  label {
@@ -13,7 +30,6 @@
     padding: 12px;
     padding-left: 40px;
     width: 100%;
-    // display: block;
     text-align: left;
     color: $color-text-main;
     cursor: pointer;
@@ -38,6 +54,12 @@
           transform: translateY(-50%);
           cursor: pointer;
           transition: all 200ms ease-in;
+
+        @media screen and (max-width: 1220px) {
+            width: 20px;
+            height: 20px;
+            left: 10px;
+        }
       }
     }
 

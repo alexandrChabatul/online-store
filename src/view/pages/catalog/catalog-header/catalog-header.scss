@@ -6,6 +6,17 @@
     padding: 10px 0;
     font-family: $font-primary;
     font-size: larger;
+
+    @media screen and (max-width: 768px) {
+        flex-wrap: wrap;
+        row-gap: 10px;
+        font-size: medium;
+    }
+
+    @media screen and (max-width: 576px) {
+        font-size: small;
+        padding: 0;
+    }
 }
 
 .search-results-title {
@@ -19,15 +30,41 @@
     outline: none;
     border: 2px solid $color-text-main;
     padding: 0 10px;
+
+    @media screen and (max-width: 1220px) {
+        font-size: small;
+        width: 150px;
+        height: 30px;
+        border-radius: 5px;
+    }
+
+    @media screen and (max-width: 576px) {
+        width: 100px;
+        box-sizing: border-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 
 .sort-method {
     height: 44px;
+
+    @media screen and (max-width: 1220px) {
+        height: 30px;
+    }
 }
 
 .view-block {
     display: flex;
     gap: 20px;
+
+    @media screen and (max-width: 1220px) {
+        gap: 10px;
+    }
+
+    @media screen and (max-width: 768px) {
+        flex-basis: 60%;
+    }
 }
 
 .view-block-icon {
@@ -45,6 +82,17 @@
         cursor: pointer;
         transform: scale(1.05);
     }
+
+    @media screen and (max-width: 1220px) {
+        width: 35px;
+        height: 35px;
+        border-radius: 5px;
+    }
+
+    @media screen and (max-width: 576px) {
+        width: 25px;
+        height: 25px;
+    }
 }
 
 .view-block-icon-active {
@@ -59,4 +107,33 @@
 
 .view-block-table {
     background-image: url('assets/icons/table.svg');
+}
+
+.filter-icon {
+    display: none;
+
+    @media screen and (max-width: 900px) {
+        display: block;
+        width: 35px;
+        height: 35px;
+        border-radius: 5px;
+        background-repeat: no-repeat;
+        background-position: right;
+        background-size: contain;
+        background-image: url('./../../../../assets/icons/filter.svg');
+    }
+
+    @media screen and (max-width: 768px) {
+        flex-basis: 40%;
+    }
+
+    @media screen and (max-width: 576px) {
+        width: 25px;
+        height: 25px;
+    }
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.7;
+    }
 }

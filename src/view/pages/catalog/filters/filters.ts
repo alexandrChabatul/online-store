@@ -13,6 +13,7 @@ export class Filters {
     brandBlock: BrandBlock;
     priceBlock: PriceBlock;
     stockBlock: StockBlock;
+    closeButton: HTMLDivElement;
     filters: HTMLDivElement;
 
     constructor() {
@@ -21,6 +22,7 @@ export class Filters {
         this.brandBlock = new BrandBlock();
         this.priceBlock = new PriceBlock();
         this.stockBlock = new StockBlock();
+        this.closeButton = ElementsFactory.createDivElement('close-button');
         this.filters = ElementsFactory.createDivElement('filters');
     }
 
@@ -32,7 +34,7 @@ export class Filters {
         const priceBlock = this.priceBlock.createPriceBlock(catalogSettings);
         const stockBlock = this.stockBlock.createStockBlock(catalogSettings);
 
-        this.filters.append(resetBlock, categoryBlock, brandBlock, priceBlock, stockBlock);
+        this.filters.append(this.closeButton, resetBlock, categoryBlock, brandBlock, priceBlock, stockBlock);
         return this.filters;
     }
 }
