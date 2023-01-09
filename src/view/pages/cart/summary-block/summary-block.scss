@@ -31,6 +31,11 @@
 
 .applied-codes {
     display: none;
+
+    p {
+        margin: 0;
+    }
+
 }
 
 .applied-codes__list {
@@ -50,6 +55,7 @@
     box-sizing: border-box;
     border-radius: 5px;
     background-color: $summary-block-color;
+
 }
 
 .applied-codes__active {
@@ -84,6 +90,7 @@
 }
 
 .code-input {
+    width: 100%;
     box-sizing: border-box;
     border: 1px solid;
     border-radius: 5px;
@@ -120,4 +127,24 @@
     height: 100%;
     width: 50px;
     border-radius: 5px;
+}
+
+@media (max-width: 992px){
+
+    .applied-codes__active {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .applied-code {
+        width: 200px;
+        margin-left: auto
+    }
+
+    .potential-code {
+        margin: 0 auto;
+        margin-top: 10px;
+        max-width: 300px;
+    }
 }
