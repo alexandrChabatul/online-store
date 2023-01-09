@@ -113,13 +113,17 @@
 
 .potential-code {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 3px;
     box-sizing: border-box;
     border-radius: 5px;
     background-color: $summary-block-color;
     font-size: 85%;
+}
+
+.potential-code__text {
+    flex-grow: 1;
+    text-align: center
 }
 
 .potential-code__button {
