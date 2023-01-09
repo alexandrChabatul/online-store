@@ -128,7 +128,6 @@ export default class CatalogHandler {
         }
         if (target instanceof HTMLDivElement) {
             if (target.classList.contains('close-button')) {
-                console.log('ck');
                 this.closeButtonHandler();
             }
         }

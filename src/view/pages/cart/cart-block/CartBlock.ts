@@ -1,5 +1,5 @@
 import { CartParams, CartProduct } from 'common/types';
-import { ElementsFactory } from 'utils/element-generator';
+import { ElementsFactory } from 'utils/ElementGenerator';
 import CartItem from './cart-item/CartItem';
 import './cart-block.scss';
 

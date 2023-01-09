@@ -1,6 +1,6 @@
 import appConstants from 'common/constants';
 import { CartSummary, PotentialPromoCode, PromoCode } from 'common/types';
-import { ElementsFactory } from 'utils/element-generator';
+import { ElementsFactory } from 'utils/ElementGenerator';
 import './summary-block.scss';
 
 export default class SummaryBlock {

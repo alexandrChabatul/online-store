@@ -8,8 +8,8 @@ import {
     sortedByDiscountDescArray,
     sortedByRatingAscArray,
     sortedByRatingDescArray,
-} from './testData/expected-sort';
-import { initialArray } from './testData/initialData';
+} from './test-data/expectedSort';
+import { initialArray } from './test-data/initialData';
 
 describe('getSearchTerm and setSearchTerm methods', () => {
     const sortService = new SortService();

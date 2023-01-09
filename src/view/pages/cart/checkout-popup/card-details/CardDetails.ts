@@ -1,6 +1,6 @@
 import appConstants from 'common/constants';
 import { InputTemplate } from 'common/types';
-import { ElementsFactory } from 'utils/element-generator';
+import { ElementsFactory } from 'utils/ElementGenerator';
 
 export class CardDetails {
     private static INPUT_DATA: InputTemplate[] = appConstants.cardInputs;

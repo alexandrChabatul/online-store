@@ -1,4 +1,4 @@
-import { ElementsFactory } from 'utils/element-generator';
+import { ElementsFactory } from 'utils/ElementGenerator';
 import './product-buttons.scss';
 
 export default class ProductButtons {

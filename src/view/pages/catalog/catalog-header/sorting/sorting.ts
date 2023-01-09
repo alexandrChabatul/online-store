@@ -1,5 +1,5 @@
 import appConstants from 'common/constants';
-import { ElementsFactory } from 'utils/element-generator';
+import { ElementsFactory } from 'utils/ElementGenerator';
 
 export class Sort {
     sort: HTMLSelectElement;

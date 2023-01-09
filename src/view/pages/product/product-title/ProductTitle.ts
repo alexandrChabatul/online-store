@@ -1,4 +1,4 @@
-import { ElementsFactory } from 'utils/element-generator';
+import { ElementsFactory } from 'utils/ElementGenerator';
 import Rating from '../product-description/rating/Rating';
 import './product-title.scss';
 

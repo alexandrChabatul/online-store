@@ -1,5 +1,5 @@
 /** @jest-environment jsdom */
-import { ElementsFactory } from 'utils/element-generator';
+import { ElementsFactory } from 'utils/ElementGenerator';
 
 describe('Element factory', () => {
     const className = 'test-class';
