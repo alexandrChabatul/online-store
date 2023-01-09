@@ -135,7 +135,19 @@ export default class CatalogHandler {
 
     resetButtonClickHandler(): void {
         const url = this.urlService.deleteAllQueryParams();
-        this.updateContent(url, '');
+        this.urlService.addUrlInHistory(url);
+        const params: params | false = this.urlService.getQueryParams();
+        if (params) {
+            const products = this.catalogService.getFilteredProducts(params);
+            const catalogSettings = this.catalogService.getCatalogSettings();
+            this.view.renderTargetedFilters(catalogSettings, '');
+            if (products.length === 0) {
+                this.view.filters.stockBlock.setNotFoundValue();
+                this.view.filters.priceBlock.setNotFoundValue();
+            }
+            this.view.catalogHeader.createCatalogHeader(products, catalogSettings);
+            this.view.renderProducts(products, catalogSettings);
+        }
     }
 
     copyLinkButtonClickHandler(): void {
