@@ -21,7 +21,6 @@ export class Search {
 
     public createSearch(searchInput: string): HTMLInputElement {
         this.search.value = searchInput;
-        console.log(this.search.value);
         return this.search;
     }
 
