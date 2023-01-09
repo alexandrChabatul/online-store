@@ -3,7 +3,7 @@ import { ElementsFactory } from 'utils/ElementGenerator';
 import './product-description.scss';
 
 class ProductDescription {
-    getDescription(product: Product) {
+    getDescription(product: Product): HTMLDivElement {
         const descriptionBlock = ElementsFactory.createDivElement('product-desc');
         let html = '';
         if (product.category) {

@@ -3,7 +3,7 @@ import { ElementsFactory } from 'utils/ElementGenerator';
 import './breadcrumbs.scss';
 
 class Breadcrumbs {
-    getBreadcrumbs(product: Product) {
+    getBreadcrumbs(product: Product): HTMLElement {
         const ul = ElementsFactory.createBaseElement('ul', 'breadcrumbs');
         const mainItem = ElementsFactory.createBaseElement('li', 'breadcrumbs__item');
         mainItem.append(ElementsFactory.createAnchor('router-link', 'Main', '/'));

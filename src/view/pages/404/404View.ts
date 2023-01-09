@@ -2,7 +2,7 @@ import { ElementsFactory } from 'utils/ElementGenerator';
 import './404.scss';
 
 class ErrorPage {
-    render() {
+    render(): HTMLDivElement {
         const container = ElementsFactory.createDivElement('wrapper wrapper-404');
         const image = ElementsFactory.createDivElement('image-404');
         const message = ElementsFactory.createBaseElementWithText(

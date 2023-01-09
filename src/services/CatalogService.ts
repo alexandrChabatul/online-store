@@ -26,7 +26,7 @@ export class CatalogService {
         this.cart = CartModel.getInstance();
     }
 
-    public setCatalogSettings(params: params) {
+    public setCatalogSettings(params: params): void {
         const { category, brand, price, stock, sort, search, view } = params;
         this.filterService.activateAllFilters(category, brand, price, stock);
         this.sortService.setSortMethod(sort);

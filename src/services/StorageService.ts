@@ -1,5 +1,5 @@
 export default class StorageService<T> {
-    setItem(key: string, item: T) {
+    setItem(key: string, item: T): void {
         localStorage.setItem(key, JSON.stringify(item));
     }
 

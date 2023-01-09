@@ -42,14 +42,14 @@ export class CardDetails {
         return creditCardContainer;
     }
 
-    addListenerToInput(target: HTMLInputElement) {
+    addListenerToInput(target: HTMLInputElement): void {
         const events = ['input', 'change', 'blur', 'keyup'];
         for (const i in events) {
             target.addEventListener(events[i], this.replaceChars, false);
         }
     }
 
-    replaceChars(e: Event) {
+    replaceChars(e: Event): void {
         const target = e.target as HTMLInputElement;
         const value = target.value;
         let cardCode: string | undefined = value.replace(/[^\d]/g, '').substring(0, target.maxLength);

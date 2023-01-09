@@ -20,7 +20,7 @@ export default class ProductController implements IController {
         this.productHandler = new ProductHandler();
     }
 
-    async render(params: params) {
+    async render(params: params): Promise<void> {
         await this.catalogService.model.setProducts();
         const response = await this.productService.getProduct(params.id);
         if ('errorMessage' in response) {

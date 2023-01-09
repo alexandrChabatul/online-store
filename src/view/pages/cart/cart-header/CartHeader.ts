@@ -8,7 +8,7 @@ export default class CartHeader {
         this.header = ElementsFactory.createDivElement('cart-header');
     }
 
-    getCartHeader(itemsPerPage: number) {
+    getCartHeader(itemsPerPage: number): HTMLDivElement {
         this.header.innerHTML = '';
         const title = ElementsFactory.createBaseElementWithText('p', 'cart-header__title', 'Products in cart:');
         const itemsPerPageContainer = ElementsFactory.createDivElement('items-per-page');

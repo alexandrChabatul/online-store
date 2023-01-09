@@ -50,9 +50,9 @@ export default class CheckoutPopup {
         }
     }
 
-    private deleteBlock(wrapper: HTMLElement, popup: HTMLElement, e: Event) {
+    private deleteBlock(wrapper: HTMLElement, popup: HTMLElement, e: Event): void {
         const target = e.target;
-        if (!target) return null;
+        if (!target) return;
         if (!popup.contains(target as Node)) {
             wrapper.remove();
         }

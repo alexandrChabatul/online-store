@@ -7,7 +7,7 @@ export class SearchService {
         this.searchTerm = '';
     }
 
-    setSearchTerm(search: string) {
+    setSearchTerm(search: string): void {
         if (search) {
             this.searchTerm = search;
         } else {
@@ -15,7 +15,7 @@ export class SearchService {
         }
     }
 
-    getSearchTerm() {
+    getSearchTerm(): string {
         return this.searchTerm;
     }
 

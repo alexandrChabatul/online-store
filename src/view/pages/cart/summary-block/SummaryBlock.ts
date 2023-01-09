@@ -14,12 +14,12 @@ export default class SummaryBlock {
         this.summaryDescription = ElementsFactory.createDivElement('summary-description');
     }
 
-    getSummary(summary: CartSummary, codes: PromoCode[]) {
+    getSummary(summary: CartSummary, codes: PromoCode[]): HTMLDivElement {
         this.updateSummary(summary, codes);
         return this.summary;
     }
 
-    updateSummary(summary: CartSummary, codes: PromoCode[]) {
+    updateSummary(summary: CartSummary, codes: PromoCode[]): void {
         this.summary.innerHTML = '';
         const heading = ElementsFactory.createBaseElementWithText('h3', 'cart-summary__heading', 'Summary');
         const buyButton = ElementsFactory.createButton('cart-summary__button', 'BUY');
@@ -32,7 +32,7 @@ export default class SummaryBlock {
         }
     }
 
-    getDescription(summary: CartSummary) {
+    getDescription(summary: CartSummary): HTMLDivElement {
         const description = ElementsFactory.createDivElement('summary-description');
         const productSummary = ElementsFactory.createDivElement('products-summary');
         productSummary.innerHTML = `
@@ -57,7 +57,7 @@ export default class SummaryBlock {
         return description;
     }
 
-    renderAppliedCodes(codes: PromoCode[]) {
+    renderAppliedCodes(codes: PromoCode[]): HTMLDivElement {
         const appliedCodes = ElementsFactory.createDivElement('applied-codes');
         const text = ElementsFactory.createBaseElementWithText('p', '', 'Applied codes:');
         appliedCodes.classList.add('applied-codes__active');
@@ -78,7 +78,7 @@ export default class SummaryBlock {
         return appliedCodes;
     }
 
-    renderCodeInput() {
+    renderCodeInput(): HTMLDivElement {
         this.potentialCodes.innerHTML = '';
         const codeInputBlock = ElementsFactory.createDivElement('codes-input-block');
         const inputContainer = ElementsFactory.createDivElement('code-input-container');
@@ -92,9 +92,9 @@ export default class SummaryBlock {
         return codeInputBlock;
     }
 
-    updatePotentialCode(potentialCode: PotentialPromoCode | null) {
+    updatePotentialCode(potentialCode: PotentialPromoCode | null): void {
         this.potentialCodes.innerHTML = '';
-        if (!potentialCode) return null;
+        if (!potentialCode) return;
         const potentialCodeBlock = ElementsFactory.createDivElement('potential-code');
         const codeBlock = ElementsFactory.createBaseElementWithText(
             'div',
@@ -110,18 +110,18 @@ export default class SummaryBlock {
         this.potentialCodes.append(potentialCodeBlock);
     }
 
-    updateSummaryDescription(summary: CartSummary) {
+    updateSummaryDescription(summary: CartSummary): void {
         const newSummary = this.getDescription(summary);
         this.summaryDescription.replaceWith(newSummary);
         this.summaryDescription = newSummary;
     }
 
-    cleanInputButtonHandler(input: HTMLInputElement) {
+    cleanInputButtonHandler(input: HTMLInputElement): void {
         input.value = '';
         this.potentialCodes.innerHTML = '';
     }
 
-    inputChangeHandler(inputButton: HTMLDivElement, e: Event) {
+    inputChangeHandler(inputButton: HTMLDivElement, e: Event): void {
         const value = (e.target as HTMLInputElement).value;
         if (value.length > 0) {
             inputButton.classList.add('clean-input-button__active');

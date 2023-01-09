@@ -7,7 +7,7 @@ export class SortService {
         this.sortMethod = 'sort';
     }
 
-    setSortMethod(sortParams: string) {
+    setSortMethod(sortParams: string): void {
         if (sortParams) {
             this.sortMethod = sortParams.split('+').join(' ');
         } else {
@@ -15,7 +15,7 @@ export class SortService {
         }
     }
 
-    getSortMethod() {
+    getSortMethod(): string {
         return this.sortMethod;
     }
 

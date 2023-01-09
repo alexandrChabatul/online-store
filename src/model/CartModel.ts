@@ -24,22 +24,22 @@ export default class CartModel {
         return CartModel.instance;
     }
 
-    setCart() {
+    setCart(): CartResponse[] {
         const cartResponse = this.storageService.getItem(CartModel.PATH);
         if (!cartResponse) return [];
         return this.validationService.checkCartResponse(cartResponse) ? cartResponse : [];
     }
 
-    getCart() {
+    getCart(): CartResponse[] {
         return this.cart;
     }
 
-    checkItem(id: string) {
+    checkItem(id: string): boolean {
         const potentialItem = this.cart.find((el) => String(el.product.id) === id);
         return Boolean(potentialItem);
     }
 
-    increaseItem(product: Product) {
+    increaseItem(product: Product): void {
         const potentialItem = this.cart.find((el) => el.product.id === product.id);
         if (potentialItem) {
             potentialItem.quantity =
@@ -52,7 +52,7 @@ export default class CartModel {
         this.storageService.setItem(CartModel.PATH, this.cart);
     }
 
-    reduceItem(itemId: string) {
+    reduceItem(itemId: string): void {
         const potentialItem = this.cart.find((el) => String(el.product.id) === itemId);
         if (potentialItem) {
             potentialItem.quantity -= 1;
@@ -63,12 +63,12 @@ export default class CartModel {
         this.storageService.setItem(CartModel.PATH, this.cart);
     }
 
-    deleteItem(itemId: string) {
+    deleteItem(itemId: string): void {
         this.cart = this.cart.filter((el) => String(el.product.id) !== itemId);
         this.storageService.setItem(CartModel.PATH, this.cart);
     }
 
-    cleanCart() {
+    cleanCart(): void {
         this.cart = [];
         this.storageService.setItem(CartModel.PATH, this.cart);
     }

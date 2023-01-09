@@ -1,7 +1,7 @@
 import { CartProduct, PromoCode } from 'common/types';
 
 export default class CalculationService {
-    getTotalQuantity(cart: CartProduct[]) {
+    getTotalQuantity(cart: CartProduct[]): number {
         if (cart.length === 0) return 0;
         return cart.reduce((acc, el) => acc + el.quantity, 0);
     }
@@ -17,7 +17,7 @@ export default class CalculationService {
         return promoCodes.reduce((acc, el) => acc + el.value, 0);
     }
 
-    getPriceWithDiscount(price: number, discount: number) {
+    getPriceWithDiscount(price: number, discount: number): number {
         return Math.round(price * (100 - discount)) / 100;
     }
 }
