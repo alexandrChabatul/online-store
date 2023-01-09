@@ -1,6 +1,6 @@
 import appConstants from 'common/constants';
 import { ICatalogSettings, ProductIsInCart } from 'common/types';
-import { ElementsFactory } from 'utils/element-generator';
+import { ElementsFactory } from 'utils/ElementGenerator';
 import './products.scss';
 import './products-row-view.scss';
 import Rating from 'view/pages/product/product-description/rating/Rating';

@@ -1,4 +1,4 @@
-import { ElementsFactory } from 'utils/element-generator';
+import { ElementsFactory } from 'utils/ElementGenerator';
 import './image-slider.scss';
 
 class ImageSlider {

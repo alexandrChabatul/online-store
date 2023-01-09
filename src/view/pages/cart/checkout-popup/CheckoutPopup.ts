@@ -1,7 +1,7 @@
 import './checkout-popup.scss';
-import { ElementsFactory } from 'utils/element-generator';
-import { PersonalDetails } from './personal-details/personal-details';
-import { CardDetails } from './card-details/card-details';
+import { ElementsFactory } from 'utils/ElementGenerator';
+import { PersonalDetails } from './personal-details/PersonalDetails';
+import { CardDetails } from './card-details/CardDetails';
 import visa from 'assets/icons/visa.svg';
 import mastercard from 'assets/icons/mastercard.svg';
 import amex from 'assets/icons/amex.svg';

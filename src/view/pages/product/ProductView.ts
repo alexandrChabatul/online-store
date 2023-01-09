@@ -1,5 +1,5 @@
 import { BadResponse, Product, ProductIsInCart } from 'common/types';
-import { ElementsFactory } from 'utils/element-generator';
+import { ElementsFactory } from 'utils/ElementGenerator';
 import Breadcrumbs from './breadcrumbs/Breadcrumbs';
 import ImageSlider from './image-slider/ImageSlider';
 import ProductButtons from './product-description/buttons-block/ProductButtons';

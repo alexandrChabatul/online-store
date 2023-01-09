@@ -1,6 +1,6 @@
 import { ICatalogSettings } from 'common/types';
-import { ElementsFactory } from 'utils/element-generator';
-import { Range } from '../range';
+import { ElementsFactory } from 'utils/ElementGenerator';
+import { Range } from '../Range';
 import '../range.scss';
 
 export class StockBlock extends Range {

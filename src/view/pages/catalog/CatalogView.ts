@@ -1,9 +1,9 @@
 import { ICatalogSettings, ProductIsInCart } from 'common/types';
-import { ElementsFactory } from 'utils/element-generator';
-import { Catalog } from './products/products';
-import { CatalogHeader } from './catalog-header/catalog-header';
+import { ElementsFactory } from 'utils/ElementGenerator';
+import { Catalog } from './products/Products';
+import { CatalogHeader } from './catalog-header/CatalogHeader';
 import './catalog-view.scss';
-import { Filters } from './filters/filters';
+import { Filters } from './filters/Filters';
 
 class CatalogView {
     filters: Filters;

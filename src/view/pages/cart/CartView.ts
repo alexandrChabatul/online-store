@@ -1,6 +1,6 @@
-import CheckoutPopup from './checkout-popup/checkout-popup';
+import CheckoutPopup from './checkout-popup/CheckoutPopup';
 import { CartInfo, CartParams, CartProduct, CartSummary, PromoCode } from 'common/types';
-import { ElementsFactory } from 'utils/element-generator';
+import { ElementsFactory } from 'utils/ElementGenerator';
 import CartBlock from './cart-block/CartBlock';
 import './cart-view.scss';
 import SummaryBlock from './summary-block/SummaryBlock';

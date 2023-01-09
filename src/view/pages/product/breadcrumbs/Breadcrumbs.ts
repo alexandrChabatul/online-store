@@ -1,5 +1,5 @@
 import { Product } from 'common/types';
-import { ElementsFactory } from 'utils/element-generator';
+import { ElementsFactory } from 'utils/ElementGenerator';
 import './breadcrumbs.scss';
 
 class Breadcrumbs {

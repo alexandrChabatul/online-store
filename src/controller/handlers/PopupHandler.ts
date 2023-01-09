@@ -1,7 +1,7 @@
 import appConstants from 'common/constants';
 import CartService from 'services/CartService';
 import PromoCodeService from 'services/PromoCodeService';
-import { ElementsFactory } from 'utils/element-generator';
+import { ElementsFactory } from 'utils/ElementGenerator';
 import BasePage from 'view/common-components/BasePage';
 import CartView from 'view/pages/cart/CartView';
 
