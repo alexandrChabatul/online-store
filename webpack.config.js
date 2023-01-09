@@ -18,6 +18,12 @@ const baseConfig = {
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: true,
+                        },
+                    },
                     'sass-loader',
                     {
                         loader: 'sass-resources-loader',
@@ -47,6 +53,7 @@ const baseConfig = {
             template: path.resolve(__dirname, './src/index.html'),
             filename: 'index.html',
             publicPath: '/',
+            favicon: './src/assets/icons/shop.svg'
         }),
         new CleanWebpackPlugin(),
         new EslingPlugin({ extensions: 'ts' }),
