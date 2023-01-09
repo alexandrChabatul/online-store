@@ -11,6 +11,7 @@ class CatalogView {
     products: Catalog;
     filtersArea: HTMLDivElement;
     productsCatalogDivElement: HTMLDivElement;
+    filtersBackground: HTMLDivElement;
 
     constructor() {
         this.filters = new Filters();
@@ -18,6 +19,7 @@ class CatalogView {
         this.products = new Catalog();
         this.filtersArea = ElementsFactory.createDivElement('main-left');
         this.productsCatalogDivElement = ElementsFactory.createDivElement('');
+        this.filtersBackground = ElementsFactory.createDivElement('filters-background');
     }
 
     public render(products: ProductIsInCart[], catalogSettings: ICatalogSettings) {
@@ -28,7 +30,7 @@ class CatalogView {
         const catalogHeader = this.catalogHeader.createCatalogHeader(products, catalogSettings);
         const productsCatalog = this.products.createProductsCatalog(products, catalogSettings);
 
-        mainWrapper.append(this.filtersArea, rightPart);
+        mainWrapper.append(this.filtersArea, rightPart, this.filtersBackground);
         this.filtersArea.append(filtering);
         rightPart.append(catalogHeader, productsCatalog);
         return mainWrapper;
@@ -59,6 +61,18 @@ class CatalogView {
 
     public renderProducts(products: ProductIsInCart[], catalogSettings: ICatalogSettings) {
         this.products.createProductsCatalog(products, catalogSettings);
+    }
+
+    public openFilters() {
+        this.filtersArea.classList.add('main-left-open');
+        this.filtersBackground.classList.add('filters-background-visible');
+        document.body.style.overflow = 'hidden';
+    }
+
+    public closeFilters() {
+        this.filtersArea.classList.remove('main-left-open');
+        this.filtersBackground.classList.remove('filters-background-visible');
+        document.body.style.overflow = 'auto';
     }
 }
 

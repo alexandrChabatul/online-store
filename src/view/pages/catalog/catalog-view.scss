@@ -1,11 +1,22 @@
 .main-wrapper {
     display: flex;
     justify-content: flex-start;
-    flex-wrap: wrap;
+    align-items: flex-start;
     gap: 20px;
     padding-top: 20px;
     padding-bottom: 40px;
-    position: relative;
+
+    @media screen and (max-width: 1220px) {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    @media screen and (max-width: 900px) {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        position: static;
+        box-sizing: border-box;
+    }
 }
 
 .main-right {
@@ -16,6 +27,19 @@
     gap: 20px;
     align-self: flex-start;
     position: relative;
+
+    @media screen and (max-width: 1340px) {
+        flex-basis: 78%;
+    }
+
+    @media screen and (max-width: 1220px) {
+        flex-basis: 73%;
+    }
+
+    @media screen and (max-width: 900px) {
+        flex-basis: 100%;
+        gap: 10px;
+    }
 }
 
 .main-left {
@@ -29,4 +53,46 @@
     border-radius: 10px;
     display: flex;
     -webkit-transform: translateZ(0);
+    overflow: hidden;
+
+    @media screen and (max-width: 1340px) {
+        flex: 0 0 20%;
+    }
+
+    @media screen and (max-width: 1220px) {
+        flex: 0 0 25%;
+    }
+
+    @media screen and (max-width: 900px) {
+        position: fixed;
+        width: 100%;
+        z-index: 3;
+        top: 80px;
+        left: 0;
+        transform: translate(-100%, 0);
+        transition: transform 0.5s ease-in;
+        height: calc(100vh - 100px);
+    }
+
+    &-open {
+        transform: translate(0, 0);
+        transition: transform 0.5s ease-in;
+    }
+}
+
+.filters-background {
+    visibility: hidden;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: rgba(14, 13, 13, 0.468);
+
+    &-visible {
+        visibility: visible;
+
+    }
 }

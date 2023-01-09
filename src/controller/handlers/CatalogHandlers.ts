@@ -23,10 +23,30 @@ export default class CatalogHandler {
     initEvents() {
         this.view.filters.filters.oninput = this.filterInputHandler.bind(this);
         this.view.filters.filters.onclick = this.filterClickHandler.bind(this);
-        this.view.catalogHeader.catalogHeader.onclick = this.viewChangeHandler.bind(this);
+        this.view.catalogHeader.catalogHeader.onclick = this.catalogHeaderClickHandler.bind(this);
         this.view.catalogHeader.catalogHeader.oninput = this.searchInputHandler.bind(this);
         this.view.catalogHeader.catalogHeader.onchange = this.sortTypeChangeHandler.bind(this);
         this.view.products.products.onclick = this.addToCartClickHandler.bind(this);
+    }
+
+    catalogHeaderClickHandler(e: Event) {
+        const target: EventTarget | null = e.target;
+        if (!(target instanceof HTMLDivElement)) return;
+
+        if (target.classList.contains('filter-icon')) {
+            this.filtersButtonHandler();
+        }
+        if (target.classList.contains('view-block-icon')) {
+            this.viewChangeHandler(target);
+        }
+    }
+
+    filtersButtonHandler() {
+        this.view.openFilters();
+    }
+
+    closeButtonHandler() {
+        this.view.closeFilters();
     }
 
     addToCartClickHandler(e: Event) {
@@ -78,10 +98,7 @@ export default class CatalogHandler {
         this.updateContent(url, '');
     }
 
-    viewChangeHandler(e: Event) {
-        const target: EventTarget | null = e.target;
-        if (!(target instanceof HTMLDivElement)) return;
-
+    viewChangeHandler(target: HTMLDivElement) {
         let url = new URL(window.location.href);
         if (target.className.includes('row')) {
             url = this.urlService.replaceQueryParam('view', 'row');
@@ -101,13 +118,19 @@ export default class CatalogHandler {
 
     filterClickHandler(e: Event) {
         const target: EventTarget | null = e.target;
-        if (!(target instanceof HTMLButtonElement)) return;
-
-        if (target.id === 'reset') {
-            this.resetButtonClickHandler();
+        if (target instanceof HTMLButtonElement) {
+            if (target.id === 'reset') {
+                this.resetButtonClickHandler();
+            }
+            if (target.id === 'copy') {
+                this.copyLinkButtonClickHandler();
+            }
         }
-        if (target.id === 'copy') {
-            this.copyLinkButtonClickHandler();
+        if (target instanceof HTMLDivElement) {
+            if (target.classList.contains('close-button')) {
+                console.log('ck');
+                this.closeButtonHandler();
+            }
         }
     }
 
@@ -162,6 +185,10 @@ export default class CatalogHandler {
             const products = this.catalogService.getFilteredProducts(params);
             const catalogSettings = this.catalogService.getCatalogSettings();
             this.view.renderTargetedFilters(catalogSettings, targetFilter);
+            if (products.length === 0) {
+                this.view.filters.stockBlock.setNotFoundValue();
+                this.view.filters.priceBlock.setNotFoundValue();
+            }
             this.view.catalogHeader.search.updateSearchResults(products.length);
             this.view.renderProducts(products, catalogSettings);
         }

@@ -3,6 +3,10 @@
     padding: 15px 10px;
     position: static;
     overflow-y: scroll;
+
+    @media screen and (max-width: 1340px) {
+        font-size: small;
+    }
 }
 
 .filters::-webkit-scrollbar {
@@ -20,6 +24,29 @@
     border-radius: 10px;
 }
 
+.close-button {
+    display: none;
+
+    @media screen and (max-width: 900px) {
+        width: 30px;
+        height: 30px;
+        display: block;
+        position: fixed;
+        background-color: white;
+        top: 0;
+        right: 0;
+        background-image: url('./../../../../assets/icons/cross.svg');
+        background-repeat: no-repeat;
+        margin: 15px;
+        cursor: pointer;
+        transition: transform 0.3s ease-in;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+}
+
 .reset-block {
     display: flex;
     justify-content: center;
@@ -32,6 +59,13 @@
 .copy-button {
     @extend %button;
     width: 130px;
+
+    @media screen and (max-width: 1340px) {
+        font-size: small;
+        width: 110px;
+        padding: 0;
+        height: 45px;
+    }
 }
 
 .copy-button-copied {
@@ -49,6 +83,10 @@
     border-radius: 10px;
     overflow-x: hidden;
     overflow-y: scroll;
+
+    @media screen and (max-width: 900px) {
+        max-height: 160px;
+    }
 }
 
 .category-block,
@@ -56,4 +94,15 @@
 .price-block,
 .stock-block {
     padding: 0 10px;
+}
+
+.category-title,
+.brand-title,
+.price-title,
+.stock-title {
+
+    @media screen and (max-width: 1220px) {
+        font-size: medium;
+        padding-left: 5px;
+    }
 }

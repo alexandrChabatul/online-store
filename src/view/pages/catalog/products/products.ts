@@ -3,6 +3,7 @@ import { ICatalogSettings, ProductIsInCart } from 'common/types';
 import { ElementsFactory } from 'utils/element-generator';
 import './products.scss';
 import './products-row-view.scss';
+import Rating from 'view/pages/product/product-description/rating/Rating';
 
 export class Catalog {
     products: HTMLElement;
@@ -41,6 +42,7 @@ export class Catalog {
             `/product/${product.id}`
         );
         const productInfo = ElementsFactory.createDivElement('product-info');
+        const productRating = Rating.getRatingBlock(product.rating);
         const productPrice = ElementsFactory.createDivElement('product-price');
         const productPriceOriginal = ElementsFactory.createBaseElementWithText(
             'span',
@@ -72,7 +74,7 @@ export class Catalog {
         productLink.append(productImage);
         productContainer.append(productLink, productElements);
         productElements.append(productName, productInfo, addToCartButton);
-        productInfo.append(productPrice, productDescription);
+        productInfo.append(productPrice, productRating, productDescription);
         productDescription.append(productDescriptionTitle, productDescriptionContent);
         productPrice.append(productPriceOriginal, productPriceFinal);
         this.products.append(productContainer);
